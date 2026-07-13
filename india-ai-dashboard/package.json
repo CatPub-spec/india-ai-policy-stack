@@ -1,0 +1,32 @@
+{
+  "name": "india-ai-dashboard",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "next dev --hostname 127.0.0.1",
+    "build": "next build",
+    "start": "next start --hostname 127.0.0.1",
+    "typecheck": "tsc --noEmit",
+    "verify:dashboard": "node ../dashboard-tools/verify-dashboard.mjs http://127.0.0.1:3000",
+    "ingest:excel": "node ../dashboard-tools/sync-dashboard-data.mjs",
+    "sync:data": "npm run ingest:excel",
+    "taxonomy:update": "node ../dashboard-tools/update-dataset-taxonomy.mjs"
+  },
+  "dependencies": {
+    "@tailwindcss/postcss": "^4.3.2",
+    "framer-motion": "11.18.2",
+    "lucide-react": "0.468.0",
+    "next": "16.2.9",
+    "react": "19.2.7",
+    "react-dom": "19.2.7",
+    "tailwindcss": "^4.3.2"
+  },
+  "devDependencies": {
+    "@types/node": "26.0.1",
+    "@types/react": "19.2.17",
+    "@types/react-dom": "19.2.3",
+    "playwright": "1.61.1",
+    "typescript": "5.9.3"
+  }
+}
