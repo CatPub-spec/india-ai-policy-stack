@@ -72,7 +72,7 @@ summarySheet.getRangeByIndexes(0, 0, summaryRows.length, summaryRows[0].length).
 };
 summarySheet.getRange("A:D").format.autofitColumns();
 
-const preview = await workbook.render({ sheetName: "Records", range: "A1:S14", scale: 1, format: "png" });
+  const preview = await workbook.render({ sheetName: "Records", range: "A1:T14", scale: 1, format: "png" });
 await fs.writeFile(path.join(path.dirname(workbookPath), "previews", "records-taxonomy-updated.png"), new Uint8Array(await preview.arrayBuffer()));
 
 const output = await SpreadsheetFile.exportXlsx(workbook);

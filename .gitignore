@@ -6,6 +6,9 @@ node_modules/
 # Local environments and editor settings
 .venv/
 .vscode/
+.agents/
+.work/
+.codex/
 .env*
 !.env.example
 

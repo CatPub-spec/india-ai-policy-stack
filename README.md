@@ -1,4 +1,12 @@
-# India AI Dashboard
+# India AI Policy & Investment Dashboard
+
+## Current Release · July 2026
+
+The current dashboard is the primary version of this project. It combines the expanded 2024–2026 evidence ledger with interactive state, industry, concentration, investment-scale, and institution-network views.
+
+**[Open the current application source →](india-ai-dashboard/)**
+
+Highlights include the master Ask the Analyst experience, the source-backed Institution Network, the redesigned Concentration Trajectory, the Data Atlas, and indexable detail pages for states, institutions, sectors, policies, and investment periods.
 
 ## Project Map
 
@@ -38,7 +46,7 @@ Next.js pages and REST API routes
 Dashboard UI
 ```
 
-Version 1 intentionally does not include PostgreSQL, FastAPI, or a separate backend. The dashboard talks to typed service functions and `/api/dashboard`, so a future database or backend service can replace the service internals without rewriting the UI.
+The current release intentionally does not include PostgreSQL, FastAPI, or a separate backend. The dashboard talks to typed service functions and `/api/dashboard`, so a future database or backend service can replace the service internals without rewriting the UI.
 
 The app uses static generation and ISR for indexable entity pages, dynamic metadata for each state/company/sector/policy/investment page, JSON-LD, `sitemap.xml`, `robots.txt`, and OpenGraph/Twitter metadata. Interactive charts are lazy-loaded on the client to keep SEO pages lightweight.
 
@@ -62,6 +70,11 @@ npm run sync:data
 ```
 
 The parser writes `india-ai-dashboard/data/dashboard.v1.json`. The dashboard does not read Excel directly.
+
+The `Records` sheet includes a `Major Players` column containing semicolon-delimited,
+canonical institution names. The sync step exposes this field as a `majorPlayers`
+array, which powers the institution pages, search, analyst context, and Chart Lab
+network.
 
 To use another workbook temporarily, pass its path explicitly:
 

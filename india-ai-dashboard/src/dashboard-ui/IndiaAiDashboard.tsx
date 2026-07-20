@@ -1,5 +1,6 @@
 "use client";
 
+import { useChat } from "@ai-sdk/react";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import {
   ArrowRight,
@@ -11,11 +12,17 @@ import {
   CircleDollarSign,
   ExternalLink,
   FilterX,
+  Layers3,
   Menu,
   MapPinned,
+  Network as NetworkIcon,
+  RotateCcw,
   Search,
+  Send,
   Sparkles,
+  Square,
 } from "lucide-react";
+import { DefaultChatTransport } from "ai";
 import Image from "next/image";
 import Link from "next/link";
 import {
@@ -27,6 +34,12 @@ import {
   type CSSProperties,
   type ReactNode,
 } from "react";
+import {
+  Message,
+  MessageContent,
+  MessageResponse,
+} from "@/components/ai-elements/message";
+import type { AnalystMessage } from "@/types/analyst";
 import { slugify } from "../lib/slugs";
 import {
   type ChartDatum,
@@ -34,11 +47,17 @@ import {
   type DashboardDataset,
   type InvestmentRecord,
   type MetricMode,
+  convertedValueForMetric,
   formatCompact,
   formatMetricValue,
   metricLabel,
   uniqueSorted,
 } from "../dashboard-data/investmentDataset";
+import {
+  INSTITUTION_TYPE_LABELS,
+  institutionTypeFor,
+  type InstitutionType,
+} from "../dashboard-data/institutionTypes";
 
 type FilterState = {
   states: string[];
@@ -53,15 +72,24 @@ type SortKey = "year" | "state" | "organization" | "industry" | "capability" | "
 type SortDirection = "asc" | "desc";
 type StateComparisonScope = "filtered" | "all";
 type IndustryComparisonScope = "filtered" | "all";
-type TrendDimension = "industry" | "capability";
-type ChartViewId = "state-comparison" | "industry-ranking" | "concentration-trend" | "investment-scatter";
+type TrendDimension = "state" | "industry" | "capability";
+type ChartViewId = "state-comparison" | "industry-ranking" | "concentration-trend" | "investment-scatter" | "ecosystem-network";
+
+type ConcentrationGroup = {
+  name: string;
+  share: number;
+};
 
 type ConcentrationPoint = {
   year: number;
   topOneShare: number;
   topThreeShare: number;
   leader: string;
-  topThree: string[];
+  topGroups: ConcentrationGroup[];
+  recordCount: number;
+  includedRecordCount: number;
+  categoryCount: number;
+  effectiveCategories: number;
 };
 
 type ChartFocusSnapshot = {
@@ -98,7 +126,8 @@ type InsightAction =
   | { kind: "industry"; value: string }
   | { kind: "year"; value: string }
   | { kind: "search"; value: string }
-  | { kind: "chart"; value: string };
+  | { kind: "chart"; value: string; scope?: "all" }
+  | { kind: "ledger"; value?: string; scope?: "all" };
 
 type EditorialInsight = {
   eyebrow: string;
@@ -118,12 +147,18 @@ type AnalystResponse = {
 };
 
 type ExplorerCard = {
+  id: string;
   eyebrow: string;
   title: string;
   body: string;
   detail: string;
-  chartId: string;
+  actionLabel: string;
+  action: InsightAction;
+  preview: "bars" | "network" | "timeline" | "records";
+  previewData: ChartDatum[];
 };
+
+type AtlasTopicKind = "state" | "industry" | "capability" | "institution" | "year";
 
 type HeroStateNode = {
   state: string;
@@ -132,6 +167,54 @@ type HeroStateNode = {
   y: string;
   color: string;
   delay: string;
+};
+
+type NetworkNode = {
+  id: string;
+  label: string;
+  clusterId: string;
+  clusterLabel: string;
+  institutionType: InstitutionType;
+  x: number;
+  y: number;
+  radius: number;
+  recordCount: number;
+  recordIds: string[];
+  states: string[];
+};
+
+type NetworkEdge = {
+  id: string;
+  source: NetworkNode;
+  target: NetworkNode;
+  weight: number;
+  path: string;
+  recordIds: string[];
+  evidence: Array<{
+    recordId: string;
+    relationship: string;
+    detail: string;
+    sourceUrl: string;
+  }>;
+};
+
+type NetworkCluster = {
+  id: string;
+  label: string;
+  legendLabel: string;
+  path: string;
+  fill: string;
+  stroke: string;
+  recordCount: number;
+  nodeCount: number;
+};
+
+type NetworkGraphModel = {
+  clusters: NetworkCluster[];
+  nodes: NetworkNode[];
+  edges: NetworkEdge[];
+  recordCount: number;
+  recordsById: Map<string, InvestmentRecord>;
 };
 
 const EMPTY_FILTERS: FilterState = {
@@ -143,21 +226,20 @@ const EMPTY_FILTERS: FilterState = {
   search: "",
 };
 
-const CHART_VIEW_IDS: ChartViewId[] = ["state-comparison", "industry-ranking", "concentration-trend", "investment-scatter"];
+const CHART_VIEW_IDS: ChartViewId[] = ["state-comparison", "industry-ranking", "concentration-trend", "investment-scatter", "ecosystem-network"];
 
 const CHART_VIEW_LABELS: Record<ChartViewId, string> = {
   "state-comparison": "State Comparison",
   "industry-ranking": "Industry Ranking",
   "concentration-trend": "Concentration Trajectory",
   "investment-scatter": "Investment Scale Scatter",
+  "ecosystem-network": "Institution Network",
 };
 
 const CURRENCY_OPTIONS: Array<{ value: MetricMode; label: string }> = [
   { value: "inr", label: "INR" },
   { value: "usd", label: "USD" },
 ];
-
-const USD_MILLION_TO_INR_CRORE = 8.3;
 
 const DOMAIN_COLORS = ["#2f80ed", "#f2b84b", "#26a69a", "#ff7f6e"];
 const SCATTER_POINT_COLOR = "#4f8cc9";
@@ -174,6 +256,21 @@ const DASHBOARD_BACKGROUND_VIDEO_URL =
   "https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260503_101827_abebfeec-f243-466b-b494-7f6814c0fbbf.mp4";
 const SPOTLIGHT_R = 260;
 const MOTION_EASE: [number, number, number, number] = [0.16, 1, 0.3, 1];
+const NETWORK_WIDTH = 860;
+const NETWORK_HEIGHT = 500;
+const NETWORK_INSTITUTION_TYPES: Array<{
+  id: InstitutionType;
+  label: string;
+  legendLabel: string;
+  fill: string;
+  stroke: string;
+}> = [
+  { id: "government", label: INSTITUTION_TYPE_LABELS.government, legendLabel: "Public", fill: "rgba(37, 99, 235, 0.20)", stroke: "rgba(29, 78, 216, 0.46)" },
+  { id: "private", label: INSTITUTION_TYPE_LABELS.private, legendLabel: "Private", fill: "rgba(249, 115, 22, 0.20)", stroke: "rgba(194, 65, 12, 0.46)" },
+  { id: "academic", label: INSTITUTION_TYPE_LABELS.academic, legendLabel: "Research", fill: "rgba(139, 92, 246, 0.19)", stroke: "rgba(109, 40, 217, 0.45)" },
+  { id: "ecosystem", label: INSTITUTION_TYPE_LABELS.ecosystem, legendLabel: "Ecosystem", fill: "rgba(34, 197, 94, 0.20)", stroke: "rgba(21, 128, 61, 0.46)" },
+  { id: "multilateral", label: INSTITUTION_TYPE_LABELS.multilateral, legendLabel: "Multilateral", fill: "rgba(6, 182, 212, 0.20)", stroke: "rgba(8, 145, 178, 0.46)" },
+];
 
 const HERO_NODE_POSITIONS = [
   { x: "48%", y: "30%" },
@@ -204,6 +301,7 @@ const HERO_NODES = [
 export function IndiaAiDashboard({ initialDataset }: { initialDataset: DashboardDataset }) {
   const [dataset, setDataset] = useState<DashboardDataset | null>(initialDataset);
   const [filters, setFilters] = useState<FilterState>(EMPTY_FILTERS);
+  const [ledgerInstitution, setLedgerInstitution] = useState<string | null>(null);
   const [metric, setMetric] = useState<MetricMode>("inr");
   const [selectedState, setSelectedState] = useState<string | null>("Maharashtra");
   const [stateComparisonScope, setStateComparisonScope] = useState<StateComparisonScope>("filtered");
@@ -256,10 +354,13 @@ export function IndiaAiDashboard({ initialDataset }: { initialDataset: Dashboard
     [filters, records],
   );
   const filteredRecords = useMemo(() => applyFilters(records, filters), [records, filters]);
-  const concentrationTrendRecords = useMemo(
-    () => applyFilters(records, { ...filters, years: [] }),
-    [filters, records],
-  );
+  const concentrationTrendRecords = useMemo(() => {
+    const comparableFilters: FilterState = { ...filters, years: [] };
+    if (trendDimension === "state") comparableFilters.states = [];
+    if (trendDimension === "industry") comparableFilters.industries = [];
+    if (trendDimension === "capability") comparableFilters.capabilities = [];
+    return applyFilters(records, comparableFilters);
+  }, [filters, records, trendDimension]);
   const hasStateFilter = filters.states.length > 0;
   const hasIndustryFilter = filters.industries.length > 0;
   const stateComparisonRecords = useMemo(
@@ -278,11 +379,12 @@ export function IndiaAiDashboard({ initialDataset }: { initialDataset: Dashboard
     () => buildConcentrationTrend(concentrationTrendRecords, metric, trendDimension),
     [concentrationTrendRecords, metric, trendDimension],
   );
+  const ecosystemNetwork = useMemo(() => buildEcosystemNetwork(filteredRecords), [filteredRecords]);
   const kpis = useMemo(() => buildKpis(filteredRecords, metric), [filteredRecords, metric]);
   const highlights = useMemo(() => buildHighlights(filteredRecords, metric), [filteredRecords, metric]);
   const editorialInsights = useMemo(() => buildEditorialInsights(records, metric), [records, metric]);
-  const explorerCards = useMemo(() => buildExplorerCards(records), [records]);
   const topicIndex = useMemo(() => buildTopicIndex(records), [records]);
+  const explorerCards = useMemo(() => buildExplorerCards(records, topicIndex), [records, topicIndex]);
   const selectedRecords = useMemo(
     () => (selectedState ? filteredRecords.filter((record) => record.state === selectedState) : filteredRecords),
     [filteredRecords, selectedState],
@@ -291,9 +393,15 @@ export function IndiaAiDashboard({ initialDataset }: { initialDataset: Dashboard
     () => buildStateSummary(selectedState || "All States", selectedRecords),
     [selectedRecords, selectedState],
   );
+  const ledgerRecords = useMemo(
+    () => ledgerInstitution
+      ? filteredRecords.filter((record) => record.majorPlayers.some((player) => normalizeText(player) === normalizeText(ledgerInstitution)))
+      : filteredRecords,
+    [filteredRecords, ledgerInstitution],
+  );
   const sortedLedger = useMemo(
-    () => sortRecords(filteredRecords, sortKey, sortDirection),
-    [filteredRecords, sortDirection, sortKey],
+    () => sortRecords(ledgerRecords, sortKey, sortDirection),
+    [ledgerRecords, sortDirection, sortKey],
   );
   const stateComparisonSubtitle = hasStateFilter
     ? `${metricLabel(metric)} commitments for applied state filters. Toggle the view to compare against all states.`
@@ -409,6 +517,20 @@ export function IndiaAiDashboard({ initialDataset }: { initialDataset: Dashboard
     setFilters((current) => ({ ...current, years: [year] }));
   };
 
+  const toggleConcentrationYear = (year: number) => {
+    clearChartFocus();
+    setFilters((current) => ({
+      ...current,
+      years: current.years.length === 1 && current.years[0] === String(year) ? [] : [String(year)],
+    }));
+  };
+
+  const focusConcentrationLeader = (name: string) => {
+    if (trendDimension === "state") focusState(name);
+    if (trendDimension === "industry") focusIndustryFilter(name);
+    if (trendDimension === "capability") focusCapability(name);
+  };
+
   const focusSearchFilter = (search: string) => {
     clearChartFocus();
     setFilters((current) => ({ ...current, search }));
@@ -423,13 +545,35 @@ export function IndiaAiDashboard({ initialDataset }: { initialDataset: Dashboard
     }, "#charts");
   };
 
+  const openInstitutionLedger = (institution: string) => {
+    clearChartFocus();
+    focusElementAfterUpdate(() => setLedgerInstitution(institution), "#evidence");
+  };
+
+  const resetDashboardScope = () => {
+    clearChartFocus();
+    setFilters(EMPTY_FILTERS);
+    setSelectedState(null);
+    setStateComparisonScope("all");
+    setIndustryComparisonScope("all");
+    setLedgerInstitution(null);
+  };
+
   const applyInsightAction = (action: InsightAction) => {
     if (action.kind === "state") focusState(action.value);
     if (action.kind === "capability") focusCapability(action.value);
     if (action.kind === "industry") focusIndustryFilter(action.value);
     if (action.kind === "year") focusYearFilter(action.value);
     if (action.kind === "search") focusSearchFilter(action.value);
-    if (action.kind === "chart") openChart(action.value);
+    if (action.kind === "chart") {
+      if (action.scope === "all") resetDashboardScope();
+      openChart(action.value);
+    }
+    if (action.kind === "ledger") {
+      if (action.scope === "all") resetDashboardScope();
+      if (action.value) openInstitutionLedger(action.value);
+      else focusElementAfterUpdate(() => setLedgerInstitution(null), "#evidence");
+    }
   };
 
   const focusScatterRecord = (datum: ScatterDatum) => {
@@ -568,9 +712,9 @@ export function IndiaAiDashboard({ initialDataset }: { initialDataset: Dashboard
             </motion.div>
           </div>
           <div className="hero-footer-tags" aria-label="Dashboard tags">
-            <span>Verified ledger</span>
+            <span>10-state coverage</span>
             <span>State comparison</span>
-            <span>Source-backed</span>
+            <span>Institution network</span>
           </div>
         </motion.div>
       </section>
@@ -643,6 +787,7 @@ export function IndiaAiDashboard({ initialDataset }: { initialDataset: Dashboard
                 onClick={() => {
                   clearChartFocus();
                   setFilters(EMPTY_FILTERS);
+                  setLedgerInstitution(null);
                   setSelectedState(null);
                   setStateComparisonScope("filtered");
                   setIndustryComparisonScope("filtered");
@@ -662,11 +807,11 @@ export function IndiaAiDashboard({ initialDataset }: { initialDataset: Dashboard
             </section>
 
             <div className="dashboard-grid">
-              <section id="charts" className="chart-zone" aria-label="Interactive charts">
+              <section id="charts" className="chart-zone" aria-label="Interactive charts" tabIndex={-1}>
                 <div className="chart-zone-heading">
                   <span>Chart Lab</span>
                   <h2>Browse the chart views</h2>
-                  <p>State, industry, concentration, and investment-scale views in a publication-width frame.</p>
+                  <p>State, industry, concentration, investment-scale, and institution-network views in a publication-width frame.</p>
                 </div>
                 <ChartDeck
                   activeChart={activeChart}
@@ -776,19 +921,27 @@ export function IndiaAiDashboard({ initialDataset }: { initialDataset: Dashboard
 
                   <Panel
                     title="Concentration Trajectory"
-                    subtitle={`Yearly ${metricLabel(metric).toLowerCase()} share by ${trendDimension}. Hover points for names.`}
+                    subtitle="See which groups lead and how commitment shares change each year."
                     chartId="concentration-trend"
                     expanded={isChartExpanded("concentration-trend")}
                     onExpansionChange={setExpandedChart}
                     action={
                       <div className="comparison-toggle" aria-label="Concentration dimension">
+                        <button type="button" className={trendDimension === "state" ? "active" : ""} aria-pressed={trendDimension === "state"} onClick={() => setTrendDimension("state")}>State</button>
                         <button type="button" className={trendDimension === "industry" ? "active" : ""} aria-pressed={trendDimension === "industry"} onClick={() => setTrendDimension("industry")}>Industry</button>
                         <button type="button" className={trendDimension === "capability" ? "active" : ""} aria-pressed={trendDimension === "capability"} onClick={() => setTrendDimension("capability")}>Capability</button>
                       </div>
                     }
                   >
                     <ChartFrame className="chart-frame concentration-trend-frame">
-                      <ConcentrationLineChartGraphic data={concentrationTrend} dimension={trendDimension} />
+                      <ConcentrationProfileChartGraphic
+                        data={concentrationTrend}
+                        dimension={trendDimension}
+                        appliedYear={filters.years.length === 1 ? Number(filters.years[0]) : null}
+                        dataAsOf={dataset.metadata.generatedAt}
+                        onApplyYear={toggleConcentrationYear}
+                        onApplyLeader={focusConcentrationLeader}
+                      />
                     </ChartFrame>
                   </Panel>
 
@@ -809,6 +962,19 @@ export function IndiaAiDashboard({ initialDataset }: { initialDataset: Dashboard
                       <ScatterChartGraphic data={charts.scatter} domain={charts.scatterDomain} metric={metric} selectedOrganization={filters.search} />
                     </ChartFrame>
                   </Panel>
+
+                  <Panel
+                    title="Institution Network"
+                    subtitle="Solid lines are source-backed direct connections. Hover or focus a line to inspect the relationship; larger dots appear in more announcements."
+                    wide
+                    chartId="ecosystem-network"
+                    expanded={isChartExpanded("ecosystem-network")}
+                    onExpansionChange={setExpandedChart}
+                  >
+                    <ChartFrame className="chart-frame network-graph-frame">
+                      <EcosystemNetworkGraphic graph={ecosystemNetwork} onViewLedger={openInstitutionLedger} />
+                    </ChartFrame>
+                  </Panel>
                 </ChartDeck>
               </section>
 
@@ -820,9 +986,16 @@ export function IndiaAiDashboard({ initialDataset }: { initialDataset: Dashboard
 
             <ExploreOurData cards={explorerCards} topicIndex={topicIndex} onAction={applyInsightAction} />
 
-            <section id="evidence" className="table-section">
-              <Panel title="Announcements Explorer" subtitle="Compact source-backed initiative details without overwhelming the dashboard." wide>
-                <EvidenceExplorer records={sortedLedger} sortKey={sortKey} sortDirection={sortDirection} onSort={changeSort} />
+            <section id="evidence" className="table-section" tabIndex={-1}>
+              <Panel title="Verified Ledger" subtitle="Compact source-backed initiative details without overwhelming the dashboard." wide>
+                <EvidenceExplorer
+                  records={sortedLedger}
+                  sortKey={sortKey}
+                  sortDirection={sortDirection}
+                  institutionFilter={ledgerInstitution}
+                  onClearInstitutionFilter={() => setLedgerInstitution(null)}
+                  onSort={changeSort}
+                />
               </Panel>
             </section>
 
@@ -1281,121 +1454,225 @@ function AskTheAnalyst({
   metric: MetricMode;
   onAction: (action: InsightAction) => void;
 }) {
-  const analystRecords = allRecords;
   const [question, setQuestion] = useState("");
-  const [response, setResponse] = useState<AnalystResponse | null>(null);
-  const [isAsking, setIsAsking] = useState(false);
-  const topState = useMemo(() => groupByConvertedMetric(analystRecords, metric, (record) => record.state)[0], [metric, analystRecords]);
-  const topCapability = useMemo(() => groupByConvertedMetric(analystRecords, metric, (record) => record.capability)[0], [metric, analystRecords]);
-  const topIndustry = useMemo(() => groupByConvertedMetric(analystRecords, metric, (record) => record.industry)[0], [metric, analystRecords]);
-  const prompts = ["Which state leads?", "Which capability dominates?", "What is the largest commitment?"];
+  const transport = useMemo(
+    () => new DefaultChatTransport<AnalystMessage>({ api: "/api/analyst" }),
+    [],
+  );
+  const {
+    messages,
+    sendMessage,
+    status,
+    error,
+    stop,
+    setMessages,
+    clearError,
+  } = useChat<AnalystMessage>({ transport, experimental_throttle: 35 });
+  const isBusy = status === "submitted" || status === "streaming";
+  const visibleMessages = messages.slice(-6);
+  const latestAssistantMessage = [...messages].reverse().find((message) => message.role === "assistant");
+  const latestAssistantId = latestAssistantMessage?.id;
+  const latestUserQuestion = analystTextFor([...messages].reverse().find((message) => message.role === "user"));
+  const dashboardAction = useMemo(
+    () => buildAnalystDashboardAction(latestUserQuestion, allRecords),
+    [allRecords, latestUserQuestion],
+  );
+  const prompts = [
+    "Compare Karnataka and Telangana and explain the gap.",
+    "Which private institution is most involved, and which players are emerging?",
+    "What changed from 2024 to the latest year?",
+  ];
 
   const ask = async (nextQuestion: string) => {
-    const submittedQuestion = nextQuestion.trim() || "Summarize the most important signal in the full dataset.";
-    setQuestion(submittedQuestion);
-    setIsAsking(true);
+    const submittedQuestion = nextQuestion.trim();
+    if (!submittedQuestion || isBusy) return;
+    setQuestion("");
+    clearError();
+    await sendMessage(
+      { text: submittedQuestion },
+      { body: { metric } },
+    ).catch(() => undefined);
+  };
 
-    try {
-      const apiResponse = await fetch("/api/analyst", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          question: submittedQuestion,
-          metric,
-        }),
-      });
-
-      if (!apiResponse.ok) throw new Error(`Analyst request failed with ${apiResponse.status}`);
-      const nextResponse = (await apiResponse.json()) as AnalystResponse & { fallback?: boolean };
-      if (nextResponse.fallback) throw new Error("AI analyst is not configured.");
-      setResponse(nextResponse);
-    } catch {
-      setResponse(buildAnalystResponse(submittedQuestion, analystRecords, metric));
-    } finally {
-      setIsAsking(false);
-    }
+  const resetConversation = () => {
+    stop();
+    setMessages([]);
+    clearError();
+    setQuestion("");
   };
 
   return (
     <section className="ask-analyst" aria-labelledby="ask-analyst-title" data-reveal>
       <div className="ask-analyst-copy">
-        <span>Ask the Analyst</span>
-        <h2 id="ask-analyst-title">Ask a question about this data</h2>
-        <p>Ask about leading states, industries, capabilities, yearly trends, totals, or the largest verified commitments.</p>
+        <span>Master Ask the Analyst</span>
+        <h2 id="ask-analyst-title">Ask anything. Get a clear answer.</h2>
+        <p>
+          Ask about investments, institutions, relationships, trends, policies, or any wider AI question.
+        </p>
       </div>
 
       <form
-        className="analyst-search"
+        className="analyst-composer"
         onSubmit={(event) => {
           event.preventDefault();
-          ask(question);
+          void ask(question);
         }}
       >
-        <Search size={20} aria-hidden="true" />
-        <input
-          type="search"
+        <Sparkles size={21} aria-hidden="true" />
+        <textarea
           value={question}
-          placeholder="Ask, for example: which state leads in cloud and compute?"
+          rows={2}
+          maxLength={1200}
+          aria-label="Question for Ask the Analyst"
+          placeholder="Ask about any state, institution, investment, relationship, trend, or broader AI question."
           onChange={(event) => setQuestion(event.target.value)}
+          onKeyDown={(event) => {
+            if (event.key === "Enter" && !event.shiftKey && !event.nativeEvent.isComposing) {
+              event.preventDefault();
+              void ask(question);
+            }
+          }}
         />
-        <button type="submit">
-          Ask <ArrowRight size={14} aria-hidden="true" />
+        <button
+          type={isBusy ? "button" : "submit"}
+          className={isBusy ? "is-stop" : ""}
+          disabled={!isBusy && !question.trim()}
+          onClick={isBusy ? () => stop() : undefined}
+        >
+          {isBusy ? <Square size={13} fill="currentColor" aria-hidden="true" /> : <Send size={15} aria-hidden="true" />}
+          {isBusy ? "Stop" : "Ask"}
         </button>
       </form>
 
-      <div className="ask-analyst-prompts">
+      {!messages.length && (
         <div className="analyst-prompts" aria-label="Example analyst questions">
           {prompts.map((prompt) => (
-            <button key={prompt} type="button" onClick={() => setQuestion(prompt)}>
+            <button key={prompt} type="button" onClick={() => void ask(prompt)}>
               {prompt}
             </button>
           ))}
         </div>
-      </div>
+      )}
 
-      <div className="ask-analyst-console">
-        {(isAsking || response) && (
-          <article className={`analyst-answer ${isAsking ? "is-thinking" : "is-ready"}`} aria-live="polite" aria-busy={isAsking}>
-            <span>{isAsking ? "Thinking" : "Answer"}</span>
-            {isAsking ? (
-              <p className="analyst-answer-loading">Reading the full source-backed dataset and preparing an answer...</p>
-            ) : (
-              response && (
-                <div className="analyst-answer-body" key={`${response.answer}-${response.evidence.join("|")}`}>
-                  <p>{response.answer}</p>
-                  <ul>
-                    {response.evidence.map((item, index) => (
-                      <li key={item} style={{ "--answer-line-delay": `${180 + index * 70}ms` } as CSSProperties}>
-                        {item}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              )
-            )}
-          </article>
+      {(messages.length > 0 || isBusy || error) && (
+      <div className={`ask-analyst-console ${messages.length ? "has-conversation" : ""}`} aria-live="polite" aria-busy={isBusy}>
+        {messages.length > 0 && (
+          <div className="analyst-console-heading analyst-console-heading-compact">
+            <button type="button" className="analyst-reset" onClick={resetConversation}>
+              <RotateCcw size={13} aria-hidden="true" /> New conversation
+            </button>
+          </div>
         )}
 
-        <div className="analyst-jump-actions" aria-label="Apply analyst focus">
-          {topState && (
-            <button type="button" onClick={() => onAction({ kind: "state", value: topState.name })}>
-              Focus {topState.name}
-            </button>
-          )}
-          {topCapability && (
-            <button type="button" onClick={() => onAction({ kind: "capability", value: topCapability.name })}>
-              Focus {topCapability.name}
-            </button>
-          )}
-          {topIndustry && (
-            <button type="button" onClick={() => onAction({ kind: "industry", value: topIndustry.name })}>
-              Focus {industryLabel(topIndustry.name)}
-            </button>
+        <div className="analyst-messages">
+          {visibleMessages.map((message) => {
+            const isLatestAssistant = message.role === "assistant" && message.id === latestAssistantId;
+
+            return (
+              <Message className={`analyst-message analyst-message-${message.role}`} from={message.role} key={message.id}>
+                <MessageContent>
+                  {message.parts.map((part, index) => {
+                    if (part.type !== "text") return null;
+                    if (message.role === "user") {
+                      return <p className="analyst-user-question" key={`${message.id}-text-${index}`}>{part.text}</p>;
+                    }
+                    return (
+                      <MessageResponse
+                        className="analyst-response-markdown"
+                        isAnimating={isLatestAssistant && status === "streaming"}
+                        key={`${message.id}-text-${index}`}
+                      >
+                        {part.text}
+                      </MessageResponse>
+                    );
+                  })}
+
+                  {isLatestAssistant && status === "ready" && dashboardAction && (
+                    <div className="analyst-dashboard-action">
+                      <button type="button" onClick={() => onAction(dashboardAction.action)}>
+                        {dashboardAction.label} <ArrowRight size={14} aria-hidden="true" />
+                      </button>
+                    </div>
+                  )}
+
+                </MessageContent>
+              </Message>
+            );
+          })}
+
+          {status === "submitted" && (
+            <div className="analyst-answer-loading">
+              <Sparkles size={17} aria-hidden="true" />
+              <span>Researching your question…</span>
+            </div>
           )}
         </div>
+
+        {error && (
+          <div className="analyst-error" role="alert">
+            <strong>The analyst could not finish that answer.</strong>
+            <span>Try again or make the question a little more specific.</span>
+          </div>
+        )}
       </div>
+      )}
     </section>
   );
+}
+
+function analystTextFor(message: AnalystMessage | undefined): string {
+  if (!message) return "";
+  return message.parts
+    .filter((part): part is Extract<(typeof message.parts)[number], { type: "text" }> => part.type === "text")
+    .map((part) => part.text)
+    .join("\n")
+    .trim();
+}
+
+function buildAnalystDashboardAction(question: string, records: InvestmentRecord[]): { label: string; action: InsightAction } | undefined {
+  const query = normalizeText(question);
+  if (!query) return undefined;
+
+  const institutions = uniqueSorted(records.flatMap((record) => record.majorPlayers))
+    .filter((label) => normalizeText(label).length >= 4)
+    .sort((a, b) => normalizeText(b).length - normalizeText(a).length);
+  const institution = institutions.find((label) => query.includes(normalizeText(label)));
+
+  if (/\bprivate\b/.test(query) && /institution|company|companies|player|players|firm|firms|emerg|rising|momentum/.test(query)) {
+    return { label: "Explore private players in the network", action: { kind: "chart", value: "ecosystem-network", scope: "all" } };
+  }
+  if (/relationship|related|connected|connection|network|counterpart|partner/.test(query)) {
+    return { label: "Open the institution network", action: { kind: "chart", value: "ecosystem-network", scope: "all" } };
+  }
+  if (/source|evidence|record|announcement|details|article/.test(query)) {
+    return {
+      label: institution ? `View ${institution} in the ledger` : "Open the detailed ledger",
+      action: { kind: "ledger", scope: "all", ...(institution ? { value: institution } : {}) },
+    };
+  }
+  if (institution) {
+    return { label: `View ${institution} records`, action: { kind: "ledger", value: institution, scope: "all" } };
+  }
+  if (/institution|agency|agencies|company|companies|organisation|organization|player|players/.test(query)) {
+    return { label: "Explore the institution network", action: { kind: "chart", value: "ecosystem-network", scope: "all" } };
+  }
+
+  const states = uniqueSorted(records.map((record) => record.state));
+  if (states.some((state) => query.includes(normalizeText(state))) || /compare state|state comparison|which state|states lead/.test(query)) {
+    return { label: "Open the state comparison", action: { kind: "chart", value: "state-comparison", scope: "all" } };
+  }
+  if (/trend|over time|changed|change from|year|latest year|recent years/.test(query)) {
+    return { label: "Open the trend chart", action: { kind: "chart", value: "concentration-trend", scope: "all" } };
+  }
+
+  const domains = uniqueSorted(records.flatMap((record) => [record.industry, record.capability]));
+  if (domains.some((domain) => query.includes(normalizeText(domain))) || /industry|industries|capability|capabilities|sector/.test(query)) {
+    return { label: "Open the industry ranking", action: { kind: "chart", value: "industry-ranking", scope: "all" } };
+  }
+  if (/largest|biggest|highest|investment|commitment|amount|crore|million|billion/.test(query)) {
+    return { label: "Open the investment chart", action: { kind: "chart", value: "investment-scatter", scope: "all" } };
+  }
+  return undefined;
 }
 
 function ChartDeck({
@@ -1464,66 +1741,238 @@ function ExploreOurData({
   topicIndex: ReturnType<typeof buildTopicIndex>;
   onAction: (action: InsightAction) => void;
 }) {
+  const [activeTopic, setActiveTopic] = useState<AtlasTopicKind>("state");
+  const [topicQuery, setTopicQuery] = useState("");
+  const topicGroups: Array<{
+    id: AtlasTopicKind;
+    label: string;
+    description: string;
+    items: ChartDatum[];
+  }> = [
+    { id: "state", label: "States", description: "All covered state and union-territory pages", items: topicIndex.states },
+    { id: "industry", label: "Industries", description: "Industry domains used across the dashboard", items: topicIndex.industries },
+    { id: "capability", label: "Capabilities", description: "AI capabilities represented in the announcements", items: topicIndex.capabilities },
+    { id: "institution", label: "Institutions", description: "Companies, public agencies, research bodies, and ecosystem partners", items: topicIndex.institutions },
+    { id: "year", label: "Years", description: "Annual announcement pages in the current coverage window", items: topicIndex.years },
+  ];
+  const activeGroup = topicGroups.find((group) => group.id === activeTopic) || topicGroups[0];
+  const normalizedQuery = normalizeText(topicQuery);
+  const matches = activeGroup.items.filter((item) => !normalizedQuery || normalizeText(item.name).includes(normalizedQuery));
+  const visibleLimit = activeTopic === "institution" ? (normalizedQuery ? 24 : 12) : activeGroup.items.length;
+  const visibleItems = matches.slice(0, visibleLimit);
+  const largestTopic = Math.max(1, ...visibleItems.map((item) => item.value));
+  const coverageStats = [
+    { label: "Announcements", value: formatCompact(topicIndex.coverage.announcements) },
+    { label: "States", value: formatCompact(topicIndex.states.length) },
+    { label: "Industries", value: formatCompact(topicIndex.industries.length) },
+    { label: "Capabilities", value: formatCompact(topicIndex.capabilities.length) },
+    { label: "Institutions", value: formatCompact(topicIndex.institutions.length) },
+    { label: "Direct links", value: formatCompact(topicIndex.coverage.relationships) },
+  ];
+
   return (
-    <section className="owid-explore" aria-labelledby="explore-data-title">
-      <div className="owid-section-heading">
-        <span>Data Atlas</span>
-        <h2 id="explore-data-title">Interactive views for state, industry, capability, and commitment patterns</h2>
-        <p>Open a chart, browse a capability page, or jump into the source-backed announcement explorer.</p>
+    <section id="atlas" className="data-atlas" aria-labelledby="explore-data-title" tabIndex={-1} data-reveal>
+      <div className="data-atlas__heading-row">
+        <div className="owid-section-heading data-atlas__heading">
+          <span>Data Atlas</span>
+          <h2 id="explore-data-title">Choose a way into India&apos;s AI activity</h2>
+          <p>Start with a full-dashboard view, then move into a state, industry, capability, institution, or year page.</p>
+        </div>
+        <div className="data-atlas__window" aria-label={`Coverage window ${topicIndex.coverage.yearRange}`}>
+          <span>Coverage window</span>
+          <strong>{topicIndex.coverage.yearRange}</strong>
+          <small>2024 onward</small>
+        </div>
       </div>
-      <div className="owid-explorer-grid">
+
+      <div className="data-atlas__coverage" aria-label="Data Atlas coverage">
+        {coverageStats.map((stat) => (
+          <div key={stat.label}>
+            <strong>{stat.value}</strong>
+            <span>{stat.label}</span>
+          </div>
+        ))}
+      </div>
+
+      <div className="data-atlas__subheading">
+        <div>
+          <span>Atlas views</span>
+          <h3>Start with the question you want to answer</h3>
+        </div>
+        <small>Every view opens against the complete Atlas.</small>
+      </div>
+
+      <div className="data-atlas__views">
         {cards.map((card) => (
-          <article key={card.chartId} className="owid-explorer-card">
-            <span>{card.eyebrow}</span>
+          <article key={card.id} className={`data-atlas__card ${card.id === "ecosystem-network" ? "is-network" : ""}`} data-reveal>
+            <div className="data-atlas__card-topline">
+              <span>{card.eyebrow}</span>
+              <AtlasCardIcon id={card.id} />
+            </div>
             <h3>{card.title}</h3>
             <p>{card.body}</p>
-            <small>{card.detail}</small>
-            <button type="button" onClick={() => onAction({ kind: "chart", value: card.chartId })}>
-              Explore the chart <ArrowRight size={14} aria-hidden="true" />
-            </button>
+            <AtlasCardPreview card={card} />
+            <div className="data-atlas__card-footer">
+              <small>{card.detail}</small>
+              <button type="button" aria-label={`${card.actionLabel} in Chart Lab`} onClick={() => onAction(card.action)}>
+                {card.actionLabel} <ArrowRight size={14} aria-hidden="true" />
+              </button>
+            </div>
           </article>
         ))}
       </div>
-      <div className="owid-topic-index" aria-label="Topic index">
-        <TopicGroup title="States" items={topicIndex.states} kind="state" />
-        <TopicGroup title="Industries" items={topicIndex.industries} kind="industry" />
-        <TopicGroup title="Capabilities" items={topicIndex.capabilities} kind="capability" />
+
+      <div className="data-atlas__utilities" aria-label="Data Atlas utilities">
+        <div>
+          <Sparkles size={19} aria-hidden="true" />
+          <span><strong>Need a synthesis?</strong><small>Ask a cross-cutting question without leaving the dashboard.</small></span>
+          <a href="#ask-analyst-title">Ask the analyst <ArrowRight size={14} aria-hidden="true" /></a>
+        </div>
+        <div>
+          <ExternalLink size={19} aria-hidden="true" />
+          <span><strong>Need the underlying record?</strong><small>Inspect and sort every announcement in the detailed ledger.</small></span>
+          <button type="button" onClick={() => onAction({ kind: "ledger", scope: "all" })}>
+            Open the ledger <ArrowRight size={14} aria-hidden="true" />
+          </button>
+        </div>
+      </div>
+
+      <div className="data-atlas__browser">
+        <div className="data-atlas__browser-heading">
+          <div>
+            <span>Browse the Atlas</span>
+            <h3>Move from the overview to a focused page</h3>
+          </div>
+          <label className="data-atlas__search">
+            <Search size={16} aria-hidden="true" />
+            <input
+              type="search"
+              value={topicQuery}
+              aria-label={`Search ${activeGroup.label.toLowerCase()} in the Data Atlas`}
+              placeholder={`Search ${activeGroup.label.toLowerCase()}`}
+              onChange={(event) => setTopicQuery(event.target.value)}
+            />
+          </label>
+        </div>
+
+        <div className="data-atlas__tabs" role="group" aria-label="Data Atlas dimensions">
+          {topicGroups.map((group) => (
+            <button
+              key={group.id}
+              type="button"
+              aria-pressed={activeTopic === group.id}
+              className={activeTopic === group.id ? "active" : ""}
+              onClick={() => {
+                setActiveTopic(group.id);
+                setTopicQuery("");
+              }}
+            >
+              <span>{group.label}</span>
+              <small>{group.items.length}</small>
+            </button>
+          ))}
+        </div>
+
+        <div className="data-atlas__topic-panel">
+          <div className="data-atlas__topic-summary">
+            <span>{activeGroup.description}</span>
+            <small>
+              {normalizedQuery
+                ? `${matches.length} match${matches.length === 1 ? "" : "es"}`
+                : visibleItems.length < matches.length
+                  ? `Showing ${visibleItems.length} of ${matches.length}`
+                  : `${matches.length} page${matches.length === 1 ? "" : "s"}`}
+            </small>
+          </div>
+          {visibleItems.length ? (
+            <nav className="data-atlas__topic-grid" aria-label={`${activeGroup.label} pages`}>
+              {visibleItems.map((item) => (
+                <Link
+                  key={item.name}
+                  href={topicHref(activeTopic, item.name)}
+                  aria-label={`${formatTopicLabel(activeTopic, item.name)}, ${item.records.length} records`}
+                  style={{ "--atlas-topic-share": `${Math.max(6, (item.value / largestTopic) * 100)}%` } as CSSProperties}
+                >
+                  <span>
+                    <strong>{formatTopicLabel(activeTopic, item.name)}</strong>
+                    <small>{item.records.length} record{item.records.length === 1 ? "" : "s"}</small>
+                  </span>
+                  <ArrowRight size={15} aria-hidden="true" />
+                  <i aria-hidden="true"><b /></i>
+                </Link>
+              ))}
+            </nav>
+          ) : (
+            <div className="data-atlas__empty">No {activeGroup.label.toLowerCase()} match “{topicQuery}”.</div>
+          )}
+        </div>
       </div>
     </section>
   );
 }
 
-function TopicGroup({
-  title,
-  items,
-  kind,
-}: {
-  title: string;
-  items: ChartDatum[];
-  kind: "state" | "industry" | "capability";
-}) {
-  return (
-    <div className="owid-topic-group">
-      <h3>{title}</h3>
-      <div>
-        {items.slice(0, 8).map((item) => (
-          <Link key={item.name} href={topicHref(kind, item.name)}>
-            <span>{formatTopicLabel(kind, item.name)}</span>
-            <small>{item.records.length}</small>
-          </Link>
+function AtlasCardIcon({ id }: { id: string }) {
+  if (id === "state-comparison") return <MapPinned size={19} aria-hidden="true" />;
+  if (id === "industry-ranking") return <BarChart3 size={19} aria-hidden="true" />;
+  if (id === "concentration-trend") return <Layers3 size={19} aria-hidden="true" />;
+  if (id === "investment-scatter") return <CircleDollarSign size={19} aria-hidden="true" />;
+  return <NetworkIcon size={19} aria-hidden="true" />;
+}
+
+function AtlasCardPreview({ card }: { card: ExplorerCard }) {
+  if (card.preview === "network") {
+    return (
+      <div className="data-atlas__cluster-preview" aria-hidden="true">
+        {NETWORK_INSTITUTION_TYPES.map((group) => (
+          <span key={group.id}>
+            <i style={{ background: group.fill, borderColor: group.stroke }} />
+            <small>{group.legendLabel}</small>
+          </span>
         ))}
       </div>
-    </div>
-  );
+    );
+  }
+
+  if (card.preview === "timeline") {
+    const largestYear = Math.max(1, ...card.previewData.map((item) => item.value));
+    return (
+      <div className="data-atlas__timeline-preview" aria-hidden="true">
+        {card.previewData.map((item) => (
+          <span key={item.name}>
+            <small>{item.name}</small>
+            <i><b style={{ height: `${Math.max(18, (item.value / largestYear) * 100)}%` }} /></i>
+            <strong>{item.records.length}</strong>
+          </span>
+        ))}
+      </div>
+    );
+  }
+
+  if (card.preview === "records") {
+    return (
+      <div className="data-atlas__record-preview" aria-hidden="true">
+        {card.previewData.slice(0, 3).map((item) => (
+          <span key={`${item.name}-${item.records[0]?.id}`}>
+            <strong>{item.name}</strong>
+            <small>{item.records[0]?.state} · {item.records[0]?.year}</small>
+          </span>
+        ))}
+      </div>
+    );
+  }
+
+  return <MiniBarList data={card.previewData} />;
 }
 
-function topicHref(kind: "state" | "industry" | "capability", value: string): string {
+function topicHref(kind: AtlasTopicKind, value: string): string {
   if (kind === "state") return `/states/${slugify(value)}`;
   if (kind === "industry") return `/sector-types/${slugify(value)}`;
-  return `/sectors/${slugify(value)}`;
+  if (kind === "capability") return `/sectors/${slugify(value)}`;
+  if (kind === "institution") return `/companies/${slugify(value)}`;
+  return `/investments/${slugify(value)}`;
 }
 
-function formatTopicLabel(kind: "state" | "industry" | "capability", value: string): string {
+function formatTopicLabel(kind: AtlasTopicKind, value: string): string {
   return kind === "industry" ? industryLabel(value) : value;
 }
 
@@ -1602,6 +2051,486 @@ function ChartFrame({
       {children}
     </div>
   );
+}
+
+type NetworkView = {
+  scale: number;
+  x: number;
+  y: number;
+};
+
+type NetworkTooltipState = {
+  x: number;
+  y: number;
+  label: string;
+  detail: string;
+} | null;
+
+function EcosystemNetworkGraphic({
+  graph,
+  onViewLedger,
+}: {
+  graph: NetworkGraphModel;
+  onViewLedger: (institution: string) => void;
+}) {
+  const stageRef = useRef<HTMLDivElement | null>(null);
+  const dragRef = useRef<{ pointerId: number; clientX: number; clientY: number; viewX: number; viewY: number } | null>(null);
+  const viewRef = useRef<NetworkView>({ scale: 1, x: 0, y: 0 });
+  const [view, setView] = useState<NetworkView>({ scale: 1, x: 0, y: 0 });
+  const [tooltip, setTooltip] = useState<NetworkTooltipState>(null);
+  const [isDragging, setIsDragging] = useState(false);
+  const [selectedNodeId, setSelectedNodeId] = useState<string | null>(null);
+  const [hoveredNodeId, setHoveredNodeId] = useState<string | null>(null);
+  const [networkQuery, setNetworkQuery] = useState("");
+
+  useEffect(() => {
+    const stage = stageRef.current;
+    if (!stage) return;
+
+    const handleWheel = (event: WheelEvent) => {
+      if ((event.target as Element | null)?.closest(".network-graph-toolbar, .network-evidence-panel")) return;
+      const activeView = viewRef.current;
+      const isAtMinimum = activeView.scale <= 1.001 && event.deltaY > 0;
+      const isAtMaximum = activeView.scale >= 3.999 && event.deltaY < 0;
+      if (isAtMinimum || isAtMaximum) return;
+      event.preventDefault();
+      const rect = stage.getBoundingClientRect();
+      const pointerX = ((event.clientX - rect.left) / Math.max(1, rect.width)) * NETWORK_WIDTH;
+      const pointerY = ((event.clientY - rect.top) / Math.max(1, rect.height)) * NETWORK_HEIGHT;
+      const zoomFactor = Math.exp(-event.deltaY * 0.0015);
+      setView((current) => {
+        const scale = Math.max(1, Math.min(4, current.scale * zoomFactor));
+        const ratio = scale / current.scale;
+        const nextView = clampNetworkView({
+          scale,
+          x: pointerX - (pointerX - current.x) * ratio,
+          y: pointerY - (pointerY - current.y) * ratio,
+        });
+        viewRef.current = nextView;
+        return nextView;
+      });
+    };
+
+    stage.addEventListener("wheel", handleWheel, { passive: false });
+    return () => stage.removeEventListener("wheel", handleWheel);
+  }, []);
+
+  useEffect(() => {
+    const resetView = { scale: 1, x: 0, y: 0 };
+    viewRef.current = resetView;
+    setView(resetView);
+    setTooltip(null);
+    setSelectedNodeId(null);
+    setHoveredNodeId(null);
+  }, [graph]);
+
+  const activeNodeId = selectedNodeId || hoveredNodeId;
+  const relatedNodeIds = useMemo(() => {
+    if (!activeNodeId) return new Set<string>();
+    const related = new Set<string>([activeNodeId]);
+    graph.edges.forEach((edge) => {
+      if (edge.source.id === activeNodeId) related.add(edge.target.id);
+      if (edge.target.id === activeNodeId) related.add(edge.source.id);
+    });
+    return related;
+  }, [activeNodeId, graph.edges]);
+  const relatedEdgeIds = useMemo(() => {
+    if (!activeNodeId) return new Set<string>();
+    return new Set(
+      graph.edges
+        .filter((edge) => edge.source.id === activeNodeId || edge.target.id === activeNodeId)
+        .map((edge) => edge.id),
+    );
+  }, [activeNodeId, graph.edges]);
+  const directEdgeCountByNodeId = useMemo(() => {
+    const counts = new Map<string, number>();
+    graph.edges.forEach((edge) => {
+      counts.set(edge.source.id, (counts.get(edge.source.id) || 0) + 1);
+      counts.set(edge.target.id, (counts.get(edge.target.id) || 0) + 1);
+    });
+    return counts;
+  }, [graph.edges]);
+  const selectedNode = graph.nodes.find((node) => node.id === selectedNodeId) || null;
+  const selectedDirectEdges = selectedNode
+    ? graph.edges.filter((edge) => edge.source.id === selectedNode.id || edge.target.id === selectedNode.id)
+    : [];
+  const selectedRecords = selectedNode
+    ? selectedNode.recordIds
+        .map((recordId) => graph.recordsById.get(recordId))
+        .filter((record): record is InvestmentRecord => Boolean(record))
+        .sort((a, b) => b.year - a.year || a.initiative.localeCompare(b.initiative))
+    : [];
+
+  const showTooltip = (label: string, detail: string, clientX: number, clientY: number) => {
+    const rect = stageRef.current?.getBoundingClientRect();
+    if (!rect) return;
+    setTooltip({
+      label,
+      detail,
+      x: Math.max(92, Math.min(rect.width - 92, clientX - rect.left)),
+      y: Math.max(64, Math.min(rect.height - 18, clientY - rect.top)),
+    });
+  };
+
+  const showFocusedTooltip = (label: string, detail: string, target: SVGElement) => {
+    const rect = target.getBoundingClientRect();
+    showTooltip(label, detail, rect.left + rect.width / 2, rect.top);
+  };
+
+  const setClampedView = (nextView: NetworkView) => {
+    const clamped = clampNetworkView(nextView);
+    viewRef.current = clamped;
+    setView(clamped);
+  };
+
+  const zoomFromKeyboard = (factor: number) => {
+    const current = viewRef.current;
+    const scale = Math.max(1, Math.min(4, current.scale * factor));
+    const ratio = scale / current.scale;
+    setClampedView({
+      scale,
+      x: NETWORK_WIDTH / 2 - (NETWORK_WIDTH / 2 - current.x) * ratio,
+      y: NETWORK_HEIGHT / 2 - (NETWORK_HEIGHT / 2 - current.y) * ratio,
+    });
+  };
+
+  const resetNetworkView = () => setClampedView({ scale: 1, x: 0, y: 0 });
+
+  const focusNode = (node: NetworkNode) => {
+    const scale = Math.max(2, viewRef.current.scale);
+    setClampedView({
+      scale,
+      x: NETWORK_WIDTH / 2 - node.x * scale,
+      y: NETWORK_HEIGHT / 2 - node.y * scale,
+    });
+    setSelectedNodeId(node.id);
+  };
+
+  const selectFromSearch = () => {
+    const normalizedQuery = normalizeText(networkQuery);
+    if (!normalizedQuery) return;
+    const match = graph.nodes.find((node) => normalizeText(node.label) === normalizedQuery)
+      || graph.nodes.find((node) => normalizeText(node.label).startsWith(normalizedQuery))
+      || graph.nodes.find((node) => normalizeText(node.label).includes(normalizedQuery));
+    if (!match) return;
+    setNetworkQuery(match.label);
+    focusNode(match);
+  };
+
+  if (!graph.nodes.length) {
+    return <div className="network-graph-empty">No institutions match the active filters.</div>;
+  }
+
+  return (
+    <div className="network-graph-shell">
+      <div
+        ref={stageRef}
+        className={isDragging ? "network-graph-stage is-dragging" : "network-graph-stage"}
+        role="region"
+        aria-roledescription="interactive network diagram"
+        aria-label={`${graph.nodes.length} institutions with ${graph.edges.length} source-backed direct links. Select an institution to inspect its cited announcements and direct neighbors.`}
+        aria-describedby="ecosystem-network-help"
+        tabIndex={0}
+      onKeyDown={(event) => {
+        if (event.key === "+" || event.key === "=") {
+          event.preventDefault();
+          zoomFromKeyboard(1.22);
+        } else if (event.key === "-") {
+          event.preventDefault();
+          zoomFromKeyboard(1 / 1.22);
+        } else if (event.key === "0") {
+          event.preventDefault();
+          resetNetworkView();
+        } else if (event.key === "Escape") {
+          event.preventDefault();
+          setSelectedNodeId(null);
+          setHoveredNodeId(null);
+          setTooltip(null);
+        } else if (["ArrowLeft", "ArrowRight", "ArrowUp", "ArrowDown"].includes(event.key)) {
+          event.preventDefault();
+          const offset = 28;
+          const current = viewRef.current;
+          setClampedView({
+            ...current,
+            x: current.x + (event.key === "ArrowLeft" ? offset : event.key === "ArrowRight" ? -offset : 0),
+            y: current.y + (event.key === "ArrowUp" ? offset : event.key === "ArrowDown" ? -offset : 0),
+          });
+        }
+      }}
+      onPointerDown={(event) => {
+        if (event.button !== 0) return;
+        if ((event.target as Element | null)?.closest(".network-node, .network-edge-group, .network-graph-toolbar, .network-evidence-panel")) return;
+        event.currentTarget.setPointerCapture(event.pointerId);
+        dragRef.current = {
+          pointerId: event.pointerId,
+          clientX: event.clientX,
+          clientY: event.clientY,
+          viewX: viewRef.current.x,
+          viewY: viewRef.current.y,
+        };
+        setTooltip(null);
+        setIsDragging(true);
+      }}
+      onPointerMove={(event) => {
+        const drag = dragRef.current;
+        if (!drag || drag.pointerId !== event.pointerId) return;
+        const rect = event.currentTarget.getBoundingClientRect();
+        const deltaX = ((event.clientX - drag.clientX) / Math.max(1, rect.width)) * NETWORK_WIDTH;
+        const deltaY = ((event.clientY - drag.clientY) / Math.max(1, rect.height)) * NETWORK_HEIGHT;
+        setClampedView({ ...viewRef.current, x: drag.viewX + deltaX, y: drag.viewY + deltaY });
+      }}
+      onPointerUp={(event) => {
+        if (dragRef.current?.pointerId !== event.pointerId) return;
+        dragRef.current = null;
+        setIsDragging(false);
+        if (event.currentTarget.hasPointerCapture(event.pointerId)) event.currentTarget.releasePointerCapture(event.pointerId);
+      }}
+      onPointerCancel={() => {
+        dragRef.current = null;
+        setIsDragging(false);
+      }}
+      onDoubleClick={(event) => {
+        if ((event.target as Element | null)?.closest(".network-graph-toolbar, .network-evidence-panel")) return;
+        resetNetworkView();
+      }}
+    >
+      <p id="ecosystem-network-help" className="sr-only">
+        Use the mouse wheel to zoom, drag to pan, and hover or focus a dot to reveal its institution. Hover or focus a solid line to inspect the direct relationship and its source. Select a dot to pin its direct network and inspect source evidence. Keyboard users can zoom with plus and minus, pan with arrow keys, clear with Escape, and reset with zero.
+      </p>
+      <form
+        className="network-graph-toolbar"
+        role="search"
+        onSubmit={(event) => {
+          event.preventDefault();
+          selectFromSearch();
+        }}
+        onPointerDown={(event) => event.stopPropagation()}
+      >
+        <label htmlFor="institution-network-search">Find institution</label>
+        <div>
+          <input
+            id="institution-network-search"
+            type="search"
+            list="institution-network-options"
+            value={networkQuery}
+            placeholder="Search institutions"
+            autoComplete="off"
+            onChange={(event) => setNetworkQuery(event.target.value)}
+          />
+          <button type="submit">Find</button>
+        </div>
+        <datalist id="institution-network-options">
+          {graph.nodes.map((node) => <option key={node.id} value={node.label} />)}
+        </datalist>
+      </form>
+      <svg
+        className="chart-graphic network-graph-graphic"
+        viewBox={`0 0 ${NETWORK_WIDTH} ${NETWORK_HEIGHT}`}
+        preserveAspectRatio="xMidYMid meet"
+        role="group"
+        aria-labelledby="ecosystem-network-title ecosystem-network-description"
+      >
+        <title id="ecosystem-network-title">Institution co-involvement network</title>
+        <desc id="ecosystem-network-description">Institution dots are grouped by agency type. Every line is a source-backed direct relationship, and its wider invisible interaction area makes the relationship evidence easier to inspect. Dot size reflects cited announcement involvement.</desc>
+        <rect
+          className="network-graph-hit-area"
+          width={NETWORK_WIDTH}
+          height={NETWORK_HEIGHT}
+          onClick={() => {
+            setSelectedNodeId(null);
+            setHoveredNodeId(null);
+            setTooltip(null);
+          }}
+        />
+        <g transform={`translate(${view.x} ${view.y}) scale(${view.scale})`}>
+          {graph.clusters.map((cluster) => (
+            <path
+              key={cluster.id}
+              className="network-cluster-shade"
+              d={cluster.path}
+              fill={cluster.fill}
+              stroke={cluster.stroke}
+              vectorEffect="non-scaling-stroke"
+              aria-hidden="true"
+            />
+          ))}
+          <g className="network-edges">
+            {graph.edges.map((edge) => {
+              const isRelated = relatedEdgeIds.has(edge.id);
+              const isInteractive = !selectedNodeId || isRelated;
+              const evidence = edge.evidence[0];
+              const record = graph.recordsById.get(evidence.recordId);
+              const relationshipSummary = evidence.relationship === "Documented co-participation"
+                ? `Co-participation — ${networkInitiativeExcerpt(record)}`
+                : `${evidence.relationship} — ${conciseNetworkRelationship(evidence.detail)}`;
+              const detail = `${relationshipSummary} · ${sourcePublisher(evidence.sourceUrl)}${edge.evidence.length > 1 ? ` · +${edge.evidence.length - 1} record${edge.evidence.length === 2 ? "" : "s"}` : ""}`;
+              return (
+                <g
+                  key={edge.id}
+                  className={`network-edge-group${activeNodeId && !isRelated ? " is-dimmed" : ""}${isRelated ? " is-related" : ""}${!isInteractive ? " is-disabled" : ""}`}
+                  tabIndex={isInteractive ? 0 : -1}
+                  role={isInteractive ? "img" : undefined}
+                  aria-hidden={isInteractive ? undefined : true}
+                  aria-label={isInteractive ? `${edge.source.label} to ${edge.target.label}: ${detail}` : undefined}
+                  onPointerDown={(event) => {
+                    if (isInteractive) event.stopPropagation();
+                  }}
+                  onPointerEnter={(event) => {
+                    if (isInteractive) showTooltip(`${edge.source.label} ↔ ${edge.target.label}`, detail, event.clientX, event.clientY);
+                  }}
+                  onPointerMove={(event) => {
+                    if (isInteractive) showTooltip(`${edge.source.label} ↔ ${edge.target.label}`, detail, event.clientX, event.clientY);
+                  }}
+                  onPointerLeave={() => {
+                    if (isInteractive) setTooltip(null);
+                  }}
+                  onFocus={(event) => {
+                    if (isInteractive) showFocusedTooltip(`${edge.source.label} ↔ ${edge.target.label}`, detail, event.currentTarget);
+                  }}
+                  onBlur={() => setTooltip(null)}
+                >
+                  <path
+                    d={edge.path}
+                    className="network-edge network-edge-direct"
+                    strokeWidth={1.15}
+                    vectorEffect="non-scaling-stroke"
+                    aria-hidden="true"
+                  />
+                  <path
+                    d={edge.path}
+                    className="network-edge-hit"
+                    strokeWidth={18}
+                    vectorEffect="non-scaling-stroke"
+                    aria-hidden="true"
+                  />
+                </g>
+              );
+            })}
+          </g>
+          <g className="network-nodes">
+            {graph.nodes.map((node) => {
+              const directEdgeCount = directEdgeCountByNodeId.get(node.id) || 0;
+              const detail = `${node.clusterLabel} · ${node.recordCount} announcement${node.recordCount === 1 ? "" : "s"} · ${directEdgeCount} verified link${directEdgeCount === 1 ? "" : "s"}`;
+              const isSelected = selectedNodeId === node.id;
+              const isRelated = relatedNodeIds.has(node.id);
+              return (
+                <circle
+                  key={node.id}
+                  className={`network-node${isSelected ? " is-selected" : ""}${activeNodeId && !isRelated ? " is-dimmed" : ""}${isRelated && !isSelected ? " is-related" : ""}`}
+                  cx={node.x}
+                  cy={node.y}
+                  r={node.radius}
+                  tabIndex={0}
+                  role="button"
+                  aria-label={`${node.label}, ${detail}`}
+                  aria-pressed={isSelected}
+                  vectorEffect="non-scaling-stroke"
+                  onPointerDown={(event) => event.stopPropagation()}
+                  onPointerEnter={(event) => {
+                    setHoveredNodeId(node.id);
+                    showTooltip(node.label, detail, event.clientX, event.clientY);
+                  }}
+                  onPointerMove={(event) => showTooltip(node.label, detail, event.clientX, event.clientY)}
+                  onPointerLeave={() => {
+                    setHoveredNodeId(null);
+                    setTooltip(null);
+                  }}
+                  onClick={(event) => {
+                    event.stopPropagation();
+                    setSelectedNodeId((current) => current === node.id ? null : node.id);
+                  }}
+                  onFocus={(event) => {
+                    setHoveredNodeId(node.id);
+                    showFocusedTooltip(node.label, detail, event.currentTarget);
+                  }}
+                  onBlur={() => {
+                    setHoveredNodeId(null);
+                    setTooltip(null);
+                  }}
+                  onKeyDown={(event) => {
+                    if (event.key !== "Enter" && event.key !== " ") return;
+                    event.preventDefault();
+                    event.stopPropagation();
+                    setSelectedNodeId((current) => current === node.id ? null : node.id);
+                  }}
+                />
+              );
+            })}
+          </g>
+        </g>
+      </svg>
+      {tooltip && (
+        <div className="network-graph-tooltip" style={{ left: tooltip.x, top: tooltip.y }} aria-hidden="true">
+          <strong>{tooltip.label}</strong>
+          <span>{tooltip.detail}</span>
+        </div>
+      )}
+      <div className="network-graph-legend" aria-label="Network legend">
+        <span><i className="legend-line legend-direct" /> Direct</span>
+        {graph.clusters.map((cluster) => (
+          <span key={cluster.id}>
+            <i className="legend-shade" style={{ background: cluster.fill, borderColor: cluster.stroke }} />
+            {cluster.legendLabel}
+          </span>
+        ))}
+      </div>
+      </div>
+      {selectedNode && (
+        <aside
+          className="network-evidence-panel"
+          aria-label={`Evidence for ${selectedNode.label}`}
+          onPointerDown={(event) => event.stopPropagation()}
+        >
+          <header>
+            <div>
+              <span>Selected institution</span>
+              <strong>{selectedNode.label}</strong>
+            </div>
+            <div className="network-evidence-actions">
+              <button className="network-ledger-button" type="button" onClick={() => onViewLedger(selectedNode.label)}>
+                View in verified ledger
+              </button>
+              <button className="network-clear-button" type="button" onClick={() => setSelectedNodeId(null)}>Clear</button>
+            </div>
+          </header>
+          <p>
+            {selectedRecords.length} announcement{selectedRecords.length === 1 ? "" : "s"} · {selectedDirectEdges.length} verified link{selectedDirectEdges.length === 1 ? "" : "s"}
+          </p>
+          {selectedDirectEdges.length > 0 ? (
+            <ul>
+              {selectedDirectEdges.slice(0, 1).map((edge) => {
+                const counterpart = edge.source.id === selectedNode.id ? edge.target : edge.source;
+                const evidence = edge.evidence[0];
+                return (
+                  <li key={edge.id}>
+                    <a href={evidence.sourceUrl} target="_blank" rel="noreferrer" aria-label={`Open relationship evidence for ${counterpart.label}`}>
+                      {counterpart.label}
+                    </a>
+                    <span>{evidence.relationship}{edge.evidence.length > 1 ? ` · ${edge.evidence.length} sources` : ""}</span>
+                  </li>
+                );
+              })}
+            </ul>
+          ) : (
+            <small>No verified relationship in the active data.</small>
+          )}
+          {selectedDirectEdges.length > 1 && <small>+{selectedDirectEdges.length - 1} more links in the ledger</small>}
+        </aside>
+      )}
+    </div>
+  );
+}
+
+function clampNetworkView(view: NetworkView): NetworkView {
+  const marginX = NETWORK_WIDTH * 0.16;
+  const marginY = NETWORK_HEIGHT * 0.18;
+  const minX = NETWORK_WIDTH - NETWORK_WIDTH * view.scale - marginX;
+  const minY = NETWORK_HEIGHT - NETWORK_HEIGHT * view.scale - marginY;
+  return {
+    scale: view.scale,
+    x: Math.max(minX, Math.min(marginX, view.x)),
+    y: Math.max(minY, Math.min(marginY, view.y)),
+  };
 }
 
 function pickVerticalCategory<T>(point: ChartClickPoint, items: T[], grid: ChartGrid): T | undefined {
@@ -1851,11 +2780,15 @@ function EvidenceExplorer({
   records,
   sortKey,
   sortDirection,
+  institutionFilter,
+  onClearInstitutionFilter,
   onSort,
 }: {
   records: InvestmentRecord[];
   sortKey: SortKey;
   sortDirection: SortDirection;
+  institutionFilter: string | null;
+  onClearInstitutionFilter: () => void;
   onSort: (key: SortKey) => void;
 }) {
   const [expanded, setExpanded] = useState(false);
@@ -1876,6 +2809,16 @@ function EvidenceExplorer({
           <span className="evidence-total">
             <strong>0</strong> matching announcements
           </span>
+          {institutionFilter && (
+            <button
+              type="button"
+              className="evidence-institution-filter"
+              aria-label={`Clear institution filter ${institutionFilter}`}
+              onClick={onClearInstitutionFilter}
+            >
+              Institution: <strong>{institutionFilter}</strong> <span>Clear</span>
+            </button>
+          )}
         </div>
         <p className="evidence-empty">No initiatives match the active filters.</p>
       </div>
@@ -1888,6 +2831,16 @@ function EvidenceExplorer({
         <span className="evidence-total" data-total={records.length}>
           <strong>{records.length}</strong> matching announcements
         </span>
+        {institutionFilter && (
+          <button
+            type="button"
+            className="evidence-institution-filter"
+            aria-label={`Clear institution filter ${institutionFilter}`}
+            onClick={onClearInstitutionFilter}
+          >
+            Institution: <strong>{institutionFilter}</strong> <span>Clear</span>
+          </button>
+        )}
         <div className="evidence-sort" role="group" aria-label="Sort evidence records">
           {sortOptions.map((option) => (
             <button key={option.key} type="button" className={sortKey === option.key ? "active" : ""} aria-pressed={sortKey === option.key} onClick={() => onSort(option.key)}>
@@ -2170,97 +3123,180 @@ function HorizontalBarChartGraphic({ data, metric, selectedName }: { data: Chart
   );
 }
 
-function ConcentrationLineChartGraphic({ data, dimension }: { data: ConcentrationPoint[]; dimension: TrendDimension }) {
-  const [activePoint, setActivePoint] = useState<{ key: "topOneShare" | "topThreeShare"; index: number } | null>(null);
-  const width = 720;
-  const height = 330;
-  const grid = { top: 34, right: 42, bottom: 46, left: 58 };
-  const plotWidth = width - grid.left - grid.right;
-  const plotHeight = height - grid.top - grid.bottom;
-  const xFor = (index: number) => grid.left + (data.length <= 1 ? plotWidth / 2 : (index / (data.length - 1)) * plotWidth);
-  const yFor = (share: number) => grid.top + (1 - share / 100) * plotHeight;
-  const series = [
-    { key: "topThreeShare" as const, label: "Top three share", color: "#2f80ed" },
-    { key: "topOneShare" as const, label: "Leading share", color: "#e05252" },
-  ];
-  const linePath = (key: "topOneShare" | "topThreeShare") =>
-    data.map((point, index) => `${index === 0 ? "M" : "L"} ${xFor(index)} ${yFor(point[key])}`).join(" ");
-  const activeSeries = activePoint ? series.find((item) => item.key === activePoint.key) : undefined;
-  const activeDatum = activePoint ? data[activePoint.index] : undefined;
-  const activeNames = activeSeries && activeDatum
-    ? activeSeries.key === "topOneShare" ? activeDatum.leader : activeDatum.topThree.join(", ")
-    : "";
-  const activeNameLines = activeNames ? wrapSvgLabel(activeNames, 38) : [];
-  const tooltipWidth = 270;
-  const tooltipHeight = 42 + activeNameLines.length * 14;
-  const activeX = activePoint ? xFor(activePoint.index) : 0;
-  const activeY = activeSeries && activeDatum ? yFor(activeDatum[activeSeries.key]) : 0;
-  const tooltipX = Math.max(8, Math.min(width - tooltipWidth - 8, activeX - tooltipWidth / 2));
-  const tooltipY = activeY - tooltipHeight - 12 < 4 ? activeY + 14 : activeY - tooltipHeight - 12;
+function ConcentrationProfileChartGraphic({
+  data,
+  dimension,
+  appliedYear,
+  dataAsOf,
+  onApplyYear,
+  onApplyLeader,
+}: {
+  data: ConcentrationPoint[];
+  dimension: TrendDimension;
+  appliedYear: number | null;
+  dataAsOf: string;
+  onApplyYear: (year: number) => void;
+  onApplyLeader: (name: string) => void;
+}) {
+  const latestYear = data[data.length - 1]?.year ?? null;
+  const initialYear = appliedYear && data.some((point) => point.year === appliedYear) ? appliedYear : latestYear;
+  const [selectedYear, setSelectedYear] = useState<number | null>(initialYear);
+  const [previewYear, setPreviewYear] = useState<number | null>(null);
+
+  useEffect(() => {
+    setSelectedYear((current) => {
+      if (appliedYear && data.some((point) => point.year === appliedYear)) return appliedYear;
+      if (current && data.some((point) => point.year === current)) return current;
+      return latestYear;
+    });
+    setPreviewYear(null);
+  }, [appliedYear, data, latestYear]);
+
+  const activeYear = previewYear ?? selectedYear ?? latestYear;
+  const activeIndex = data.findIndex((point) => point.year === activeYear);
+  const activePoint = activeIndex >= 0 ? data[activeIndex] : undefined;
+  const previousPoint = activeIndex > 0 ? data[activeIndex - 1] : undefined;
+  const leaderGroup = activePoint?.topGroups[0];
+  const leaderDelta = activePoint && previousPoint ? activePoint.topOneShare - previousPoint.topOneShare : null;
+  const leaderChanged = Boolean(activePoint && previousPoint && activePoint.leader !== previousPoint.leader);
+  const dimensionLabel = trendDimensionLabel(dimension);
+  const dimensionPluralLabel = trendDimensionPlural(dimension);
+  const snapshotDate = formatConcentrationSnapshotDate(dataAsOf);
 
   return (
-    <svg className="chart-graphic" viewBox={`0 0 ${width} ${height}`} role="img" aria-label={`${dimension} concentration trajectory`} preserveAspectRatio="xMidYMid meet">
-      {[0, 25, 50, 75, 100].map((tick) => {
-        const y = yFor(tick);
-        return (
-          <g key={tick}>
-            <line x1={grid.left} x2={width - grid.right} y1={y} y2={y} stroke={CHART_GRID_COLOR} strokeDasharray="4 6" />
-            <text x={grid.left - 10} y={y + 4} textAnchor="end" fill={CHART_TEXT_COLOR} fontSize="12" fontWeight="700">{tick}%</text>
-          </g>
-        );
-      })}
-      {data.map((point, index) => (
-        <text key={point.year} x={xFor(index)} y={height - 13} textAnchor="middle" fill={CHART_TEXT_COLOR} fontSize="12" fontWeight="800">{point.year}</text>
-      ))}
-      {series.map((item) => (
-        <path key={item.key} d={linePath(item.key)} fill="none" stroke={item.color} strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" />
-      ))}
-      <g transform={`translate(${grid.left}, 16)`}>
-        {series.map((item, index) => (
-          <g key={item.key} transform={`translate(${index * 150}, 0)`}>
-            <line x1="0" x2="22" y1="0" y2="0" stroke={item.color} strokeWidth="3" />
-            <text x="30" y="4" fill={CHART_AXIS_COLOR} fontSize="11" fontWeight="800">{item.label}</text>
-          </g>
-        ))}
-      </g>
-      {series.map((item) =>
-        data.map((point, index) => {
-          const names = item.key === "topOneShare" ? point.leader : point.topThree.join(", ");
-          return (
-            <g
-              key={`${item.key}-${point.year}`}
-              className="concentration-point"
-              tabIndex={0}
-              role="img"
-              aria-label={`${point.year} ${item.label}: ${point[item.key].toFixed(1)}%. ${names}.`}
-              onMouseEnter={() => setActivePoint({ key: item.key, index })}
-              onMouseLeave={() => setActivePoint(null)}
-              onFocus={() => setActivePoint({ key: item.key, index })}
-              onBlur={() => setActivePoint(null)}
-            >
-              <circle cx={xFor(index)} cy={yFor(point[item.key])} r="6" fill={item.color} stroke="#fff" strokeWidth="2" />
-            </g>
-          );
-        }),
+    <div className="concentration-profile">
+      <div className="concentration-legend" aria-label="Concentration chart legend">
+        <span><i className="is-leader" />Leader</span>
+        <span><i className="is-next" />Next two</span>
+        <span><i className="is-remaining" />Others</span>
+      </div>
+
+      {data.length ? (
+        <div
+          className="concentration-snapshot-chart"
+          role="group"
+          aria-label={`${dimensionLabel} concentration by disclosed commitment value for ${data.map((point) => point.year).join(", ")}`}
+        >
+          <div className="concentration-axis" aria-hidden="true">
+            <span>0%</span><span>25%</span><span>50%</span><span>75%</span><span>100%</span>
+          </div>
+          {data.map((point) => {
+            const nextTwoShare = Math.max(0, point.topThreeShare - point.topOneShare);
+            const remainingShare = Math.max(0, 100 - point.topThreeShare);
+            const isSelected = point.year === activeYear;
+            const coverageLabel = `${point.includedRecordCount} of ${point.recordCount} records have values`;
+            const topNames = point.topGroups.map((group) => `${group.name} ${group.share.toFixed(1)}%`).join(", ");
+
+            return (
+              <button
+                type="button"
+                key={point.year}
+                className={`concentration-year-row ${isSelected ? "is-selected" : ""}`}
+                aria-pressed={selectedYear === point.year}
+                aria-label={`${point.year}. ${point.leader} leads with ${point.topOneShare.toFixed(1)} percent; top three share ${point.topThreeShare.toFixed(1)} percent. ${coverageLabel}. Effective spread ${point.effectiveCategories.toFixed(1)} of ${point.categoryCount} ${dimensionPluralLabel}. Top groups: ${topNames}.`}
+                onMouseEnter={() => setPreviewYear(point.year)}
+                onMouseLeave={() => setPreviewYear(null)}
+                onFocus={() => setPreviewYear(point.year)}
+                onBlur={() => setPreviewYear(null)}
+                onClick={() => setSelectedYear(point.year)}
+              >
+                <span className="concentration-year-label">
+                  <strong>{point.year}</strong>
+                  {point.year === latestYear && <small>Latest</small>}
+                </span>
+                <span className="concentration-share-bar" aria-hidden="true">
+                  <span className="concentration-segment is-leader" style={{ width: `${point.topOneShare}%` }}>
+                    {point.topOneShare >= 24 && <b>{truncateConcentrationLabel(point.leader)} {point.topOneShare.toFixed(0)}%</b>}
+                  </span>
+                  <span className="concentration-segment is-next" style={{ width: `${nextTwoShare}%` }}>
+                    {nextTwoShare >= 23 && <b>Next two</b>}
+                  </span>
+                  <span className="concentration-segment is-remaining" style={{ width: `${remainingShare}%` }}>
+                    {remainingShare >= 23 && <b>Others</b>}
+                  </span>
+                </span>
+                <span className="concentration-year-meta" aria-hidden="true">
+                  <span>{coverageLabel}</span>
+                  <span>Spread {point.effectiveCategories.toFixed(1)} of {point.categoryCount}</span>
+                </span>
+              </button>
+            );
+          })}
+        </div>
+      ) : (
+        <div className="concentration-empty" role="status">No records are available in this scope.</div>
       )}
-      {activeSeries && activeDatum && (
-        <g className="concentration-point-tooltip" transform={`translate(${tooltipX}, ${tooltipY})`} aria-hidden="true">
-          <rect width={tooltipWidth} height={tooltipHeight} rx="8" fill="#f7fbff" stroke="#b9ccdf" />
-          <text x="12" y="19" fill="#17324d" fontSize="11" fontWeight="800">
-            {activeDatum.year} · {activeSeries.label}: {activeDatum[activeSeries.key].toFixed(1)}%
-          </text>
-          <text x="12" y="38" fill="#526b82" fontSize="10.5" fontWeight="700">
-            {activeNameLines.map((line, lineIndex) => (
-              <tspan key={`${activeDatum.year}-${activeSeries.key}-${lineIndex}`} x="12" dy={lineIndex === 0 ? 0 : 14}>
-                {line}
-              </tspan>
+
+      {activePoint && leaderGroup && (
+        <section className="concentration-detail" aria-live="polite" aria-label={`Selected ${activePoint.year} concentration details`}>
+          <div className="concentration-detail-heading">
+            <div>
+              <span>{activePoint.year} {dimensionLabel}</span>
+              <h3>{activePoint.leader} leads</h3>
+            </div>
+          </div>
+
+          <div className="concentration-detail-metrics">
+            <div><span>Leader</span><strong>{activePoint.topOneShare.toFixed(1)}%</strong></div>
+            <div><span>Top three</span><strong>{activePoint.topThreeShare.toFixed(1)}%</strong></div>
+            <div><span>Spread</span><strong>{activePoint.effectiveCategories.toFixed(1)} <small>of {activePoint.categoryCount}</small></strong></div>
+          </div>
+
+          <div className="concentration-ranked-groups" aria-label={`Top ${dimensionPluralLabel} in ${activePoint.year}`}>
+            {activePoint.topGroups.map((group, index) => (
+              <span key={`${activePoint.year}-${group.name}`}>
+                <b>{index + 1}</b> {group.name} <strong>{group.share.toFixed(1)}%</strong>
+              </span>
             ))}
-          </text>
-        </g>
+          </div>
+
+          <div className="concentration-detail-footer">
+            <p>
+              {activePoint.includedRecordCount} of {activePoint.recordCount} records include a disclosed value.
+              {leaderDelta !== null && ` The leading share ${leaderDelta >= 0 ? "increased" : "decreased"} by ${Math.abs(leaderDelta).toFixed(1)} percentage points from ${previousPoint?.year}.`}
+              {leaderChanged && previousPoint && ` ${activePoint.leader} replaced ${previousPoint.leader} as the leader.`}
+              {activePoint.year === latestYear && snapshotDate && ` The latest snapshot was updated on ${snapshotDate}.`}
+            </p>
+            <div className="concentration-actions">
+              <button type="button" onClick={() => onApplyYear(activePoint.year)}>
+                {appliedYear === activePoint.year ? "Clear year" : `Filter ${activePoint.year}`}
+              </button>
+              <button type="button" onClick={() => onApplyLeader(activePoint.leader)}>
+                Focus leader
+              </button>
+            </div>
+          </div>
+        </section>
       )}
-      {!data.length && <text x={width / 2} y={height / 2} textAnchor="middle" fill={CHART_TEXT_COLOR} fontSize="13" fontWeight="700">No chartable commitments in this scope</text>}
-    </svg>
+
+      <p className="concentration-method-note">
+        This chart shows disclosed commitments in tracked records, not market share. A higher spread means commitments are distributed more evenly.
+      </p>
+    </div>
   );
+}
+
+function trendDimensionLabel(dimension: TrendDimension): string {
+  if (dimension === "state") return "State";
+  if (dimension === "industry") return "Industry";
+  return "Capability";
+}
+
+function trendDimensionPlural(dimension: TrendDimension): string {
+  if (dimension === "state") return "states";
+  if (dimension === "industry") return "industries";
+  return "capabilities";
+}
+
+function truncateConcentrationLabel(value: string, maxLength = 20): string {
+  if (value.length <= maxLength) return value;
+  return `${value.slice(0, Math.max(1, maxLength - 1)).trimEnd()}…`;
+}
+
+function formatConcentrationSnapshotDate(value: string): string {
+  const date = new Date(value);
+  if (Number.isNaN(date.getTime())) return "";
+  return new Intl.DateTimeFormat("en-IN", { day: "numeric", month: "short", year: "numeric", timeZone: "UTC" }).format(date);
 }
 
 function buildTicks(max: number): number[] {
@@ -2377,6 +3413,7 @@ function focusElementAfterUpdate(update: () => void, selector: string): void {
     const viewportHeight = window.innerHeight;
     const visibleTop = 96;
     const targetTop = window.scrollY + rect.top - Math.max(visibleTop, (viewportHeight - Math.min(rect.height, viewportHeight * 0.72)) / 2);
+    if (element.hasAttribute("tabindex")) element.focus({ preventScroll: true });
     window.scrollTo({ top: Math.max(0, targetTop), behavior: "smooth" });
   };
 
@@ -2533,15 +3570,6 @@ function stateAxisLabel(value: string): string {
   return `${value.slice(0, 8)}\n${value.slice(8)}`;
 }
 
-function convertedValueForMetric(record: InvestmentRecord, metric: MetricMode): number {
-  if (metric === "records") return 1;
-  if (!record.amount.chartable || !record.amount.currency) return 0;
-  if (metric === "inr") {
-    return record.amount.currency === "INR" ? record.amount.croreValue || 0 : (record.amount.usdMillionValue || 0) * USD_MILLION_TO_INR_CRORE;
-  }
-  return record.amount.currency === "USD" ? record.amount.usdMillionValue || 0 : (record.amount.croreValue || 0) / USD_MILLION_TO_INR_CRORE;
-}
-
 function groupByConvertedMetric(records: InvestmentRecord[], metric: MetricMode, getKey: (record: InvestmentRecord) => string): ChartDatum[] {
   const groups = new Map<string, InvestmentRecord[]>();
   records.forEach((record) => {
@@ -2601,23 +3629,435 @@ function buildIndustryComparison(records: InvestmentRecord[], metric: MetricMode
   };
 }
 
-function buildConcentrationTrend(records: InvestmentRecord[], metric: MetricMode, dimension: TrendDimension): ConcentrationPoint[] {
-  const chartableRecords = records.filter((record) => convertedValueForMetric(record, metric) > 0);
-  const years = [...new Set(chartableRecords.map((record) => record.year))].sort((a, b) => a - b);
+function buildConcentrationTrend(
+  records: InvestmentRecord[],
+  metric: MetricMode,
+  dimension: TrendDimension,
+): ConcentrationPoint[] {
+  const years = [...new Set(records.map((record) => record.year))].sort((a, b) => a - b);
 
   return years.map((year) => {
-    const yearRecords = chartableRecords.filter((record) => record.year === year);
-    const groups = groupByConvertedMetric(yearRecords, metric, (record) => record[dimension]);
+    const yearRecords = records.filter((record) => record.year === year);
+    const includedRecords = yearRecords.filter((record) => convertedValueForMetric(record, metric) > 0);
+    const groups = groupByConvertedMetric(includedRecords, metric, (record) => record[dimension]);
     const total = groups.reduce((sum, group) => sum + group.value, 0);
     const share = (value: number) => total > 0 ? (value / total) * 100 : 0;
+    const rankedGroups: ConcentrationGroup[] = groups.map((group) => ({
+      name: group.name,
+      share: share(group.value),
+    }));
+    const hhi = rankedGroups.reduce((sum, group) => sum + (group.share / 100) ** 2, 0);
+    const topGroups = rankedGroups.slice(0, 3);
+
     return {
       year,
-      topOneShare: share(groups[0]?.value || 0),
-      topThreeShare: share(groups.slice(0, 3).reduce((sum, group) => sum + group.value, 0)),
-      leader: groups[0]?.name || "No leader",
-      topThree: groups.slice(0, 3).map((group) => group.name),
+      topOneShare: topGroups[0]?.share || 0,
+      topThreeShare: topGroups.reduce((sum, group) => sum + group.share, 0),
+      leader: topGroups[0]?.name || "No leader",
+      topGroups,
+      recordCount: yearRecords.length,
+      includedRecordCount: includedRecords.length,
+      categoryCount: rankedGroups.length,
+      effectiveCategories: hhi > 0 ? 1 / hhi : 0,
     };
   });
+}
+
+type NetworkNodeSeed = {
+  label: string;
+  institutionType: InstitutionType;
+  recordIds: Set<string>;
+  states: Set<string>;
+};
+
+type NetworkEdgeSeed = {
+  sourceLabel: string;
+  targetLabel: string;
+  recordIds: Set<string>;
+  evidence: Array<{
+    recordId: string;
+    relationship: string;
+    detail: string;
+    sourceUrl: string;
+  }>;
+};
+
+function buildEcosystemNetwork(records: InvestmentRecord[]): NetworkGraphModel {
+  const recordsById = new Map(records.map((record) => [record.id, record]));
+  const nodeSeeds = new Map<string, NetworkNodeSeed>();
+  const evidenceEdges = new Map<string, NetworkEdgeSeed>();
+
+  records.forEach((record) => {
+    const explicitRelationships = (record.institutionRelationships || [])
+      .map((relationship) => ({
+        source: relationship.source.trim(),
+        target: relationship.target.trim(),
+        relationship: relationship.relationship.trim() || "Direct relationship",
+        detail: relationship.detail.trim() || "Named together as direct counterparties in the cited source.",
+        sourceUrl: relationship.sourceUrl?.trim() || record.sourceUrl,
+      }))
+      .filter((relationship) => relationship.source && relationship.target && relationship.source !== relationship.target);
+    const majorPlayers = [...new Set(
+      [
+        ...(((record as InvestmentRecord & { majorPlayers?: string[] }).majorPlayers || []).map((player) => player.trim())),
+        ...explicitRelationships.flatMap((relationship) => [relationship.source, relationship.target]),
+      ].filter(Boolean),
+    )].sort((a, b) => a.localeCompare(b));
+
+    majorPlayers.forEach((label) => {
+      const node = nodeSeeds.get(label) || {
+        label,
+        institutionType: institutionTypeFor(label),
+        recordIds: new Set<string>(),
+        states: new Set<string>(),
+      };
+      node.recordIds.add(record.id);
+      if (record.state) node.states.add(record.state);
+      nodeSeeds.set(label, node);
+    });
+
+    const addEvidenceEdge = (
+      firstLabel: string,
+      secondLabel: string,
+      relationship: string,
+      detail: string,
+      sourceUrl: string,
+    ) => {
+      const [sourceLabel, targetLabel] = [firstLabel, secondLabel].sort((a, b) => a.localeCompare(b));
+      if (!sourceLabel || !targetLabel || sourceLabel === targetLabel) return;
+      const key = `${sourceLabel}\u0000${targetLabel}`;
+      const edge = evidenceEdges.get(key) || {
+        sourceLabel,
+        targetLabel,
+        recordIds: new Set<string>(),
+        evidence: [],
+      };
+      edge.recordIds.add(record.id);
+      if (!edge.evidence.some((item) => item.recordId === record.id && item.relationship === relationship && item.detail === detail)) {
+        edge.evidence.push({ recordId: record.id, relationship, detail, sourceUrl });
+      }
+      evidenceEdges.set(key, edge);
+    };
+
+    explicitRelationships.forEach((relationship) => {
+      addEvidenceEdge(
+        relationship.source,
+        relationship.target,
+        relationship.relationship,
+        relationship.detail,
+        relationship.sourceUrl,
+      );
+    });
+
+    if (!explicitRelationships.length && majorPlayers.length === 2) {
+      addEvidenceEdge(
+        majorPlayers[0],
+        majorPlayers[1],
+        "Documented co-participation",
+        `The cited announcement names both institutions in “${record.initiative}”.`,
+        record.sourceUrl,
+      );
+    }
+  });
+
+  const labels = [...nodeSeeds.keys()].sort((a, b) => a.localeCompare(b));
+  if (!labels.length) {
+    return { clusters: [], nodes: [], edges: [], recordCount: records.length, recordsById };
+  }
+
+  const evidenceEdgeList = [...evidenceEdges.values()];
+  const institutionTypeByLabel = new Map(labels.map((label) => [label, nodeSeeds.get(label)!.institutionType]));
+  const positions = layoutInstitutionNetwork(labels, evidenceEdgeList, institutionTypeByLabel, nodeSeeds);
+  const maximumRecordCount = Math.max(...labels.map((label) => nodeSeeds.get(label)!.recordIds.size));
+
+  const nodes = labels.map<NetworkNode>((label) => {
+    const seed = nodeSeeds.get(label)!;
+    const position = positions.get(label)!;
+    const institutionType = seed.institutionType;
+    return {
+      id: `institution:${label}`,
+      label,
+      clusterId: institutionType,
+      clusterLabel: INSTITUTION_TYPE_LABELS[institutionType],
+      institutionType,
+      x: position.x,
+      y: position.y,
+      radius: networkNodeRadius(seed.recordIds.size, maximumRecordCount),
+      recordCount: seed.recordIds.size,
+      recordIds: [...seed.recordIds].sort(),
+      states: [...seed.states].sort((a, b) => a.localeCompare(b)),
+    };
+  });
+  const nodeByLabel = new Map(nodes.map((node) => [node.label, node]));
+
+  const edges = evidenceEdgeList.flatMap<NetworkEdge>((edge, index) => {
+    const source = nodeByLabel.get(edge.sourceLabel);
+    const target = nodeByLabel.get(edge.targetLabel);
+    if (!source || !target) return [];
+    return [{
+      id: `direct:${index}:${edge.sourceLabel}:${edge.targetLabel}`,
+      source,
+      target,
+      weight: Math.max(1, edge.recordIds.size),
+      recordIds: [...edge.recordIds].sort(),
+      evidence: [...edge.evidence].sort((a, b) => a.recordId.localeCompare(b.recordId) || a.relationship.localeCompare(b.relationship)),
+      path: buildNetworkEdgePath(source, target),
+    }];
+  });
+
+  const typeGroups = new Map<InstitutionType, NetworkNode[]>();
+  nodes.forEach((node) => typeGroups.set(node.institutionType, [...(typeGroups.get(node.institutionType) || []), node]));
+  const clusters = NETWORK_INSTITUTION_TYPES.flatMap<NetworkCluster>((type) => {
+    const members = typeGroups.get(type.id) || [];
+    if (!members.length) return [];
+      const recordIds = new Set(members.flatMap((node) => node.recordIds));
+      return [{
+        id: type.id,
+        label: type.label,
+        legendLabel: type.legendLabel,
+        path: buildNetworkCommunityPath(members, type.id),
+        fill: type.fill,
+        stroke: type.stroke,
+        recordCount: recordIds.size,
+        nodeCount: members.length,
+      }];
+  });
+
+  return { clusters, nodes, edges, recordCount: records.length, recordsById };
+}
+
+function layoutInstitutionNetwork(
+  labels: string[],
+  edges: NetworkEdgeSeed[],
+  institutionTypeByLabel: Map<string, InstitutionType>,
+  nodeSeeds: Map<string, NetworkNodeSeed>,
+): Map<string, { x: number; y: number }> {
+  const anchorShares: Record<InstitutionType, { x: number; y: number }> = {
+    government: { x: 0.28, y: 0.57 },
+    private: { x: 0.66, y: 0.61 },
+    academic: { x: 0.38, y: 0.20 },
+    ecosystem: { x: 0.70, y: 0.22 },
+    multilateral: { x: 0.84, y: 0.38 },
+  };
+  const typeGroups = new Map<InstitutionType, string[]>();
+  labels.forEach((label) => {
+    const institutionType = institutionTypeByLabel.get(label) || "private";
+    typeGroups.set(institutionType, [...(typeGroups.get(institutionType) || []), label]);
+  });
+  const maximumRecordCount = Math.max(...labels.map((label) => nodeSeeds.get(label)?.recordIds.size || 1));
+  const radiusByLabel = new Map(labels.map((label) => [
+    label,
+    networkNodeRadius(nodeSeeds.get(label)?.recordIds.size || 1, maximumRecordCount),
+  ]));
+  const positions = new Map<string, { x: number; y: number; vx: number; vy: number }>();
+  NETWORK_INSTITUTION_TYPES.forEach(({ id }) => {
+    const members = typeGroups.get(id) || [];
+    const anchor = anchorShares[id];
+    members.sort((a, b) => (nodeSeeds.get(b)?.recordIds.size || 0) - (nodeSeeds.get(a)?.recordIds.size || 0) || a.localeCompare(b));
+    members.forEach((label, index) => {
+      const angle = index * 2.399963229728653 + stableNetworkUnit(label, 307) * 0.7;
+      const radius = 9 + Math.sqrt(index) * 15;
+      positions.set(label, {
+        x: anchor.x * NETWORK_WIDTH + Math.cos(angle) * radius * (0.9 + stableNetworkUnit(label, 311) * 0.25),
+        y: anchor.y * NETWORK_HEIGHT + Math.sin(angle) * radius * (0.68 + stableNetworkUnit(label, 313) * 0.22),
+        vx: 0,
+        vy: 0,
+      });
+    });
+  });
+  const edgeWeights = edges.map((edge) => ({
+    ...edge,
+    desired: institutionTypeByLabel.get(edge.sourceLabel) === institutionTypeByLabel.get(edge.targetLabel)
+      ? 58
+      : 108,
+    strength: 0.009,
+  }));
+  const sortedLabels = [...labels].sort((a, b) => a.localeCompare(b));
+
+  for (let iteration = 0; iteration < 210; iteration += 1) {
+    const cooling = 1 - iteration / 250;
+    for (let leftIndex = 0; leftIndex < sortedLabels.length; leftIndex += 1) {
+      const leftLabel = sortedLabels[leftIndex];
+      const left = positions.get(leftLabel)!;
+      for (let rightIndex = leftIndex + 1; rightIndex < sortedLabels.length; rightIndex += 1) {
+        const rightLabel = sortedLabels[rightIndex];
+        const right = positions.get(rightLabel)!;
+        let dx = right.x - left.x;
+        let dy = right.y - left.y;
+        if (Math.abs(dx) + Math.abs(dy) < 0.001) {
+          dx = stableNetworkUnit(`${leftLabel}:${rightLabel}`, 331) - 0.5;
+          dy = stableNetworkUnit(`${rightLabel}:${leftLabel}`, 337) - 0.5;
+        }
+        const distanceSquared = Math.max(20, dx * dx + dy * dy);
+        const distance = Math.sqrt(distanceSquared);
+        const repulsion = (275 / distanceSquared) * cooling;
+        const forceX = (dx / distance) * repulsion;
+        const forceY = (dy / distance) * repulsion;
+        left.vx -= forceX;
+        left.vy -= forceY;
+        right.vx += forceX;
+        right.vy += forceY;
+        const collisionDistance = (radiusByLabel.get(leftLabel) || 4) + (radiusByLabel.get(rightLabel) || 4) + 2.5;
+        if (distance < collisionDistance) {
+          const collision = (collisionDistance - distance) * 0.055;
+          left.vx -= (dx / distance) * collision;
+          left.vy -= (dy / distance) * collision;
+          right.vx += (dx / distance) * collision;
+          right.vy += (dy / distance) * collision;
+        }
+      }
+    }
+
+    edgeWeights.forEach((edge) => {
+      const source = positions.get(edge.sourceLabel)!;
+      const target = positions.get(edge.targetLabel)!;
+      const dx = target.x - source.x;
+      const dy = target.y - source.y;
+      const distance = Math.max(1, Math.hypot(dx, dy));
+      const spring = (distance - edge.desired) * edge.strength * cooling;
+      const forceX = (dx / distance) * spring;
+      const forceY = (dy / distance) * spring;
+      source.vx += forceX;
+      source.vy += forceY;
+      target.vx -= forceX;
+      target.vy -= forceY;
+    });
+
+    sortedLabels.forEach((label) => {
+      const point = positions.get(label)!;
+      const institutionType = institutionTypeByLabel.get(label) || "private";
+      const anchor = anchorShares[institutionType];
+      point.vx += (anchor.x * NETWORK_WIDTH - point.x) * 0.0022 * cooling;
+      point.vy += (anchor.y * NETWORK_HEIGHT - point.y) * 0.0022 * cooling;
+      point.vx += (NETWORK_WIDTH / 2 - point.x) * 0.0001;
+      point.vy += (NETWORK_HEIGHT / 2 - point.y) * 0.0001;
+      point.vx *= 0.82;
+      point.vy *= 0.82;
+      const boundary = (radiusByLabel.get(label) || 4) + 22;
+      point.x = clampNumber(point.x + point.vx, boundary, NETWORK_WIDTH - boundary);
+      point.y = clampNumber(point.y + point.vy, boundary, NETWORK_HEIGHT - boundary);
+    });
+  }
+
+  return new Map([...positions.entries()].map(([label, point]) => [label, { x: point.x, y: point.y }]));
+}
+
+function networkNodeRadius(recordCount: number, maximumRecordCount: number): number {
+  if (maximumRecordCount <= 1) return 5;
+  return 4 + Math.sqrt((Math.max(1, recordCount) - 1) / (maximumRecordCount - 1)) * 9;
+}
+
+function networkInitiativeExcerpt(record: InvestmentRecord | undefined): string {
+  const label = record?.initiative.trim() || "Cited announcement";
+  return label.length > 58 ? `${label.slice(0, 55).trimEnd()}…` : label;
+}
+
+function conciseNetworkRelationship(value: string): string {
+  const normalized = value.trim().replace(/\s+/g, " ").replace(/[.!?]+$/, "");
+  if (normalized.length <= 78) return normalized;
+  const candidate = normalized.slice(0, 75);
+  const clauseBoundary = Math.max(candidate.lastIndexOf(";"), candidate.lastIndexOf(","));
+  const wordBoundary = candidate.lastIndexOf(" ");
+  const boundary = clauseBoundary >= 52 ? clauseBoundary : wordBoundary;
+  return `${candidate.slice(0, Math.max(52, boundary)).replace(/[,:;\s]+$/, "")}…`;
+}
+
+function buildNetworkCommunityPath(nodes: NetworkNode[], seed: string): string {
+  if (nodes.length === 1) return buildNetworkBlobPath(nodes[0].x, nodes[0].y, 33, 28, seed);
+  if (nodes.length === 2) {
+    const centerX = (nodes[0].x + nodes[1].x) / 2;
+    const centerY = (nodes[0].y + nodes[1].y) / 2;
+    return buildNetworkBlobPath(centerX, centerY, Math.abs(nodes[0].x - nodes[1].x) / 2 + 32, Math.abs(nodes[0].y - nodes[1].y) / 2 + 30, seed);
+  }
+  const hull = convexNetworkHull(nodes.map((node) => ({ x: node.x, y: node.y })));
+  const center = hull.reduce((sum, point) => ({ x: sum.x + point.x / hull.length, y: sum.y + point.y / hull.length }), { x: 0, y: 0 });
+  const expanded = hull.map((point, index) => {
+    const dx = point.x - center.x;
+    const dy = point.y - center.y;
+    const distance = Math.max(1, Math.hypot(dx, dy));
+    const padding = 22 + stableNetworkUnit(seed, index + 401) * 9;
+    return { x: point.x + (dx / distance) * padding, y: point.y + (dy / distance) * padding };
+  });
+  const midpoint = (a: { x: number; y: number }, b: { x: number; y: number }) => ({ x: (a.x + b.x) / 2, y: (a.y + b.y) / 2 });
+  const start = midpoint(expanded[expanded.length - 1], expanded[0]);
+  const segments = expanded.map((point, index) => {
+    const end = midpoint(point, expanded[(index + 1) % expanded.length]);
+    return `Q ${point.x.toFixed(1)} ${point.y.toFixed(1)} ${end.x.toFixed(1)} ${end.y.toFixed(1)}`;
+  });
+  return `M ${start.x.toFixed(1)} ${start.y.toFixed(1)} ${segments.join(" ")} Z`;
+}
+
+function convexNetworkHull(points: Array<{ x: number; y: number }>): Array<{ x: number; y: number }> {
+  const sorted = [...points].sort((a, b) => a.x - b.x || a.y - b.y);
+  const cross = (origin: { x: number; y: number }, a: { x: number; y: number }, b: { x: number; y: number }) =>
+    (a.x - origin.x) * (b.y - origin.y) - (a.y - origin.y) * (b.x - origin.x);
+  const lower: Array<{ x: number; y: number }> = [];
+  sorted.forEach((point) => {
+    while (lower.length >= 2 && cross(lower[lower.length - 2], lower[lower.length - 1], point) <= 0) lower.pop();
+    lower.push(point);
+  });
+  const upper: Array<{ x: number; y: number }> = [];
+  [...sorted].reverse().forEach((point) => {
+    while (upper.length >= 2 && cross(upper[upper.length - 2], upper[upper.length - 1], point) <= 0) upper.pop();
+    upper.push(point);
+  });
+  return [...lower.slice(0, -1), ...upper.slice(0, -1)];
+}
+
+function groupRecordsBy(records: InvestmentRecord[], getKey: (record: InvestmentRecord) => string) {
+  const groups = new Map<string, InvestmentRecord[]>();
+  records.forEach((record) => {
+    const key = getKey(record);
+    groups.set(key, [...(groups.get(key) || []), record]);
+  });
+  return [...groups.entries()].map(([name, group]) => ({ name, records: group }));
+}
+
+function buildNetworkBlobPath(cx: number, cy: number, rx: number, ry: number, seed: string): string {
+  const pointCount = 13;
+  const points = Array.from({ length: pointCount }, (_, index) => {
+    const angle = -Math.PI / 2 + (index / pointCount) * Math.PI * 2;
+    const variance = 0.88 + stableNetworkUnit(seed, index + 31) * 0.24;
+    return {
+      x: cx + Math.cos(angle) * (rx + 18) * variance,
+      y: cy + Math.sin(angle) * (ry + 15) * variance,
+    };
+  });
+  const midpoint = (a: { x: number; y: number }, b: { x: number; y: number }) => ({
+    x: (a.x + b.x) / 2,
+    y: (a.y + b.y) / 2,
+  });
+  const start = midpoint(points[points.length - 1], points[0]);
+  const segments = points.map((point, index) => {
+    const next = points[(index + 1) % points.length];
+    const end = midpoint(point, next);
+    return `Q ${point.x.toFixed(1)} ${point.y.toFixed(1)} ${end.x.toFixed(1)} ${end.y.toFixed(1)}`;
+  });
+  return `M ${start.x.toFixed(1)} ${start.y.toFixed(1)} ${segments.join(" ")} Z`;
+}
+
+function buildNetworkEdgePath(source: NetworkNode, target: NetworkNode): string {
+  const dx = target.x - source.x;
+  const dy = target.y - source.y;
+  const distance = Math.max(1, Math.hypot(dx, dy));
+  const bendDirection = stableNetworkUnit(`${source.label}:${target.label}`, 71) > 0.5 ? 1 : -1;
+  const bend = Math.min(34, distance * (source.clusterId === target.clusterId ? 0.045 : 0.11)) * bendDirection;
+  const controlX = (source.x + target.x) / 2 - (dy / distance) * bend;
+  const controlY = (source.y + target.y) / 2 + (dx / distance) * bend;
+  return `M ${source.x.toFixed(1)} ${source.y.toFixed(1)} Q ${controlX.toFixed(1)} ${controlY.toFixed(1)} ${target.x.toFixed(1)} ${target.y.toFixed(1)}`;
+}
+
+function stableNetworkUnit(value: string, salt: number): number {
+  let hash = (2166136261 ^ salt) >>> 0;
+  for (let index = 0; index < value.length; index += 1) {
+    hash ^= value.charCodeAt(index);
+    hash = Math.imul(hash, 16777619);
+  }
+  return (hash >>> 0) / 4294967295;
+}
+
+function clampNumber(value: number, minimum: number, maximum: number): number {
+  return Math.max(minimum, Math.min(maximum, value));
 }
 
 function buildAnalystResponse(query: string, records: InvestmentRecord[], metric: MetricMode): AnalystResponse {
@@ -2833,48 +4273,123 @@ function buildEditorialInsights(records: InvestmentRecord[], metric: MetricMode)
   ];
 }
 
-function buildExplorerCards(records: InvestmentRecord[]): ExplorerCard[] {
-  const stateCount = uniqueSorted(records.map((record) => record.state)).length;
-  const industryCount = uniqueSorted(records.map((record) => record.industry)).length;
-  const sourceCount = records.length;
+function buildExplorerCards(records: InvestmentRecord[], topicIndex: ReturnType<typeof buildTopicIndex>): ExplorerCard[] {
+  const scalePreview = records
+    .filter((record) => record.amount.chartable)
+    .map((record) => ({
+      name: record.organization,
+      value: convertedValueForMetric(record, "inr"),
+      records: [record],
+    }))
+    .sort((a, b) => b.value - a.value || a.name.localeCompare(b.name))
+    .slice(0, 5);
+
   return [
     {
+      id: "state-comparison",
       eyebrow: "State Lens",
       title: "State Comparison",
-      body: "Compare source-backed AI commitments by state and toggle filtered states against the full state set.",
-      detail: `${stateCount} states represented`,
-      chartId: "state-comparison",
+      body: "Compare commitment scale across every covered state and see where activity is concentrated.",
+      detail: `${topicIndex.states.length} state pages`,
+      actionLabel: "Open state view",
+      action: { kind: "chart", value: "state-comparison", scope: "all" },
+      preview: "bars",
+      previewData: topicIndex.states.slice(0, 5),
     },
     {
+      id: "ecosystem-network",
+      eyebrow: "Institution Web",
+      title: "Institution Network",
+      body: "Trace source-backed connections among public agencies, private firms, research bodies, and ecosystem partners.",
+      detail: `${topicIndex.institutions.length} institutions · ${topicIndex.coverage.relationships} direct links`,
+      actionLabel: "Open the network",
+      action: { kind: "chart", value: "ecosystem-network", scope: "all" },
+      preview: "network",
+      previewData: [],
+    },
+    {
+      id: "industry-ranking",
       eyebrow: "Industry Pulse",
       title: "Industry Ranking",
-      body: "Rank industry domains by value and toggle filtered industries against the full industry set.",
-      detail: `${industryCount} industries classified`,
-      chartId: "industry-ranking",
+      body: "Rank the sectors receiving the strongest commitment signals and compare the breadth of activity.",
+      detail: `${topicIndex.industries.length} industry pages`,
+      actionLabel: "Open industry view",
+      action: { kind: "chart", value: "industry-ranking", scope: "all" },
+      preview: "bars",
+      previewData: topicIndex.industries.slice(0, 5),
     },
     {
+      id: "concentration-trend",
       eyebrow: "Portfolio Shape",
       title: "Concentration Trajectory",
-      body: "Track annual leading and top-three shares to see whether commitments are broadening or concentrating.",
-      detail: "Industry and capability views",
-      chartId: "concentration-trend",
+      body: "See who leads, what the top three hold, and how evenly activity is shared.",
+      detail: `${topicIndex.coverage.yearRange} · disclosed commitments`,
+      actionLabel: "Open trend view",
+      action: { kind: "chart", value: "concentration-trend", scope: "all" },
+      preview: "timeline",
+      previewData: topicIndex.years,
     },
     {
+      id: "investment-scatter",
       eyebrow: "Scale Map",
       title: "Investment Scale Scatter",
-      body: "Plot source-backed commitments by year and amount to find the largest records and clusters.",
-      detail: `${sourceCount} chartable announcements`,
-      chartId: "investment-scatter",
+      body: "Find the largest announcements, year clusters, and the long tail of smaller commitments.",
+      detail: `${topicIndex.coverage.chartableAnnouncements} chartable announcements`,
+      actionLabel: "Open scale view",
+      action: { kind: "chart", value: "investment-scatter", scope: "all" },
+      preview: "records",
+      previewData: scalePreview,
     },
   ];
 }
 
 function buildTopicIndex(records: InvestmentRecord[]) {
+  const states = groupByConvertedMetric(records, "records", (record) => record.state);
+  const industries = groupByConvertedMetric(records, "records", (record) => record.industry);
+  const capabilities = groupByConvertedMetric(records, "records", (record) => record.capability);
+  const institutions = buildInstitutionTopicIndex(records);
+  const years = groupByConvertedMetric(records, "records", (record) => String(record.year))
+    .sort((a, b) => Number(a.name) - Number(b.name));
+  const yearRange = years.length ? `${years[0].name}–${years[years.length - 1].name}` : "No years";
+
   return {
-    states: groupByConvertedMetric(records, "records", (record) => record.state),
-    industries: groupByConvertedMetric(records, "records", (record) => record.industry),
-    capabilities: groupByConvertedMetric(records, "records", (record) => record.capability),
+    states,
+    industries,
+    capabilities,
+    institutions,
+    years,
+    coverage: {
+      announcements: records.length,
+      chartableAnnouncements: records.filter((record) => record.amount.chartable).length,
+      relationships: records.reduce((sum, record) => sum + (record.institutionRelationships?.length || 0), 0),
+      yearRange,
+    },
   };
+}
+
+function buildInstitutionTopicIndex(records: InvestmentRecord[]): ChartDatum[] {
+  const groups = new Map<string, { name: string; records: Map<string, InvestmentRecord> }>();
+
+  records.forEach((record) => {
+    const labels = record.majorPlayers.length ? record.majorPlayers : [record.organization];
+    const seenRecordInstitutions = new Set<string>();
+    labels.forEach((rawLabel) => {
+      const name = rawLabel.trim();
+      const key = slugify(name);
+      if (!name || !key || seenRecordInstitutions.has(key)) return;
+      seenRecordInstitutions.add(key);
+      const group = groups.get(key) || { name, records: new Map<string, InvestmentRecord>() };
+      group.records.set(record.id, record);
+      groups.set(key, group);
+    });
+  });
+
+  return [...groups.values()]
+    .map((group) => {
+      const groupRecords = [...group.records.values()];
+      return { name: group.name, value: groupRecords.length, records: groupRecords };
+    })
+    .sort((a, b) => b.value - a.value || a.name.localeCompare(b.name));
 }
 
 function buildCharts(records: InvestmentRecord[], metric: MetricMode) {
@@ -3100,6 +4615,7 @@ function matchesSearch(record: InvestmentRecord, query: string): boolean {
       record.state,
       record.location,
       record.organization,
+      (record as InvestmentRecord & { majorPlayers?: string[] }).majorPlayers?.join(" ") || "",
       record.initiative,
       record.industry,
       record.capability,
@@ -3134,6 +4650,7 @@ function categorySearchAliases(query: string): string[] {
     "Healthcare",
     "Industry Domain",
     "Manufacturing",
+    "Retail & Commerce",
     "Semiconductor & Electronics",
     "Startup & Innovation Ecosystem",
     "Transportation",

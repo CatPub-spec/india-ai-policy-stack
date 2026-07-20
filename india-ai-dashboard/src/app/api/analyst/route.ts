@@ -1,121 +1,197 @@
+import { google } from "@ai-sdk/google";
+import { openai } from "@ai-sdk/openai";
+import {
+  convertToModelMessages,
+  createUIMessageStream,
+  createUIMessageStreamResponse,
+  stepCountIs,
+  streamText,
+  type UIMessageStreamWriter,
+} from "ai";
 import { NextResponse } from "next/server";
 
-import { formatMetricValue, metricLabel, type InvestmentRecord, type MetricMode } from "@/dashboard-data/investmentDataset";
+import type { MetricMode } from "@/dashboard-data/investmentDataset";
+import { buildAnalystPackage, buildAnalystSystemPrompt } from "@/services/analyst";
 import { getDashboardDataset } from "@/services/dashboardData";
+import type {
+  AnalystAnswerMode,
+  AnalystMessage,
+} from "@/types/analyst";
 
-type AnalystRequestRecord = Pick<
-  InvestmentRecord,
-  "year" | "state" | "organization" | "initiative" | "industry" | "capability" | "investmentBrought" | "amount"
->;
+export const maxDuration = 60;
 
 type AnalystRequest = {
-  question?: string;
-  metric?: MetricMode;
+  messages?: unknown;
+  metric?: unknown;
 };
-
-type AnalystResponse = {
-  answer: string;
-  evidence: string[];
-};
-
-const OPENAI_RESPONSES_URL = "https://api.openai.com/v1/responses";
 
 export async function POST(request: Request) {
-  const apiKey = process.env.OPENAI_API_KEY;
-  if (!apiKey) {
-    return NextResponse.json({ fallback: true, error: "OPENAI_API_KEY is not configured." });
+  let payload: AnalystRequest;
+  try {
+    payload = (await request.json()) as AnalystRequest;
+  } catch {
+    return NextResponse.json({ error: "The analyst request was not valid JSON." }, { status: 400 });
   }
 
-  const payload = (await request.json()) as AnalystRequest;
-  const question = String(payload.question || "").trim();
-  const metric = payload.metric || "inr";
-
+  const messages = sanitizeMessages(payload.messages);
+  const question = latestUserQuestion(messages);
   if (!question) {
-    return NextResponse.json({ error: "Question is required." }, { status: 400 });
+    return NextResponse.json({ error: "Please enter a question for the analyst." }, { status: 400 });
   }
 
-  const datasetRecords = getDashboardDataset().records.slice(0, 80);
-  const total = datasetRecords.reduce((sum, record) => sum + valueForMetric(record, metric), 0);
-  const context = {
-    question,
-    metric: metricLabel(metric),
-    dataset: {
-      records: datasetRecords.length,
-      fullDatasetCommitment: formatMetricValue(total, metric),
-    },
-    records: datasetRecords.map((record) => ({
-      year: record.year,
-      state: record.state,
-      organization: record.organization,
-      industry: record.industry,
-      capability: record.capability,
-      commitment: record.investmentBrought,
-      metricValue: formatMetricValue(valueForMetric(record, metric), metric),
-      initiative: record.initiative,
-    })),
-  };
+  const metric = parseMetric(payload.metric);
+  const records = getDashboardDataset().records;
+  const analystPackage = buildAnalystPackage(question, records, metric);
+  const answerMode = chooseAnswerMode();
+  const modelMessages = await convertToModelMessages(messages.slice(-8));
+  const system = buildAnalystSystemPrompt(analystPackage.context, answerMode.endsWith("-web"));
 
-  const response = await fetch(OPENAI_RESPONSES_URL, {
-    method: "POST",
-    headers: {
-      Authorization: `Bearer ${apiKey}`,
-      "Content-Type": "application/json",
+  const stream = createUIMessageStream<AnalystMessage>({
+    originalMessages: messages,
+    execute: async ({ writer }) => {
+      if (answerMode === "ledger") {
+        writeLocalAnswer(writer, analystPackage.localAnswer);
+        return;
+      }
+
+      const commonOptions = {
+        system,
+        messages: modelMessages,
+        abortSignal: request.signal,
+        timeout: { totalMs: 50_000, chunkMs: 18_000 },
+        maxOutputTokens: 900,
+        temperature: 0.2,
+      } as const;
+
+      if (answerMode === "google-web") {
+        const result = streamText({
+          ...commonOptions,
+          model: google(process.env.ANALYST_GOOGLE_MODEL || "gemini-2.5-flash"),
+          tools: {
+            google_search: google.tools.googleSearch({}),
+          },
+          stopWhen: stepCountIs(4),
+        });
+        writer.merge(
+          result.toUIMessageStream<AnalystMessage>({
+            sendReasoning: false,
+            sendSources: false,
+            onError: analystStreamError,
+          }),
+        );
+        return;
+      }
+
+      if (answerMode === "openai-web" || answerMode === "gateway-web") {
+        const result = streamText({
+          ...commonOptions,
+          model: answerMode === "openai-web"
+            ? openai(process.env.OPENAI_ANALYST_MODEL || "gpt-5.6")
+            : process.env.ANALYST_AI_MODEL || "openai/gpt-5.4",
+          tools: {
+            web_search: openai.tools.webSearch({}),
+          },
+          stopWhen: stepCountIs(4),
+        });
+        writer.merge(
+          result.toUIMessageStream<AnalystMessage>({
+            sendReasoning: false,
+            sendSources: false,
+            onError: analystStreamError,
+          }),
+        );
+        return;
+      }
+
+      const model = answerMode === "openai"
+        ? openai(process.env.OPENAI_ANALYST_MODEL || "gpt-5.6")
+        : answerMode === "google"
+          ? google(process.env.ANALYST_GOOGLE_MODEL || "gemini-2.5-flash")
+          : process.env.ANALYST_AI_MODEL || "openai/gpt-5.4";
+      const result = streamText({ ...commonOptions, model });
+      writer.merge(
+        result.toUIMessageStream<AnalystMessage>({
+          sendReasoning: false,
+          sendSources: false,
+          onError: analystStreamError,
+        }),
+      );
     },
-    body: JSON.stringify({
-      model: process.env.OPENAI_ANALYST_MODEL || "gpt-5.6",
-      reasoning: { effort: "low" },
-      instructions:
-        "You are a careful India AI policy data analyst. Answer only from the provided full-dataset records, independent of any visible dashboard filters. Be concise, thoughtful, and source-grounded. Return strict JSON with keys answer and evidence. The answer should be 2-3 sentences. Evidence should contain 2-4 short bullets with concrete numbers, states, organizations, industries, capabilities, or years. If the records do not answer the question, say what is missing.",
-      input: JSON.stringify(context),
-    }),
+    onError: analystStreamError,
   });
 
-  if (!response.ok) {
-    const errorText = await response.text();
-    return NextResponse.json({ fallback: true, error: errorText || "OpenAI request failed." });
-  }
-
-  const data = await response.json();
-  const text = extractResponseText(data);
-  const parsed = parseAnalystResponse(text);
-
-  return NextResponse.json(parsed);
+  return createUIMessageStreamResponse({
+    stream,
+    headers: {
+      "Cache-Control": "no-store",
+      "X-Analyst-Mode": answerMode,
+    },
+  });
 }
 
-function valueForMetric(record: AnalystRequestRecord, metric: MetricMode): number {
-  if (metric === "records") return 1;
-  if (metric === "usd") return record.amount.usdMillionValue || 0;
-  return record.amount.croreValue || 0;
+function sanitizeMessages(input: unknown): AnalystMessage[] {
+  if (!Array.isArray(input)) return [];
+
+  return input.slice(-10).flatMap<AnalystMessage>((candidate, index) => {
+    if (!candidate || typeof candidate !== "object") return [];
+    const message = candidate as { id?: unknown; role?: unknown; parts?: unknown };
+    if (message.role !== "user" && message.role !== "assistant") return [];
+    if (!Array.isArray(message.parts)) return [];
+    const parts = message.parts.flatMap<{ type: "text"; text: string }>((part) => {
+      if (!part || typeof part !== "object") return [];
+      const textPart = part as { type?: unknown; text?: unknown };
+      if (textPart.type !== "text" || typeof textPart.text !== "string") return [];
+      const text = textPart.text.trim().slice(0, 4_000);
+      return text ? [{ type: "text", text }] : [];
+    });
+    if (!parts.length) return [];
+    return [{
+      id: typeof message.id === "string" && message.id ? message.id : `analyst-message-${index}`,
+      role: message.role,
+      parts,
+    }];
+  });
 }
 
-function extractResponseText(data: unknown): string {
-  if (isRecord(data) && typeof data.output_text === "string") return data.output_text;
-  if (!isRecord(data) || !Array.isArray(data.output)) return "";
-
-  return data.output
-    .flatMap((item) => (isRecord(item) && Array.isArray(item.content) ? item.content : []))
-    .map((content) => (isRecord(content) && typeof content.text === "string" ? content.text : ""))
-    .filter(Boolean)
+function latestUserQuestion(messages: AnalystMessage[]): string {
+  const message = [...messages].reverse().find((candidate) => candidate.role === "user");
+  if (!message) return "";
+  return message.parts
+    .filter((part): part is Extract<(typeof message.parts)[number], { type: "text" }> => part.type === "text")
+    .map((part) => part.text)
     .join("\n")
-    .trim();
+    .trim()
+    .slice(0, 1_200);
 }
 
-function parseAnalystResponse(text: string): AnalystResponse {
-  const jsonText = text.match(/\{[\s\S]*\}/)?.[0] || text;
-  try {
-    const parsed = JSON.parse(jsonText) as Partial<AnalystResponse>;
-    return {
-      answer: String(parsed.answer || "I could not generate a clear analyst answer from the full dataset."),
-      evidence: Array.isArray(parsed.evidence) ? parsed.evidence.map(String).slice(0, 4) : [],
-    };
-  } catch {
-    return {
-      answer: text || "I could not generate a clear analyst answer from the full dataset.",
-      evidence: [],
-    };
-  }
+function parseMetric(value: unknown): MetricMode {
+  return value === "records" || value === "usd" || value === "inr" ? value : "inr";
 }
 
-function isRecord(value: unknown): value is Record<string, unknown> {
-  return Boolean(value && typeof value === "object");
+function chooseAnswerMode(): AnalystAnswerMode {
+  if (process.env.GOOGLE_GENERATIVE_AI_API_KEY) return "google-web";
+  if (process.env.OPENAI_API_KEY) return "openai-web";
+  if (process.env.AI_GATEWAY_API_KEY) return "gateway-web";
+  return "ledger";
+}
+
+function writeLocalAnswer(
+  writer: UIMessageStreamWriter<AnalystMessage>,
+  answer: string,
+) {
+  const id = "analyst-answer";
+  writer.write({ type: "text-start", id });
+  chunkText(answer, 150).forEach((delta) => writer.write({ type: "text-delta", id, delta }));
+  writer.write({ type: "text-end", id });
+}
+
+function chunkText(text: string, size: number): string[] {
+  const chunks: string[] = [];
+  for (let index = 0; index < text.length; index += size) chunks.push(text.slice(index, index + size));
+  return chunks.length ? chunks : [text];
+}
+
+function analystStreamError(error: unknown): string {
+  console.error("Ask the Analyst provider stream failed.", error);
+  return "The analyst could not finish this answer. Please try again.";
 }

@@ -43,7 +43,8 @@ const sourceRows = rows
 const records = sourceRows.map((row, index) => {
   return isRecordsSheet ? recordFromRecordsSheet(row, index) : recordFromLegacySheet(row, index);
 });
-const sourceRange = isRecordsSheet ? `A1:S${sourceRows.length + 1}` : `A${headerIndex + 1}:K${headerIndex + sourceRows.length + 1}`;
+const lastColumn = columnLetters(headers.length);
+const sourceRange = `A${headerIndex + 1}:${lastColumn}${headerIndex + sourceRows.length + 1}`;
 
 const dataset = {
   metadata: {
@@ -68,12 +69,15 @@ function recordFromRecordsSheet(row, index) {
   const location = text(row.Location || row.State);
   const industry = text(row.Industry || row.Domain);
   const capability = text(row.Capability || row.Subdomain);
+  const organization = text(row.Organization);
   return {
     id: text(row.ID) || `ai-${String(index + 1).padStart(3, "0")}`,
     year: Number(row.Year),
     state: text(row.State) || canonicalState(location),
     location,
-    organization: text(row.Organization),
+    organization,
+    majorPlayers: parseMajorPlayers(row, organization),
+    institutionRelationships: parseInstitutionRelationships(row),
     initiative: text(row.Initiative),
     industry,
     capability,
@@ -92,12 +96,15 @@ function recordFromRecordsSheet(row, index) {
 function recordFromLegacySheet(row, index) {
   const location = text(row.State);
   const classification = classifyTaxonomy(row.Domain, row);
+  const organization = text(row["Public Organisation"]);
   return {
     id: `ai-${String(index + 1).padStart(3, "0")}`,
     year: Number(row.Year),
     state: canonicalState(location),
     location,
-    organization: text(row["Public Organisation"]),
+    organization,
+    majorPlayers: parseMajorPlayers(row, organization),
+    institutionRelationships: parseInstitutionRelationships(row),
     initiative: text(row["Policy / Initiative Change"]),
     industry: classification.industry,
     capability: classification.capability,
@@ -111,6 +118,46 @@ function recordFromLegacySheet(row, index) {
     sourceUrl: text(row["Source URL"]),
     amount: parseInvestmentAmount(row["Investment Brought"]),
   };
+}
+
+function parseMajorPlayers(row, organization) {
+  const raw = row["Major Players"] || row["Major Player(s)"] || row["Major Players / Institutions"] || "";
+  const values = Array.isArray(raw) ? raw : String(raw).split(/\r?\n|[;|]/);
+  const seen = new Set();
+  const players = values
+    .map((value) => text(value).replace(/^[\u2022\-*]+\s*/, ""))
+    .filter((value) => value && !/^(?:n\/?a|none|unknown|not disclosed|unnamed)$/i.test(value))
+    .filter((value) => {
+      const key = value.toLocaleLowerCase("en-IN");
+      if (seen.has(key)) return false;
+      seen.add(key);
+      return true;
+    });
+  return players.length ? players : organization ? [organization] : [];
+}
+
+function parseInstitutionRelationships(row) {
+  const raw = row["Institution Relationships"] || row["Institution Relationship Pairs"] || "";
+  const seen = new Set();
+  return String(raw)
+    .split(/\r?\n|\s*\|\|\s*/)
+    .map((line) => line.trim())
+    .filter(Boolean)
+    .flatMap((line) => {
+      const [pair = "", relationship = "Direct relationship", detail = "", sourceUrl = ""] = line.split(/\s*::\s*/, 4);
+      const [source = "", target = ""] = pair.split(/\s*<->\s*/, 2).map(text);
+      if (!source || !target || source.toLocaleLowerCase("en-IN") === target.toLocaleLowerCase("en-IN")) return [];
+      const key = [source, target].map((value) => value.toLocaleLowerCase("en-IN")).sort().join("\u0000");
+      if (seen.has(key)) return [];
+      seen.add(key);
+      return [{
+        source,
+        target,
+        relationship: text(relationship) || "Direct relationship",
+        detail: text(detail) || "Named together as direct counterparties in the cited source.",
+        ...(text(sourceUrl) ? { sourceUrl: text(sourceUrl) } : {}),
+      }];
+    });
 }
 
 function cellText(value) {
@@ -274,4 +321,15 @@ function inrAmount(croreValue, parseNote) {
 
 function parseNumber(value) {
   return Number(String(value).replace(/,/g, ""));
+}
+
+function columnLetters(columnCount) {
+  let value = Math.max(1, Number(columnCount) || 1);
+  let letters = "";
+  while (value > 0) {
+    const remainder = (value - 1) % 26;
+    letters = String.fromCharCode(65 + remainder) + letters;
+    value = Math.floor((value - 1) / 26);
+  }
+  return letters;
 }
