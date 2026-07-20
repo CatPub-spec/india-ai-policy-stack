@@ -1,4 +1,15 @@
-export const STATE_ORDER = ["Delhi", "Gujarat", "Haryana", "Karnataka", "Maharashtra", "Tamil Nadu", "Telangana"] as const;
+export const STATE_ORDER = [
+  "Andhra Pradesh",
+  "Delhi",
+  "Gujarat",
+  "Haryana",
+  "Karnataka",
+  "Kerala",
+  "Maharashtra",
+  "Tamil Nadu",
+  "Telangana",
+  "Uttar Pradesh",
+] as const;
 
 export type MetricMode = "records" | "inr" | "usd";
 export type CurrencyCode = "INR" | "USD";
@@ -11,12 +22,22 @@ export interface ParsedAmount {
   parseNote: string;
 }
 
+export interface InstitutionRelationship {
+  source: string;
+  target: string;
+  relationship: string;
+  detail: string;
+  sourceUrl?: string;
+}
+
 export interface InvestmentRecord {
   id: string;
   year: number;
   state: string;
   location: string;
   organization: string;
+  majorPlayers: string[];
+  institutionRelationships?: InstitutionRelationship[];
   initiative: string;
   industry: string;
   capability: string;
@@ -140,6 +161,21 @@ export function valueForMetric(record: InvestmentRecord, metric: MetricMode): nu
   if (metric === "records") return 1;
   if (metric === "inr") return record.amount.currency === "INR" && record.amount.chartable ? record.amount.croreValue || 0 : 0;
   return record.amount.currency === "USD" && record.amount.chartable ? record.amount.usdMillionValue || 0 : 0;
+}
+
+export const USD_MILLION_TO_INR_CRORE = 8.3;
+
+export function convertedValueForMetric(record: InvestmentRecord, metric: MetricMode): number {
+  if (metric === "records") return 1;
+  if (!record.amount.chartable || !record.amount.currency) return 0;
+  if (metric === "inr") {
+    return record.amount.currency === "INR"
+      ? record.amount.croreValue || 0
+      : (record.amount.usdMillionValue || 0) * USD_MILLION_TO_INR_CRORE;
+  }
+  return record.amount.currency === "USD"
+    ? record.amount.usdMillionValue || 0
+    : (record.amount.croreValue || 0) / USD_MILLION_TO_INR_CRORE;
 }
 
 export function formatMetricValue(value: number, metric: MetricMode): string {

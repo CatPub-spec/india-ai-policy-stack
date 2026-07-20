@@ -4,9 +4,9 @@
     "sourceSpreadsheetId": "1bUQ19QlLoGFmsiP4vrV5hvwXN45AFonsu4c1bEc10ZA",
     "sourceSpreadsheetUrl": "https://docs.google.com/spreadsheets/d/1bUQ19QlLoGFmsiP4vrV5hvwXN45AFonsu4c1bEc10ZA/edit",
     "sourceSheet": "Records",
-    "sourceRange": "A1:S117",
-    "generatedAt": "2026-07-12T18:24:13.367Z",
-    "recordCount": 116,
+    "sourceRange": "A1:U190",
+    "generatedAt": "2026-07-20T13:22:48.380Z",
+    "recordCount": 189,
     "amountPolicy": "INR crore and USD million values are charted separately. Undisclosed, per-unit, and non-row-specific amounts are preserved in the ledger but excluded from value totals."
   },
   "records": [
@@ -16,6 +16,11 @@
       "state": "Delhi",
       "location": "Delhi",
       "organization": "Delhi Government / Education Department",
+      "majorPlayers": [
+        "Government of NCT of Delhi",
+        "Education Department, Government of NCT of Delhi"
+      ],
+      "institutionRelationships": [],
       "initiative": "Budget allocation for AI exposure, data analysis and exchange programmes in government schools.",
       "industry": "Education & Skilling",
       "capability": "AI Talent & Skilling",
@@ -41,6 +46,12 @@
       "state": "Delhi",
       "location": "Delhi",
       "organization": "Delhi Government / PWD / Delhi Police",
+      "majorPlayers": [
+        "Government of NCT of Delhi",
+        "Public Works Department, Government of NCT of Delhi",
+        "Delhi Police"
+      ],
+      "institutionRelationships": [],
       "initiative": "Phase-wise advanced CCTV network for women's safety and dark spots, including ANPR cameras.",
       "industry": "Government & Public Services",
       "capability": "AI Applications",
@@ -66,6 +77,13 @@
       "state": "Delhi",
       "location": "Delhi",
       "organization": "Delhi Government + MeitY + NSUT + GGSIPU",
+      "majorPlayers": [
+        "Government of NCT of Delhi",
+        "Ministry of Electronics and Information Technology, Government of India",
+        "Netaji Subhas University of Technology (NSUT)",
+        "Guru Gobind Singh Indraprastha University (GGSIPU)"
+      ],
+      "institutionRelationships": [],
       "initiative": "Two AI Centres of Excellence at NSUT and GGSIPU under the IndiaAI Mission model.",
       "industry": "Education & Skilling",
       "capability": "Startup & Innovation Ecosystem",
@@ -91,6 +109,11 @@
       "state": "Delhi",
       "location": "Delhi",
       "organization": "Delhi Police / Ministry of Home Affairs",
+      "majorPlayers": [
+        "Delhi Police",
+        "Ministry of Home Affairs, Government of India"
+      ],
+      "institutionRelationships": [],
       "initiative": "Modern C4I system under the Delhi Safe City Project.",
       "industry": "Government & Public Services",
       "capability": "AI Applications",
@@ -116,6 +139,11 @@
       "state": "Haryana",
       "location": "Haryana",
       "organization": "Anant Raj Limited + Government of Haryana",
+      "majorPlayers": [
+        "Anant Raj Limited",
+        "Government of Haryana"
+      ],
+      "institutionRelationships": [],
       "initiative": "MoU signed with Haryana government for large-scale data-centre infrastructure across the state.",
       "industry": "Technology Infrastructure",
       "capability": "Cloud & Compute",
@@ -141,6 +169,11 @@
       "state": "Haryana",
       "location": "Haryana",
       "organization": "Haryana Government / Industries & Commerce Department",
+      "majorPlayers": [
+        "Government of Haryana",
+        "Department of Industries and Commerce, Government of Haryana"
+      ],
+      "institutionRelationships": [],
       "initiative": "IT/ITeS, AI and Emerging Technologies Policy; Global AI Centre and advanced computing facility.",
       "industry": "Technology Infrastructure",
       "capability": "Cloud & Compute",
@@ -166,6 +199,11 @@
       "state": "Haryana",
       "location": "Haryana",
       "organization": "Haryana Government / Industries & Commerce Department",
+      "majorPlayers": [
+        "Government of Haryana",
+        "Department of Industries and Commerce, Government of Haryana"
+      ],
+      "institutionRelationships": [],
       "initiative": "New Haryana Data Centre Policy 2026 for data centres and digital infrastructure.",
       "industry": "Technology Infrastructure",
       "capability": "Cloud & Compute",
@@ -191,6 +229,12 @@
       "state": "Haryana",
       "location": "Haryana",
       "organization": "Haryana Government + HARTRON",
+      "majorPlayers": [
+        "Government of Haryana",
+        "Haryana State Electronics Development Corporation (HARTRON)",
+        "World Bank"
+      ],
+      "institutionRelationships": [],
       "initiative": "Haryana AI Development Programme with World Bank 70:30 funding arrangement.",
       "industry": "Finance",
       "capability": "Cloud & Compute",
@@ -216,6 +260,11 @@
       "state": "Haryana",
       "location": "Haryana",
       "organization": "Haryana Government / Jal Sanrakshit Haryana",
+      "majorPlayers": [
+        "Government of Haryana",
+        "World Bank"
+      ],
+      "institutionRelationships": [],
       "initiative": "State water-security programme with real-time digital water management system.",
       "industry": "Finance",
       "capability": "Digital Public Infrastructure",
@@ -241,6 +290,10 @@
       "state": "Karnataka",
       "location": "Karnataka / Bidadi",
       "organization": "Karnataka Government / Global Bidadi IT and AI Township",
+      "majorPlayers": [
+        "Government of Karnataka"
+      ],
+      "institutionRelationships": [],
       "initiative": "Bidadi AI Township plan to build an IT and AI-focused work-live-play city near Bengaluru.",
       "industry": "Technology Infrastructure",
       "capability": "Cloud & Compute",
@@ -266,6 +319,13 @@
       "state": "Karnataka",
       "location": "Karnataka / Bengaluru",
       "organization": "Karnataka Government + Nasscom + MeitY",
+      "majorPlayers": [
+        "Government of Karnataka",
+        "NASSCOM",
+        "Ministry of Electronics and Information Technology, Government of India",
+        "Karnataka State Electronics Development Corporation (KEONICS)"
+      ],
+      "institutionRelationships": [],
       "initiative": "Centre for Applied AI for Tech Solutions at Keonics HSR Layout.",
       "industry": "Education & Skilling",
       "capability": "Startup & Innovation Ecosystem",
@@ -291,6 +351,11 @@
       "state": "Karnataka",
       "location": "Karnataka / Bengaluru",
       "organization": "Karnataka Cabinet / Institute of Bioinformatics and Applied Biotechnology",
+      "majorPlayers": [
+        "Government of Karnataka",
+        "Institute of Bioinformatics and Applied Biotechnology"
+      ],
+      "institutionRelationships": [],
       "initiative": "Centre of Excellence for AI in biotechnology approved at Electronics City.",
       "industry": "Healthcare",
       "capability": "Semiconductor & Electronics",
@@ -316,6 +381,10 @@
       "state": "Karnataka",
       "location": "Karnataka / Bengaluru",
       "organization": "NTT DATA",
+      "majorPlayers": [
+        "NTT DATA"
+      ],
+      "institutionRelationships": [],
       "initiative": "New data-centre campus near Bengaluru international airport.",
       "industry": "Technology Infrastructure",
       "capability": "Cloud & Compute",
@@ -341,6 +410,11 @@
       "state": "Karnataka",
       "location": "Karnataka",
       "organization": "Bagmane Constructions + Karnataka Government",
+      "majorPlayers": [
+        "Bagmane Constructions",
+        "Government of Karnataka"
+      ],
+      "institutionRelationships": [],
       "initiative": "Bagmane IT infrastructure project cleared under Karnataka industrial approvals.",
       "industry": "Manufacturing & Electronics",
       "capability": "Semiconductor & Electronics",
@@ -366,6 +440,12 @@
       "state": "Karnataka",
       "location": "Karnataka",
       "organization": "Kaynes + Bellatrix + Karnataka Government",
+      "majorPlayers": [
+        "Kaynes Technology",
+        "Bellatrix Aerospace",
+        "Government of Karnataka"
+      ],
+      "institutionRelationships": [],
       "initiative": "Industrial project approvals spanning ESDM, aerospace and advanced manufacturing.",
       "industry": "Defence & Aerospace",
       "capability": "Semiconductor & Electronics",
@@ -391,6 +471,11 @@
       "state": "Karnataka",
       "location": "Karnataka",
       "organization": "Axiscades Aerospace + Government of Karnataka",
+      "majorPlayers": [
+        "Axiscades Aerospace",
+        "Government of Karnataka"
+      ],
+      "institutionRelationships": [],
       "initiative": "Bengaluru-based Axiscades Aerospace investment plan in Karnataka.",
       "industry": "Defence & Aerospace",
       "capability": "Semiconductor & Electronics",
@@ -416,6 +501,11 @@
       "state": "Maharashtra",
       "location": "Maharashtra",
       "organization": "Findability Sciences + Government of Maharashtra",
+      "majorPlayers": [
+        "Findability Sciences",
+        "Government of Maharashtra"
+      ],
+      "institutionRelationships": [],
       "initiative": "Selected for funding and strategic support under Maha Agri-AI Policy.",
       "industry": "Agriculture",
       "capability": "AI Strategy & Governance",
@@ -441,6 +531,10 @@
       "state": "Maharashtra",
       "location": "Maharashtra",
       "organization": "Maharashtra Government",
+      "majorPlayers": [
+        "Government of Maharashtra"
+      ],
+      "institutionRelationships": [],
       "initiative": "AI Startup Fund under the state AI policy.",
       "industry": "Technology Infrastructure",
       "capability": "Cloud & Compute",
@@ -466,6 +560,11 @@
       "state": "Maharashtra",
       "location": "Maharashtra",
       "organization": "Maharashtra Government / Department of Electronics, IT & AI",
+      "majorPlayers": [
+        "Government of Maharashtra",
+        "Department of Electronics, Information Technology and Artificial Intelligence, Government of Maharashtra"
+      ],
+      "institutionRelationships": [],
       "initiative": "State AI Policy roadmap for AI industry development by 2030-31.",
       "industry": "Transportation",
       "capability": "Cloud & Compute",
@@ -491,6 +590,11 @@
       "state": "Maharashtra",
       "location": "Maharashtra",
       "organization": "Maharashtra Government / Department of Electronics, IT & AI",
+      "majorPlayers": [
+        "Government of Maharashtra",
+        "Department of Electronics, Information Technology and Artificial Intelligence, Government of Maharashtra"
+      ],
+      "institutionRelationships": [],
       "initiative": "Fixed-capital investment incentive for AI units under the state AI policy.",
       "industry": "Manufacturing & Electronics",
       "capability": "Semiconductor & Electronics",
@@ -516,6 +620,11 @@
       "state": "Maharashtra",
       "location": "Maharashtra",
       "organization": "Tillman Global Holdings + Government of Maharashtra",
+      "majorPlayers": [
+        "Tillman Global Holdings",
+        "Government of Maharashtra"
+      ],
+      "institutionRelationships": [],
       "initiative": "MoU for a 1GW data-centre project in Maharashtra.",
       "industry": "Technology Infrastructure",
       "capability": "Cloud & Compute",
@@ -541,6 +650,11 @@
       "state": "Maharashtra",
       "location": "Maharashtra / Mumbai",
       "organization": "Supervity AI + Government of Maharashtra",
+      "majorPlayers": [
+        "Supervity AI",
+        "Government of Maharashtra"
+      ],
+      "institutionRelationships": [],
       "initiative": "MoU to establish an AI Global Capability Center hub in Mumbai's BKC.",
       "industry": "Technology Infrastructure",
       "capability": "Automation & Enterprise Tech",
@@ -566,6 +680,11 @@
       "state": "Maharashtra",
       "location": "Maharashtra / Mumbai Metropolitan Region",
       "organization": "Brookfield + MMRDA",
+      "majorPlayers": [
+        "Brookfield",
+        "Mumbai Metropolitan Region Development Authority (MMRDA)"
+      ],
+      "institutionRelationships": [],
       "initiative": "MoU for logistics-industrial park at Kharbav-Bhiwandi and Fintech-Insurtech hub at Wadala.",
       "industry": "Finance",
       "capability": "Emerging AI Capability",
@@ -591,6 +710,11 @@
       "state": "Maharashtra",
       "location": "Maharashtra / Mumbai Metropolitan Region",
       "organization": "RMZ + MMRDA",
+      "majorPlayers": [
+        "RMZ",
+        "Mumbai Metropolitan Region Development Authority (MMRDA)"
+      ],
+      "institutionRelationships": [],
       "initiative": "MoU for global business districts, data centres and mixed-use developments across MMR.",
       "industry": "Transportation",
       "capability": "Cloud & Compute",
@@ -616,6 +740,11 @@
       "state": "Maharashtra",
       "location": "Maharashtra / Mumbai Metropolitan Region",
       "organization": "The Alan Turing Institute + MMRDA",
+      "majorPlayers": [
+        "The Alan Turing Institute",
+        "Mumbai Metropolitan Region Development Authority (MMRDA)"
+      ],
+      "institutionRelationships": [],
       "initiative": "Technical knowledge partnership for AI governance and smart metropolitan development.",
       "industry": "Transportation",
       "capability": "AI Strategy & Governance",
@@ -641,6 +770,27 @@
       "state": "Maharashtra",
       "location": "Maharashtra / Mumbai",
       "organization": "Equinix",
+      "majorPlayers": [
+        "Equinix",
+        "Government of Maharashtra",
+        "Kotak Securities"
+      ],
+      "institutionRelationships": [
+        {
+          "source": "Equinix",
+          "target": "Government of Maharashtra",
+          "relationship": "Government partnership",
+          "detail": "At the MB3 launch, Maharashtra's Chief Minister described an existing state partnership with Equinix and said it would expand.",
+          "sourceUrl": "https://newsroom.equinix.com/2026-04-08-Equinix-Launches-Purpose-Built-IBX-Data-Center-in-Mumbai-to-Accelerate-Indias-AI-and-Cloud-Growth"
+        },
+        {
+          "source": "Equinix",
+          "target": "Kotak Securities",
+          "relationship": "Customer relationship",
+          "detail": "Kotak Securities identified the Mumbai Equinix campus as infrastructure it already uses for low-latency and resilient workloads.",
+          "sourceUrl": "https://newsroom.equinix.com/2026-04-08-Equinix-Launches-Purpose-Built-IBX-Data-Center-in-Mumbai-to-Accelerate-Indias-AI-and-Cloud-Growth"
+        }
+      ],
       "initiative": "Fourth Mumbai data-centre facility, MB3, opened as part of India expansion.",
       "industry": "Technology Infrastructure",
       "capability": "Cloud & Compute",
@@ -666,6 +816,10 @@
       "state": "Maharashtra",
       "location": "Maharashtra / Navi Mumbai",
       "organization": "ESR Group",
+      "majorPlayers": [
+        "ESR Group"
+      ],
+      "institutionRelationships": [],
       "initiative": "Data-centre and logistics park investment in Navi Mumbai.",
       "industry": "Technology Infrastructure",
       "capability": "Cloud & Compute",
@@ -691,6 +845,27 @@
       "state": "Maharashtra",
       "location": "Maharashtra / Navi Mumbai",
       "organization": "STT Global Data Centres India",
+      "majorPlayers": [
+        "STT Global Data Centres India",
+        "Repro India Limited",
+        "ST Telemedia Global Data Centres"
+      ],
+      "institutionRelationships": [
+        {
+          "source": "STT Global Data Centres India",
+          "target": "Repro India Limited",
+          "relationship": "Land acquisition",
+          "detail": "STT Global Data Centres India acquired the Mahape property from Repro India for digital-infrastructure expansion.",
+          "sourceUrl": "https://m.economictimes.com/industry/services/property-/-cstruction/stt-global-acquires-3-5-acre-land-parcel-in-navi-mumbai-for-rs-282-crore/articleshow/131534900.cms"
+        },
+        {
+          "source": "STT Global Data Centres India",
+          "target": "ST Telemedia Global Data Centres",
+          "relationship": "Corporate ownership",
+          "detail": "STT Global Data Centres India is the Indian operating platform of ST Telemedia Global Data Centres.",
+          "sourceUrl": "https://m.economictimes.com/industry/services/property-/-cstruction/stt-global-acquires-3-5-acre-land-parcel-in-navi-mumbai-for-rs-282-crore/articleshow/131534900.cms"
+        }
+      ],
       "initiative": "Industrial land acquisition in Mahape, Navi Mumbai, for digital infrastructure expansion.",
       "industry": "Manufacturing & Electronics",
       "capability": "Cloud & Compute",
@@ -716,6 +891,11 @@
       "state": "Maharashtra",
       "location": "Maharashtra / Navi Mumbai",
       "organization": "Tata Sons + Government of Maharashtra",
+      "majorPlayers": [
+        "Tata Sons",
+        "Government of Maharashtra"
+      ],
+      "institutionRelationships": [],
       "initiative": "AI/data innovation city planned near Navi Mumbai.",
       "industry": "Technology Infrastructure",
       "capability": "Cloud & Compute",
@@ -741,6 +921,35 @@
       "state": "Maharashtra",
       "location": "Maharashtra / Mumbai",
       "organization": "NTT Global Data Centers & Cloud Infrastructure India",
+      "majorPlayers": [
+        "NTT Global Data Centers & Cloud Infrastructure India",
+        "NTT DATA",
+        "Pantheon Buildcon Private Limited",
+        "Tusshar Infra Developers Private Limited"
+      ],
+      "institutionRelationships": [
+        {
+          "source": "NTT Global Data Centers & Cloud Infrastructure India",
+          "target": "NTT DATA",
+          "relationship": "Corporate ownership",
+          "detail": "NTT Global Data Centers & Cloud Infrastructure India is an NTT DATA group company.",
+          "sourceUrl": "https://www.moneycontrol.com/news/business/real-estate/actor-jeetendra-kapoor-and-family-sell-andheri-plot-for-rs-855-crore-to-ntt-global-data-centers-13100127.html"
+        },
+        {
+          "source": "NTT Global Data Centers & Cloud Infrastructure India",
+          "target": "Pantheon Buildcon Private Limited",
+          "relationship": "Land acquisition",
+          "detail": "Pantheon Buildcon was a registered seller of the Andheri land and IT park acquired by NTT Global Data Centers.",
+          "sourceUrl": "https://www.moneycontrol.com/news/business/real-estate/actor-jeetendra-kapoor-and-family-sell-andheri-plot-for-rs-855-crore-to-ntt-global-data-centers-13100127.html"
+        },
+        {
+          "source": "NTT Global Data Centers & Cloud Infrastructure India",
+          "target": "Tusshar Infra Developers Private Limited",
+          "relationship": "Land acquisition",
+          "detail": "Tusshar Infra Developers was a registered seller of the Andheri land and IT park acquired by NTT Global Data Centers.",
+          "sourceUrl": "https://www.moneycontrol.com/news/business/real-estate/actor-jeetendra-kapoor-and-family-sell-andheri-plot-for-rs-855-crore-to-ntt-global-data-centers-13100127.html"
+        }
+      ],
       "initiative": "Land and IT park acquisition in Andheri to expand data-centre and cloud infrastructure footprint.",
       "industry": "Technology Infrastructure",
       "capability": "Cloud & Compute",
@@ -766,6 +975,10 @@
       "state": "Maharashtra",
       "location": "Maharashtra / Mumbai",
       "organization": "Princeton Digital Group (PDG)",
+      "majorPlayers": [
+        "Princeton Digital Group (PDG)"
+      ],
+      "institutionRelationships": [],
       "initiative": "Multi-site acquisition adding data-centre capacity across Mumbai and Hyderabad.",
       "industry": "Technology Infrastructure",
       "capability": "Cloud & Compute",
@@ -791,6 +1004,11 @@
       "state": "Maharashtra",
       "location": "Maharashtra / Navi Mumbai",
       "organization": "IFC + Sify Technologies",
+      "majorPlayers": [
+        "International Finance Corporation (IFC)",
+        "Sify Technologies"
+      ],
+      "institutionRelationships": [],
       "initiative": "IFC commitment to support next-generation data centres, including Navi Mumbai.",
       "industry": "Finance",
       "capability": "Cloud & Compute",
@@ -816,6 +1034,10 @@
       "state": "Delhi",
       "location": "Delhi",
       "organization": "Delhi Government",
+      "majorPlayers": [
+        "Government of NCT of Delhi"
+      ],
+      "institutionRelationships": [],
       "initiative": "Delhi AI Grind city-wide AI and innovation movement for students and teachers.",
       "industry": "Education & Skilling",
       "capability": "AI Talent & Skilling",
@@ -841,6 +1063,11 @@
       "state": "Delhi",
       "location": "Delhi",
       "organization": "Delhi Government + Union Education Ministry",
+      "majorPlayers": [
+        "Government of NCT of Delhi",
+        "Ministry of Education, Government of India"
+      ],
+      "institutionRelationships": [],
       "initiative": "CM Shri Schools project with AI-enabled smart classrooms and digital learning infrastructure.",
       "industry": "Education & Skilling",
       "capability": "AI Talent & Skilling",
@@ -866,6 +1093,12 @@
       "state": "Delhi",
       "location": "Delhi",
       "organization": "IIT Delhi + AIIMS Delhi",
+      "majorPlayers": [
+        "IIT Delhi",
+        "All India Institute of Medical Sciences, New Delhi",
+        "Ministry of Education, Government of India"
+      ],
+      "institutionRelationships": [],
       "initiative": "Centre of Excellence for AI in Healthcare under the Make AI in India initiative.",
       "industry": "Healthcare",
       "capability": "Startup & Innovation Ecosystem",
@@ -891,6 +1124,19 @@
       "state": "Haryana",
       "location": "Haryana",
       "organization": "Gurugram Metropolitan Development Authority (GMDA)",
+      "majorPlayers": [
+        "Gurugram Metropolitan Development Authority (GMDA)",
+        "Gurugram Traffic Police"
+      ],
+      "institutionRelationships": [
+        {
+          "source": "Gurugram Metropolitan Development Authority (GMDA)",
+          "target": "Gurugram Traffic Police",
+          "relationship": "Traffic-system integration",
+          "detail": "GMDA integrated live feeds from 109 smart signals with the police Traffic Tower for real-time signal management.",
+          "sourceUrl": "https://www.hindustantimes.com/cities/gurugram-news/gmda-connects-live-feed-from-109-smart-signals-with-traffic-tower-in-gurugram-101755629297954.html"
+        }
+      ],
       "initiative": "Live feed from 109 smart traffic signals connected with GMDA ICCC and Traffic Tower.",
       "industry": "Transportation",
       "capability": "Automation & Enterprise Tech",
@@ -916,6 +1162,11 @@
       "state": "Haryana",
       "location": "Haryana / Gurugram and Manesar",
       "organization": "Municipal Corporation of Gurugram + Municipal Corporation of Manesar",
+      "majorPlayers": [
+        "Municipal Corporation of Gurugram",
+        "Municipal Corporation of Manesar"
+      ],
+      "institutionRelationships": [],
       "initiative": "AI deployment for property-tax collection and resident outreach.",
       "industry": "Government & Public Services",
       "capability": "Digital Public Infrastructure",
@@ -941,6 +1192,11 @@
       "state": "Haryana",
       "location": "Haryana",
       "organization": "HARTRON Advanced Skill Centre",
+      "majorPlayers": [
+        "HARTRON Advanced Skill Centre",
+        "Haryana State Electronics Development Corporation (HARTRON)"
+      ],
+      "institutionRelationships": [],
       "initiative": "AI, cybersecurity, cloud, data analytics and digital marketing courses across Haryana.",
       "industry": "Technology Infrastructure",
       "capability": "Cloud & Compute",
@@ -966,6 +1222,11 @@
       "state": "Karnataka",
       "location": "Karnataka",
       "organization": "Karnataka Cabinet / IT-BT Department",
+      "majorPlayers": [
+        "Government of Karnataka",
+        "Department of Electronics, Information Technology, Biotechnology and Science & Technology, Government of Karnataka"
+      ],
+      "institutionRelationships": [],
       "initiative": "Startup Policy 2025-2030 to support emerging technology startups.",
       "industry": "Government & Public Services",
       "capability": "Startup & Innovation Ecosystem",
@@ -991,6 +1252,10 @@
       "state": "Karnataka",
       "location": "Karnataka",
       "organization": "Karnataka Government",
+      "majorPlayers": [
+        "Government of Karnataka"
+      ],
+      "institutionRelationships": [],
       "initiative": "Deeptech investment plan ahead of Bengaluru Tech Summit to support advanced technologies.",
       "industry": "Manufacturing & Electronics",
       "capability": "Semiconductor & Electronics",
@@ -1016,6 +1281,11 @@
       "state": "Karnataka",
       "location": "Karnataka",
       "organization": "Karnataka Government / Department of Skill Development, Entrepreneurship & Livelihood",
+      "majorPlayers": [
+        "Government of Karnataka",
+        "Department of Skill Development, Entrepreneurship and Livelihood, Government of Karnataka"
+      ],
+      "institutionRelationships": [],
       "initiative": "Karnataka State Skill Development Policy 2025-32 approved by Cabinet.",
       "industry": "Transportation",
       "capability": "AI Talent & Skilling",
@@ -1041,6 +1311,10 @@
       "state": "Karnataka",
       "location": "Karnataka",
       "organization": "Karnataka Government / GCC investors",
+      "majorPlayers": [
+        "Government of Karnataka"
+      ],
+      "institutionRelationships": [],
       "initiative": "GCC investment inflows into Karnataka technology hubs.",
       "industry": "Technology Infrastructure",
       "capability": "Automation & Enterprise Tech",
@@ -1066,6 +1340,11 @@
       "state": "Karnataka",
       "location": "Karnataka",
       "organization": "Karnataka Government / IT-BT Department",
+      "majorPlayers": [
+        "Government of Karnataka",
+        "Department of Electronics, Information Technology, Biotechnology and Science & Technology, Government of Karnataka"
+      ],
+      "institutionRelationships": [],
       "initiative": "IT-BT Policy 2025-2030 to expand technology growth beyond Bengaluru.",
       "industry": "Education & Skilling",
       "capability": "Startup & Innovation Ecosystem",
@@ -1091,6 +1370,12 @@
       "state": "Karnataka",
       "location": "Karnataka",
       "organization": "Karnataka Government + Datasamudra / Teleindia Datacenter",
+      "majorPlayers": [
+        "Government of Karnataka",
+        "Datasamudra",
+        "Teleindia Datacenter"
+      ],
+      "institutionRelationships": [],
       "initiative": "State data-centre project pipeline and Datasamudra expansion beyond Bengaluru.",
       "industry": "Technology Infrastructure",
       "capability": "Cloud & Compute",
@@ -1116,6 +1401,27 @@
       "state": "Karnataka",
       "location": "Karnataka / Hubballi",
       "organization": "Infosys",
+      "majorPlayers": [
+        "Infosys",
+        "Indian Institute of Information Technology Dharwad (IIIT Dharwad)",
+        "KLE Technological University"
+      ],
+      "institutionRelationships": [
+        {
+          "source": "Infosys",
+          "target": "Indian Institute of Information Technology Dharwad (IIIT Dharwad)",
+          "relationship": "Research collaboration",
+          "detail": "Infosys identifies IIIT Dharwad as a Hubballi-region institution with which it has forged ties for innovation and collaboration.",
+          "sourceUrl": "https://www.infosys.com/newsroom/press-releases/2025/inaugurates-center-advanced-ai-hubballi.html"
+        },
+        {
+          "source": "Infosys",
+          "target": "KLE Technological University",
+          "relationship": "Research collaboration",
+          "detail": "Infosys identifies KLE Technological University as a Hubballi-region institution with which it has forged ties for innovation and collaboration.",
+          "sourceUrl": "https://www.infosys.com/newsroom/press-releases/2025/inaugurates-center-advanced-ai-hubballi.html"
+        }
+      ],
       "initiative": "Advanced AI, cybersecurity and spacetech centre at Infosys Hubballi development centre.",
       "industry": "Defence & Aerospace",
       "capability": "Automation & Enterprise Tech",
@@ -1141,6 +1447,12 @@
       "state": "Karnataka",
       "location": "Karnataka / Bengaluru",
       "organization": "IISc Bengaluru / Ministry of Education",
+      "majorPlayers": [
+        "Indian Institute of Science (IISc)",
+        "Ministry of Education, Government of India",
+        "TANUH Foundation"
+      ],
+      "institutionRelationships": [],
       "initiative": "TANUH Foundation, AI Centre of Excellence for healthcare at IISc Bengaluru.",
       "industry": "Healthcare",
       "capability": "AI Talent & Skilling",
@@ -1166,6 +1478,19 @@
       "state": "Karnataka",
       "location": "Karnataka / Bengaluru",
       "organization": "NTT DATA",
+      "majorPlayers": [
+        "NTT DATA",
+        "Embassy Group"
+      ],
+      "institutionRelationships": [
+        {
+          "source": "NTT DATA",
+          "target": "Embassy Group",
+          "relationship": "Land acquisition",
+          "detail": "NTT DATA acquired a six-acre Bengaluru parcel from Embassy Group for data-centre expansion.",
+          "sourceUrl": "https://m.economictimes.com/industry/services/property-/-cstruction/ntt-data-acquires-6-acre-land-in-bengaluru-from-embassy-group-for-rs-2468-crore/articleshow/126555629.cms"
+        }
+      ],
       "initiative": "Land acquisition in Bengaluru for data-centre expansion.",
       "industry": "Technology Infrastructure",
       "capability": "Cloud & Compute",
@@ -1191,6 +1516,11 @@
       "state": "Karnataka",
       "location": "Karnataka / Devanahalli",
       "organization": "Burkhan World Investment Group + Government of Karnataka",
+      "majorPlayers": [
+        "Burkhan World Investment Group",
+        "Government of Karnataka"
+      ],
+      "institutionRelationships": [],
       "initiative": "Planned AI-powered server manufacturing facility near Devanahalli, with Karnataka government land support.",
       "industry": "Manufacturing & Electronics",
       "capability": "Semiconductor & Electronics",
@@ -1216,6 +1546,11 @@
       "state": "Maharashtra",
       "location": "Maharashtra",
       "organization": "Maharashtra Cabinet / Agriculture Department",
+      "majorPlayers": [
+        "Government of Maharashtra",
+        "Department of Agriculture, Government of Maharashtra"
+      ],
+      "institutionRelationships": [],
       "initiative": "MahaAgri-AI Policy 2025-2029 for AI-led agricultural transformation.",
       "industry": "Agriculture",
       "capability": "Startup & Innovation Ecosystem",
@@ -1241,6 +1576,11 @@
       "state": "Maharashtra",
       "location": "Maharashtra",
       "organization": "Maharashtra Cabinet / Industries Department",
+      "majorPlayers": [
+        "Government of Maharashtra",
+        "Department of Industries, Government of Maharashtra"
+      ],
+      "institutionRelationships": [],
       "initiative": "Maharashtra Global Competence Centre Policy 2025 approved by state cabinet.",
       "industry": "Finance",
       "capability": "AI Strategy & Governance",
@@ -1266,6 +1606,11 @@
       "state": "Maharashtra",
       "location": "Maharashtra",
       "organization": "Maharashtra Government / Directorate of Forensic Science Laboratories",
+      "majorPlayers": [
+        "Government of Maharashtra",
+        "Directorate of Forensic Science Laboratories, Government of Maharashtra"
+      ],
+      "institutionRelationships": [],
       "initiative": "Statewide mobile forensic vans project approved for serious-crime evidence collection.",
       "industry": "Government & Public Services",
       "capability": "Digital Public Infrastructure",
@@ -1291,6 +1636,11 @@
       "state": "Maharashtra",
       "location": "Maharashtra",
       "organization": "Maharashtra Police + Microsoft",
+      "majorPlayers": [
+        "Maharashtra Police",
+        "Microsoft"
+      ],
+      "institutionRelationships": [],
       "initiative": "MahaCrimeOS AI platform expansion from Nagpur pilot to all police stations in Maharashtra.",
       "industry": "Government & Public Services",
       "capability": "Emerging AI Capability",
@@ -1316,6 +1666,11 @@
       "state": "Maharashtra",
       "location": "Maharashtra",
       "organization": "MGSA Realty + Government of Maharashtra",
+      "majorPlayers": [
+        "MGSA Realty",
+        "Government of Maharashtra"
+      ],
+      "institutionRelationships": [],
       "initiative": "MoU for industrial warehouses, data centres and logistics hubs under Maharashtra investment package.",
       "industry": "Manufacturing & Electronics",
       "capability": "Cloud & Compute",
@@ -1341,6 +1696,11 @@
       "state": "Maharashtra",
       "location": "Maharashtra / Konkan",
       "organization": "MIDC / Maharashtra Government",
+      "majorPlayers": [
+        "Maharashtra Industrial Development Corporation (MIDC)",
+        "Government of Maharashtra"
+      ],
+      "institutionRelationships": [],
       "initiative": "Data-centre parks planned in the Konkan region.",
       "industry": "Manufacturing & Electronics",
       "capability": "Cloud & Compute",
@@ -1366,6 +1726,11 @@
       "state": "Maharashtra",
       "location": "Maharashtra / Navi Mumbai",
       "organization": "Prestige Group + Government of Maharashtra",
+      "majorPlayers": [
+        "Prestige Group",
+        "Government of Maharashtra"
+      ],
+      "institutionRelationships": [],
       "initiative": "MoU for logistics facilities, data centres and GCC parks around Navi Mumbai.",
       "industry": "Transportation",
       "capability": "Cloud & Compute",
@@ -1391,6 +1756,11 @@
       "state": "Maharashtra",
       "location": "Maharashtra / Palava, Thane",
       "organization": "Lodha Developers + Government of Maharashtra",
+      "majorPlayers": [
+        "Lodha Developers",
+        "Government of Maharashtra"
+      ],
+      "institutionRelationships": [],
       "initiative": "MoU for a Green Integrated Data Centre Park in Palava / Thane district.",
       "industry": "Technology Infrastructure",
       "capability": "Cloud & Compute",
@@ -1416,6 +1786,19 @@
       "state": "Maharashtra",
       "location": "Maharashtra / Pune",
       "organization": "Haber",
+      "majorPlayers": [
+        "Haber",
+        "ITC Limited"
+      ],
+      "institutionRelationships": [
+        {
+          "source": "Haber",
+          "target": "ITC Limited",
+          "relationship": "Customer deployment",
+          "detail": "ITC's pulp and packaging division is a named industrial customer using Haber's AI-led process systems.",
+          "sourceUrl": "https://timesofindia.indiatimes.com/city/pune/how-a-pune-startup-is-using-ai-to-rewrite-the-rules-of-green-chemistry/articleshow/126253939.cms"
+        }
+      ],
       "initiative": "AI Green Chemistry Lab opened at Pune campus backed by R&D investment.",
       "industry": "Manufacturing & Electronics",
       "capability": "Cloud & Compute",
@@ -1441,6 +1824,10 @@
       "state": "Maharashtra",
       "location": "Maharashtra / Pune",
       "organization": "Vasantdada Sugar Institute",
+      "majorPlayers": [
+        "Vasantdada Sugar Institute"
+      ],
+      "institutionRelationships": [],
       "initiative": "AI cultivation subsidy expanded for Maharashtra sugarcane farmers.",
       "industry": "Agriculture",
       "capability": "Emerging AI Capability",
@@ -1466,6 +1853,10 @@
       "state": "Maharashtra",
       "location": "Maharashtra",
       "organization": "Maharashtra State Road Transport Corporation",
+      "majorPlayers": [
+        "Maharashtra State Road Transport Corporation"
+      ],
+      "institutionRelationships": [],
       "initiative": "New Lalpari buses with AI-enabled CCTV, GPS, WiFi and safety systems.",
       "industry": "Transportation",
       "capability": "AI Applications",
@@ -1491,6 +1882,10 @@
       "state": "Delhi",
       "location": "Delhi",
       "organization": "AIIMS New Delhi",
+      "majorPlayers": [
+        "All India Institute of Medical Sciences, New Delhi"
+      ],
+      "institutionRelationships": [],
       "initiative": "Digital infrastructure upgrade to integrate AI in hospital delivery and research.",
       "industry": "Healthcare",
       "capability": "AI Research & Innovation",
@@ -1516,6 +1911,11 @@
       "state": "Karnataka",
       "location": "Karnataka",
       "organization": "Karnataka Cabinet / Department of IT-BT",
+      "majorPlayers": [
+        "Government of Karnataka",
+        "Department of Electronics, Information Technology, Biotechnology and Science & Technology, Government of Karnataka"
+      ],
+      "institutionRelationships": [],
       "initiative": "Centre of Excellence in Artificial Intelligence approved for Bengaluru.",
       "industry": "Government & Public Services",
       "capability": "Startup & Innovation Ecosystem",
@@ -1541,6 +1941,11 @@
       "state": "Maharashtra",
       "location": "Maharashtra / Nagpur",
       "organization": "Maharashtra Police / MARVEL",
+      "majorPlayers": [
+        "Maharashtra Police",
+        "Government of Maharashtra"
+      ],
+      "institutionRelationships": [],
       "initiative": "Maharashtra cabinet approval for MARVEL AI project for the police force.",
       "industry": "Government & Public Services",
       "capability": "Emerging AI Capability",
@@ -1566,6 +1971,11 @@
       "state": "Gujarat",
       "location": "Gujarat",
       "organization": "Government of Gujarat / Department of Science & Technology",
+      "majorPlayers": [
+        "Government of Gujarat",
+        "Department of Science and Technology, Government of Gujarat"
+      ],
+      "institutionRelationships": [],
       "initiative": "State budget allocation for AI and digital governance initiatives to strengthen technology-led public administration.",
       "industry": "Government & Public Services",
       "capability": "AI Strategy & Governance",
@@ -1591,6 +2001,11 @@
       "state": "Gujarat",
       "location": "Dholera SIR, Gujarat",
       "organization": "L&T Vyom + Government of Gujarat",
+      "majorPlayers": [
+        "L&T Vyom",
+        "Government of Gujarat"
+      ],
+      "institutionRelationships": [],
       "initiative": "MoU to establish a 250 MW green, AI-ready data-centre campus at Dholera Special Investment Region.",
       "industry": "Technology Infrastructure",
       "capability": "Cloud & Compute",
@@ -1616,6 +2031,11 @@
       "state": "Gujarat",
       "location": "Dholera, Gujarat",
       "organization": "Tata Semiconductor Manufacturing Private Limited / Tata Group",
+      "majorPlayers": [
+        "Tata Semiconductor Manufacturing Private Limited (TSMPL)",
+        "Tata Group"
+      ],
+      "institutionRelationships": [],
       "initiative": "India's first semiconductor fabrication plant notified as an SEZ at Dholera.",
       "industry": "Manufacturing & Electronics",
       "capability": "Semiconductor & Electronics",
@@ -1641,6 +2061,11 @@
       "state": "Gujarat",
       "location": "Sanand, Gujarat",
       "organization": "CG Semi / CG Power and Industrial Solutions",
+      "majorPlayers": [
+        "CG Semi",
+        "CG Power and Industrial Solutions"
+      ],
+      "institutionRelationships": [],
       "initiative": "End-to-end Outsourced Semiconductor Assembly and Test facility in Sanand.",
       "industry": "Manufacturing & Electronics",
       "capability": "Semiconductor & Electronics",
@@ -1666,6 +2091,11 @@
       "state": "Telangana",
       "location": "Telangana",
       "organization": "Government of Telangana / IT & Industries Department",
+      "majorPlayers": [
+        "Government of Telangana",
+        "Information Technology and Industries Department, Government of Telangana"
+      ],
+      "institutionRelationships": [],
       "initiative": "Telangana AI Innovation Hub and AI roadmap to train talent, support startups and mobilize private capital.",
       "industry": "Healthcare",
       "capability": "Startup & Innovation Ecosystem",
@@ -1691,6 +2121,11 @@
       "state": "Telangana",
       "location": "Bharat Future City / Hyderabad, Telangana",
       "organization": "UPC Volt + Government of Telangana",
+      "majorPlayers": [
+        "UPC Volt",
+        "Government of Telangana"
+      ],
+      "institutionRelationships": [],
       "initiative": "100 MW AI-ready data centre supported by renewable power under Telangana's Green Open Access framework.",
       "industry": "Technology Infrastructure",
       "capability": "Cloud & Compute",
@@ -1716,6 +2151,11 @@
       "state": "Telangana",
       "location": "Hyderabad, Telangana",
       "organization": "L'Oréal + Government of Telangana",
+      "majorPlayers": [
+        "L'Oréal",
+        "Government of Telangana"
+      ],
+      "institutionRelationships": [],
       "initiative": "L'Oréal's first AI-powered global beauty tech innovation hub in Hyderabad.",
       "industry": "Government & Public Services",
       "capability": "AI Applications",
@@ -1741,6 +2181,10 @@
       "state": "Telangana",
       "location": "Ameenpur, Telangana",
       "organization": "Pulsus Group",
+      "majorPlayers": [
+        "Pulsus Group"
+      ],
+      "institutionRelationships": [],
       "initiative": "Expansion of AI healthcare and digital innovation hub on a 35-acre campus in Ameenpur.",
       "industry": "Healthcare",
       "capability": "Emerging AI Capability",
@@ -1766,6 +2210,11 @@
       "state": "Tamil Nadu",
       "location": "Tamil Nadu",
       "organization": "Government of Tamil Nadu / StartupTN",
+      "majorPlayers": [
+        "Government of Tamil Nadu",
+        "Tamil Nadu Startup and Innovation Mission (StartupTN)"
+      ],
+      "institutionRelationships": [],
       "initiative": "Tamil Nadu Deep-Technology Startup Policy to support research commercialization and deep-tech startups.",
       "industry": "Defence & Aerospace",
       "capability": "Semiconductor & Electronics",
@@ -1791,6 +2240,11 @@
       "state": "Tamil Nadu",
       "location": "Thoothukudi, Tamil Nadu",
       "organization": "Kaynes Circuits India / Kaynes Technology",
+      "majorPlayers": [
+        "Kaynes Circuits India",
+        "Kaynes Technology"
+      ],
+      "institutionRelationships": [],
       "initiative": "MoU with Tamil Nadu government for advanced electronic component manufacturing facilities.",
       "industry": "Manufacturing & Electronics",
       "capability": "Semiconductor & Electronics",
@@ -1816,6 +2270,35 @@
       "state": "Tamil Nadu",
       "location": "Chennai, Tamil Nadu",
       "organization": "Korcomptenz",
+      "majorPlayers": [
+        "Korcomptenz",
+        "Microsoft",
+        "SAP",
+        "Salesforce"
+      ],
+      "institutionRelationships": [
+        {
+          "source": "Korcomptenz",
+          "target": "Microsoft",
+          "relationship": "Enterprise technology partnership",
+          "detail": "Korcomptenz identifies Microsoft as an enterprise collaborator supporting its technology-services work.",
+          "sourceUrl": "https://timesofindia.indiatimes.com/city/chennai/us-based-technology-service-company-korcomptenz-to-open-new-hubs-in-chennai-hyderabad/articleshow/121036212.cms"
+        },
+        {
+          "source": "Korcomptenz",
+          "target": "SAP",
+          "relationship": "Enterprise technology partnership",
+          "detail": "Korcomptenz identifies SAP as an enterprise collaborator supporting its technology-services work.",
+          "sourceUrl": "https://timesofindia.indiatimes.com/city/chennai/us-based-technology-service-company-korcomptenz-to-open-new-hubs-in-chennai-hyderabad/articleshow/121036212.cms"
+        },
+        {
+          "source": "Korcomptenz",
+          "target": "Salesforce",
+          "relationship": "Enterprise technology partnership",
+          "detail": "Korcomptenz identifies Salesforce as an enterprise collaborator supporting its technology-services work.",
+          "sourceUrl": "https://timesofindia.indiatimes.com/city/chennai/us-based-technology-service-company-korcomptenz-to-open-new-hubs-in-chennai-hyderabad/articleshow/121036212.cms"
+        }
+      ],
       "initiative": "New Chennai AI research and development hub with high-performance servers and advanced network infrastructure.",
       "industry": "Technology & Innovation",
       "capability": "AI Research & Innovation",
@@ -1841,6 +2324,19 @@
       "state": "Tamil Nadu",
       "location": "Chennai, Tamil Nadu",
       "organization": "KLA Corporation",
+      "majorPlayers": [
+        "KLA Corporation",
+        "Government of Tamil Nadu"
+      ],
+      "institutionRelationships": [
+        {
+          "source": "KLA Corporation",
+          "target": "Government of Tamil Nadu",
+          "relationship": "Government R&D-site agreement",
+          "detail": "KLA and the Tamil Nadu government formalized an MoU for the expanded Chennai R&D and innovation campus.",
+          "sourceUrl": "https://economictimes.indiatimes.com/tech/technology/kla-inks-mou-with-tn-govt-for-rs-3600-crore-rd-and-innovation-campus-in-chennai/articleshow/128321210.cms"
+        }
+      ],
       "initiative": "R&D and innovation hub expansion in Chennai for next-generation semiconductor and electronics technology solutions.",
       "industry": "Manufacturing & Electronics",
       "capability": "Semiconductor & Electronics",
@@ -1866,6 +2362,11 @@
       "state": "Tamil Nadu",
       "location": "Chennai, Tamil Nadu",
       "organization": "IIT Madras + Sunil Wadhwani / Wadhwani Impact Trust",
+      "majorPlayers": [
+        "IIT Madras",
+        "Wadhwani Impact Trust"
+      ],
+      "institutionRelationships": [],
       "initiative": "Endowment to establish the Wadhwani School of Data Science and Artificial Intelligence at IIT Madras.",
       "industry": "Healthcare",
       "capability": "AI Talent & Skilling",
@@ -1891,6 +2392,10 @@
       "state": "Gujarat",
       "location": "Gujarat",
       "organization": "Government of Gujarat / AI and Deep Tech Mission",
+      "majorPlayers": [
+        "Government of Gujarat"
+      ],
+      "institutionRelationships": [],
       "initiative": "Five-year action plan for AI implementation across state governance.",
       "industry": "Transportation",
       "capability": "AI Talent & Skilling",
@@ -1916,6 +2421,10 @@
       "state": "Gujarat",
       "location": "Ahmedabad, Gujarat",
       "organization": "Ahmedabad Municipal School Board",
+      "majorPlayers": [
+        "Ahmedabad Municipal School Board"
+      ],
+      "institutionRelationships": [],
       "initiative": "Budget provision for artificial-intelligence education in civic schools.",
       "industry": "Education & Skilling",
       "capability": "AI Talent & Skilling",
@@ -1941,6 +2450,12 @@
       "state": "Gujarat",
       "location": "Gandhinagar / GIFT City, Gujarat",
       "organization": "Government of Gujarat / GIFT City ecosystem",
+      "majorPlayers": [
+        "Government of Gujarat",
+        "Gujarat International Finance Tec-City Company Limited (GIFT City)",
+        "Indian AI Research Organisation (IAIRO)"
+      ],
+      "institutionRelationships": [],
       "initiative": "Dedicated IT-AI cluster planned near GIFT City and Indian AI Research Organisation operationalized.",
       "industry": "Government & Public Services",
       "capability": "Startup & Innovation Ecosystem",
@@ -1966,6 +2481,10 @@
       "state": "Gujarat",
       "location": "Gujarat",
       "organization": "Government of Gujarat",
+      "majorPlayers": [
+        "Government of Gujarat"
+      ],
+      "institutionRelationships": [],
       "initiative": "AI-powered platform to coach job aspirants and provide personalized employment preparation.",
       "industry": "Education & Skilling",
       "capability": "AI Talent & Skilling",
@@ -1991,6 +2510,11 @@
       "state": "Gujarat",
       "location": "Dholera, Gujarat",
       "organization": "Fujifilm + Government of Gujarat",
+      "majorPlayers": [
+        "Fujifilm",
+        "Government of Gujarat"
+      ],
+      "institutionRelationships": [],
       "initiative": "MoU to explore a semiconductor materials manufacturing unit in Dholera.",
       "industry": "Manufacturing & Electronics",
       "capability": "Semiconductor & Electronics",
@@ -2016,6 +2540,10 @@
       "state": "Gujarat",
       "location": "Gandhinagar / Sanand / Dholera, Gujarat",
       "organization": "Government of Gujarat / Gujarat SemiConnect 2026 partners",
+      "majorPlayers": [
+        "Government of Gujarat"
+      ],
+      "institutionRelationships": [],
       "initiative": "Semiconductor ecosystem MoUs covering chemicals, R&D, training and chip-supply-chain support.",
       "industry": "Manufacturing & Electronics",
       "capability": "Semiconductor & Electronics",
@@ -2041,6 +2569,11 @@
       "state": "Gujarat",
       "location": "Sanand, Gujarat",
       "organization": "Hotayi Industries + Government of Gujarat",
+      "majorPlayers": [
+        "Hotayi Industries",
+        "Government of Gujarat"
+      ],
+      "institutionRelationships": [],
       "initiative": "Memory modules manufacturing unit proposed under Gujarat SemiConnect 2026 MoUs.",
       "industry": "Manufacturing & Electronics",
       "capability": "Semiconductor & Electronics",
@@ -2066,6 +2599,11 @@
       "state": "Gujarat",
       "location": "Dholera, Gujarat",
       "organization": "ASML + Tata Electronics",
+      "majorPlayers": [
+        "ASML",
+        "Tata Electronics"
+      ],
+      "institutionRelationships": [],
       "initiative": "MoU to equip India's first commercial semiconductor fab in Dholera with lithography technology.",
       "industry": "Manufacturing & Electronics",
       "capability": "Semiconductor & Electronics",
@@ -2091,6 +2629,11 @@
       "state": "Telangana",
       "location": "Hyderabad / Telangana",
       "organization": "Government of Telangana / Aikam partners",
+      "majorPlayers": [
+        "Government of Telangana",
+        "Aikam"
+      ],
+      "institutionRelationships": [],
       "initiative": "Aikam autonomous AI innovation entity launched as a proving ground for large-scale AI deployment.",
       "industry": "Healthcare",
       "capability": "AI Talent & Skilling",
@@ -2116,6 +2659,11 @@
       "state": "Telangana",
       "location": "Telangana",
       "organization": "Government of Telangana / Telangana Information Bureau",
+      "majorPlayers": [
+        "Government of Telangana",
+        "Telangana Information Bureau"
+      ],
+      "institutionRelationships": [],
       "initiative": "Telangana Information Bureau under TGDeX for AI-driven alternative credit scoring.",
       "industry": "Finance",
       "capability": "AI Strategy & Governance",
@@ -2141,6 +2689,11 @@
       "state": "Telangana",
       "location": "Hyderabad / Shamshabad, Telangana",
       "organization": "ITP Aero + Government of Telangana",
+      "majorPlayers": [
+        "ITP Aero",
+        "Government of Telangana"
+      ],
+      "institutionRelationships": [],
       "initiative": "Aerospace components manufacturing facility at Hardware Park Phase III in Shamshabad.",
       "industry": "Defence & Aerospace",
       "capability": "Semiconductor & Electronics",
@@ -2166,6 +2719,10 @@
       "state": "Telangana",
       "location": "Hyderabad, Telangana",
       "organization": "Skyroot Aerospace",
+      "majorPlayers": [
+        "Skyroot Aerospace"
+      ],
+      "institutionRelationships": [],
       "initiative": "Infinity campus and Vikram-I private orbital rocket manufacturing capability.",
       "industry": "Defence & Aerospace",
       "capability": "Emerging AI Capability",
@@ -2191,6 +2748,11 @@
       "state": "Telangana",
       "location": "Hyderabad, Telangana",
       "organization": "MCRHRDI + Government of Telangana",
+      "majorPlayers": [
+        "Dr. MCR Human Resource Development Institute of Telangana (MCRHRDI)",
+        "Government of Telangana"
+      ],
+      "institutionRelationships": [],
       "initiative": "Governance training push to integrate AI across state administration.",
       "industry": "Education & Skilling",
       "capability": "AI Talent & Skilling",
@@ -2216,6 +2778,10 @@
       "state": "Telangana",
       "location": "Hyderabad, Telangana",
       "organization": "Government of Telangana / TGDeX ecosystem",
+      "majorPlayers": [
+        "Government of Telangana"
+      ],
+      "institutionRelationships": [],
       "initiative": "Telangana Data Exchange used as AI development and secure data-sharing backbone.",
       "industry": "Government & Public Services",
       "capability": "AI Strategy & Governance",
@@ -2241,6 +2807,27 @@
       "state": "Tamil Nadu",
       "location": "Chennai / Siruseri, Tamil Nadu",
       "organization": "Equinix",
+      "majorPlayers": [
+        "Equinix",
+        "Government of Tamil Nadu",
+        "State Industries Promotion Corporation of Tamil Nadu Limited (SIPCOT)"
+      ],
+      "institutionRelationships": [
+        {
+          "source": "Equinix",
+          "target": "Government of Tamil Nadu",
+          "relationship": "Government support",
+          "detail": "Equinix's official CN1 release credits the Tamil Nadu government with supporting the Chennai data-centre launch.",
+          "sourceUrl": "https://newsroom.equinix.com/2025-09-19-Equinix-Opens-First-AI-Ready-Data-Center-in-Chennai%2C1"
+        },
+        {
+          "source": "Equinix",
+          "target": "State Industries Promotion Corporation of Tamil Nadu Limited (SIPCOT)",
+          "relationship": "Industrial-site relationship",
+          "detail": "Equinix's CN1 data centre was developed on SIPCOT land at Siruseri.",
+          "sourceUrl": "https://newsroom.equinix.com/2025-09-19-Equinix-Opens-First-AI-Ready-Data-Center-in-Chennai%2C1"
+        }
+      ],
       "initiative": "AI-ready Chennai data centre inaugurated at Siruseri.",
       "industry": "Technology Infrastructure",
       "capability": "Cloud & Compute",
@@ -2266,6 +2853,11 @@
       "state": "Tamil Nadu",
       "location": "Chennai, Tamil Nadu",
       "organization": "TNIFMC + Aheesa Digital Innovations",
+      "majorPlayers": [
+        "Tamil Nadu Infrastructure Fund Management Corporation (TNIFMC)",
+        "Aheesa Digital Innovations"
+      ],
+      "institutionRelationships": [],
       "initiative": "Investment in Chennai-based fabless semiconductor startup Aheesa.",
       "industry": "Transportation",
       "capability": "Semiconductor & Electronics",
@@ -2291,6 +2883,27 @@
       "state": "Tamil Nadu",
       "location": "Chennai, Tamil Nadu",
       "organization": "Sify Infinit Spaces",
+      "majorPlayers": [
+        "Sify Infinit Spaces",
+        "Kotak Data Center Fund",
+        "Kotak Special Situations Fund"
+      ],
+      "institutionRelationships": [
+        {
+          "source": "Sify Infinit Spaces",
+          "target": "Kotak Data Center Fund",
+          "relationship": "Selling shareholder",
+          "detail": "Kotak Data Center Fund is named as a selling shareholder in the Sify Infinit Spaces IPO.",
+          "sourceUrl": "https://sifyinfinitspaces.com/ipo/"
+        },
+        {
+          "source": "Sify Infinit Spaces",
+          "target": "Kotak Special Situations Fund",
+          "relationship": "Selling shareholder",
+          "detail": "Kotak Special Situations Fund is named as a selling shareholder in the Sify Infinit Spaces IPO.",
+          "sourceUrl": "https://sifyinfinitspaces.com/ipo/"
+        }
+      ],
       "initiative": "IPO filing to raise capital for data-centre expansion amid AI-driven demand.",
       "industry": "Defence & Aerospace",
       "capability": "Cloud & Compute",
@@ -2316,6 +2929,19 @@
       "state": "Tamil Nadu",
       "location": "Theni district, Tamil Nadu",
       "organization": "SFO Technologies",
+      "majorPlayers": [
+        "SFO Technologies",
+        "Government of Tamil Nadu"
+      ],
+      "institutionRelationships": [
+        {
+          "source": "SFO Technologies",
+          "target": "Government of Tamil Nadu",
+          "relationship": "Manufacturing investment MoU",
+          "detail": "SFO Technologies and the Tamil Nadu government agreed the proposed electronics-manufacturing investment through an MoU process.",
+          "sourceUrl": "https://m.economictimes.com/tech/technology/sfo-tech-mulling-rs-2270-crore-electronic-components-plant-in-tamil-nadu/amp_articleshow/125812349.cms"
+        }
+      ],
       "initiative": "Proposed electronic components and PCB manufacturing facility in Tamil Nadu.",
       "industry": "Manufacturing & Electronics",
       "capability": "Semiconductor & Electronics",
@@ -2341,6 +2967,11 @@
       "state": "Tamil Nadu",
       "location": "Madurai, Tamil Nadu",
       "organization": "Tamil Nadu School Education Department / Madurai government schools",
+      "majorPlayers": [
+        "School Education Department, Government of Tamil Nadu",
+        "Government of Tamil Nadu"
+      ],
+      "institutionRelationships": [],
       "initiative": "AI, coding and digital literacy classes introduced under TN SPARK.",
       "industry": "Education & Skilling",
       "capability": "AI Talent & Skilling",
@@ -2366,6 +2997,10 @@
       "state": "Delhi",
       "location": "Delhi",
       "organization": "Delhi Government / Delhi Next",
+      "majorPlayers": [
+        "Government of NCT of Delhi"
+      ],
+      "institutionRelationships": [],
       "initiative": "Delhi Next initiative to pilot 60 civic-tech innovations in government functioning.",
       "industry": "Government & Public Services",
       "capability": "Startup & Innovation Ecosystem",
@@ -2391,6 +3026,10 @@
       "state": "Delhi",
       "location": "Delhi / DMRC network",
       "organization": "Delhi Metro Rail Corporation",
+      "majorPlayers": [
+        "Delhi Metro Rail Corporation"
+      ],
+      "institutionRelationships": [],
       "initiative": "AI-enabled baggage scanners and video analytics upgrades across Delhi Metro security systems.",
       "industry": "Transportation",
       "capability": "Automation & Enterprise Tech",
@@ -2416,6 +3055,11 @@
       "state": "Delhi",
       "location": "Delhi",
       "organization": "Delhi Government + IIT Kanpur",
+      "majorPlayers": [
+        "Government of NCT of Delhi",
+        "IIT Kanpur"
+      ],
+      "institutionRelationships": [],
       "initiative": "Explored collaboration for AI-enabled air-pollution decision support system.",
       "industry": "Education & Skilling",
       "capability": "AI Talent & Skilling",
@@ -2441,6 +3085,11 @@
       "state": "Haryana",
       "location": "Haryana",
       "organization": "Haryana Government + BPCL",
+      "majorPlayers": [
+        "Government of Haryana",
+        "Bharat Petroleum Corporation Limited (BPCL)"
+      ],
+      "institutionRelationships": [],
       "initiative": "AI-driven tuberculosis detection campaign with handheld X-ray devices and diagnostic machines.",
       "industry": "Healthcare",
       "capability": "AI Applications",
@@ -2466,6 +3115,12 @@
       "state": "Haryana",
       "location": "Haryana / Gurugram",
       "organization": "Haryana Education Department / SCERT",
+      "majorPlayers": [
+        "Department of School Education, Government of Haryana",
+        "State Council of Educational Research and Training, Haryana (SCERT)",
+        "Government of Haryana"
+      ],
+      "institutionRelationships": [],
       "initiative": "Artificial-intelligence curriculum rollout for government schools beginning with Class 9.",
       "industry": "Education & Skilling",
       "capability": "AI Talent & Skilling",
@@ -2491,6 +3146,11 @@
       "state": "Karnataka",
       "location": "Karnataka",
       "organization": "Karnataka Government / Department of IT-BT",
+      "majorPlayers": [
+        "Government of Karnataka",
+        "Department of Electronics, Information Technology, Biotechnology and Science & Technology, Government of Karnataka"
+      ],
+      "institutionRelationships": [],
       "initiative": "Startup Policy 2025-2030 supporting AI, blockchain, quantum and deep-tech startups.",
       "industry": "Government & Public Services",
       "capability": "Startup & Innovation Ecosystem",
@@ -2516,6 +3176,11 @@
       "state": "Delhi",
       "location": "New Delhi",
       "organization": "IN-SPACe / Government of India",
+      "majorPlayers": [
+        "Indian National Space Promotion and Authorization Centre (IN-SPACe)",
+        "Government of India"
+      ],
+      "institutionRelationships": [],
       "initiative": "Seed fund scheme for startups and individuals developing AI applications in the space sector.",
       "industry": "Defence & Aerospace",
       "capability": "Startup & Innovation Ecosystem",
@@ -2541,6 +3206,11 @@
       "state": "Delhi",
       "location": "Delhi",
       "organization": "Delhi Government / Directorate of Training and Technical Education",
+      "majorPlayers": [
+        "Government of NCT of Delhi",
+        "Directorate of Training and Technical Education, Government of NCT of Delhi"
+      ],
+      "institutionRelationships": [],
       "initiative": "Proposed Delhi Startup & Incubation Policy 2026 covering government-funded campuses and AI/deep-tech startups.",
       "industry": "Healthcare",
       "capability": "Startup & Innovation Ecosystem",
@@ -2566,6 +3236,10 @@
       "state": "Gujarat",
       "location": "Ahmedabad, Gujarat",
       "organization": "IIM Ahmedabad + Chandrika and Ranjan Tandon",
+      "majorPlayers": [
+        "IIM Ahmedabad"
+      ],
+      "institutionRelationships": [],
       "initiative": "Krishnamurthy Tandon School of Artificial Intelligence at IIM Ahmedabad.",
       "industry": "Education & Skilling",
       "capability": "AI Talent & Skilling",
@@ -2591,6 +3265,12 @@
       "state": "Haryana",
       "location": "Gurugram, Haryana",
       "organization": "TrueFan AI",
+      "majorPlayers": [
+        "TrueFan AI",
+        "Baring Private Equity Asia",
+        "Z3Partners"
+      ],
+      "institutionRelationships": [],
       "initiative": "Funding round for AI-generated video-content platform.",
       "industry": "Marketing & Advertising",
       "capability": "Automation & Enterprise Tech",
@@ -2616,6 +3296,35 @@
       "state": "Haryana",
       "location": "Gurugram, Haryana",
       "organization": "Brekfuz",
+      "majorPlayers": [
+        "Brekfuz",
+        "Pear VC",
+        "Pareto Holdings",
+        "Collective Global"
+      ],
+      "institutionRelationships": [
+        {
+          "source": "Brekfuz",
+          "target": "Pear VC",
+          "relationship": "Funding investor",
+          "detail": "Pear VC invested in Brekfuz's $525,000 funding round.",
+          "sourceUrl": "https://m.economictimes.com/tech/funding/gurugram-ai-startup-brekfuz-raises-525000-in-funding-valued-at-7-5-million/articleshow/132095543.cms"
+        },
+        {
+          "source": "Brekfuz",
+          "target": "Pareto Holdings",
+          "relationship": "Funding investor",
+          "detail": "Pareto Holdings invested in Brekfuz's $525,000 funding round.",
+          "sourceUrl": "https://m.economictimes.com/tech/funding/gurugram-ai-startup-brekfuz-raises-525000-in-funding-valued-at-7-5-million/articleshow/132095543.cms"
+        },
+        {
+          "source": "Brekfuz",
+          "target": "Collective Global",
+          "relationship": "Funding investor",
+          "detail": "Collective Global invested in Brekfuz's $525,000 funding round.",
+          "sourceUrl": "https://m.economictimes.com/tech/funding/gurugram-ai-startup-brekfuz-raises-525000-in-funding-valued-at-7-5-million/articleshow/132095543.cms"
+        }
+      ],
       "initiative": "Funding round for Gurugram-based AI startup Brekfuz.",
       "industry": "Technology & Innovation",
       "capability": "Startup & Innovation Ecosystem",
@@ -2641,6 +3350,11 @@
       "state": "Maharashtra",
       "location": "Palava near Mumbai, Maharashtra",
       "organization": "Digital Edge India + NIIF",
+      "majorPlayers": [
+        "Digital Edge India",
+        "National Investment and Infrastructure Fund (NIIF)"
+      ],
+      "institutionRelationships": [],
       "initiative": "Acquisition of 30 acres at Palava for a planned 270MW hyperscale data-centre campus.",
       "industry": "Technology Infrastructure",
       "capability": "Cloud & Compute",
@@ -2666,6 +3380,43 @@
       "state": "Tamil Nadu",
       "location": "Chennai, Tamil Nadu",
       "organization": "Tattvam AI",
+      "majorPlayers": [
+        "Tattvam AI",
+        "Seedcamp",
+        "EWOR",
+        "Entropy Industrial Ventures",
+        "Concept Ventures"
+      ],
+      "institutionRelationships": [
+        {
+          "source": "Tattvam AI",
+          "target": "Seedcamp",
+          "relationship": "Funding investor",
+          "detail": "Seedcamp led Tattvam AI's $1.7 million pre-seed round.",
+          "sourceUrl": "https://timesofindia.indiatimes.com/city/chennai/chip-design-automation-startup-tattvam-raise-1-7mn/articleshow/128791625.cms"
+        },
+        {
+          "source": "Tattvam AI",
+          "target": "EWOR",
+          "relationship": "Funding investor",
+          "detail": "EWOR participated in Tattvam AI's $1.7 million pre-seed round.",
+          "sourceUrl": "https://timesofindia.indiatimes.com/city/chennai/chip-design-automation-startup-tattvam-raise-1-7mn/articleshow/128791625.cms"
+        },
+        {
+          "source": "Tattvam AI",
+          "target": "Entropy Industrial Ventures",
+          "relationship": "Funding investor",
+          "detail": "Entropy Industrial Ventures participated in Tattvam AI's $1.7 million pre-seed round.",
+          "sourceUrl": "https://timesofindia.indiatimes.com/city/chennai/chip-design-automation-startup-tattvam-raise-1-7mn/articleshow/128791625.cms"
+        },
+        {
+          "source": "Tattvam AI",
+          "target": "Concept Ventures",
+          "relationship": "Funding investor",
+          "detail": "Concept Ventures participated in Tattvam AI's $1.7 million pre-seed round.",
+          "sourceUrl": "https://timesofindia.indiatimes.com/city/chennai/chip-design-automation-startup-tattvam-raise-1-7mn/articleshow/128791625.cms"
+        }
+      ],
       "initiative": "Pre-seed funding for AI-driven semiconductor chip design automation startup.",
       "industry": "Manufacturing & Electronics",
       "capability": "Semiconductor & Electronics",
@@ -2691,6 +3442,10 @@
       "state": "Tamil Nadu",
       "location": "Chennai, Tamil Nadu",
       "organization": "Speciale Invest",
+      "majorPlayers": [
+        "Speciale Invest"
+      ],
+      "institutionRelationships": [],
       "initiative": "Growth Fund II for early-stage deeptech startups.",
       "industry": "Technology & Innovation",
       "capability": "Startup & Innovation Ecosystem",
@@ -2716,6 +3471,12 @@
       "state": "Telangana",
       "location": "Hyderabad, Telangana",
       "organization": "Telangana Government + Google",
+      "majorPlayers": [
+        "Government of Telangana",
+        "Google",
+        "T-Hub"
+      ],
+      "institutionRelationships": [],
       "initiative": "Google for Startups Hub at T-Hub and Telangana startup fund of funds for AI-first startup ecosystem.",
       "industry": "Technology Infrastructure",
       "capability": "Cloud & Compute",
@@ -2741,6 +3502,10 @@
       "state": "Delhi",
       "location": "Delhi / New Delhi",
       "organization": "Ministry of Health and Family Welfare",
+      "majorPlayers": [
+        "Ministry of Health and Family Welfare, Government of India"
+      ],
+      "institutionRelationships": [],
       "initiative": "Strategy for Artificial Intelligence in Healthcare for India (SAHI) launched in New Delhi.",
       "industry": "Healthcare",
       "capability": "AI Strategy & Governance",
@@ -2766,6 +3531,12 @@
       "state": "Gujarat",
       "location": "Gujarat / GIFT City, Gandhinagar",
       "organization": "Government of Gujarat / Department of Science and Technology / Gujarat Informatics Limited",
+      "majorPlayers": [
+        "Government of Gujarat",
+        "Department of Science and Technology, Government of Gujarat",
+        "Gujarat Informatics Limited"
+      ],
+      "institutionRelationships": [],
       "initiative": "AI Innovation Challenge operationalized through the Gujarat AI Centre of Excellence.",
       "industry": "Government & Public Services",
       "capability": "AI Research & Innovation",
@@ -2791,6 +3562,11 @@
       "state": "Haryana",
       "location": "Haryana",
       "organization": "Government of Haryana / Department of Industries and Commerce",
+      "majorPlayers": [
+        "Government of Haryana",
+        "Department of Industries and Commerce, Government of Haryana"
+      ],
+      "institutionRelationships": [],
       "initiative": "MedTech innovation support covering AI-enabled products, prototyping and a state Pitch-A-thon.",
       "industry": "Healthcare",
       "capability": "Startup & Innovation Ecosystem",
@@ -2816,6 +3592,11 @@
       "state": "Karnataka",
       "location": "Karnataka",
       "organization": "Government of Karnataka / Department of Technical Education",
+      "majorPlayers": [
+        "Government of Karnataka",
+        "Department of Technical Education, Government of Karnataka"
+      ],
+      "institutionRelationships": [],
       "initiative": "C-25 Diploma Curriculum in Artificial Intelligence introduced from academic year 2025-26.",
       "industry": "Education & Skilling",
       "capability": "AI Talent & Skilling",
@@ -2841,6 +3622,11 @@
       "state": "Maharashtra",
       "location": "Maharashtra",
       "organization": "Government of Maharashtra / Public Works Department",
+      "majorPlayers": [
+        "Government of Maharashtra",
+        "Public Works Department, Government of Maharashtra"
+      ],
+      "institutionRelationships": [],
       "initiative": "AI-powered mobile application introduced for pothole detection and real-time road-repair monitoring.",
       "industry": "Transportation",
       "capability": "AI Applications",
@@ -2866,6 +3652,11 @@
       "state": "Tamil Nadu",
       "location": "Tamil Nadu / Chennai",
       "organization": "Government of Tamil Nadu / Tamil Nadu e-Governance Agency",
+      "majorPlayers": [
+        "Government of Tamil Nadu",
+        "Tamil Nadu e-Governance Agency (TNeGA)"
+      ],
+      "institutionRelationships": [],
       "initiative": "Tamil Nadu Artificial Intelligence Mission established at TNeGA for cross-department AI solution development.",
       "industry": "Government & Public Services",
       "capability": "AI Strategy & Governance",
@@ -2891,6 +3682,11 @@
       "state": "Telangana",
       "location": "Telangana / Hyderabad",
       "organization": "Government of Telangana + Blaize",
+      "majorPlayers": [
+        "Government of Telangana",
+        "Blaize"
+      ],
+      "institutionRelationships": [],
       "initiative": "MoU to expand energy-efficient AI computing, semiconductor and advanced AI engineering activity in Hyderabad.",
       "industry": "Manufacturing & Electronics",
       "capability": "Semiconductor & Electronics",
@@ -2908,6 +3704,2520 @@
         "croreValue": null,
         "usdMillionValue": null,
         "parseNote": "Excluded because the financial amount is undisclosed."
+      }
+    },
+    {
+      "id": "ai-118",
+      "year": 2026,
+      "state": "Andhra Pradesh",
+      "location": "Tirupati",
+      "organization": "Sri Venkateswara University / APSCHE",
+      "majorPlayers": [
+        "Sri Venkateswara University",
+        "Andhra Pradesh State Council of Higher Education (APSCHE)"
+      ],
+      "institutionRelationships": [],
+      "initiative": "Drones and Space Technologies Consortium with industry partners",
+      "industry": "Defence & Aerospace",
+      "capability": "Emerging AI Capability",
+      "Industry": "Defence & Aerospace",
+      "Capability": "Emerging AI Capability",
+      "investmentDomain": "Drone and space technology research ecosystem",
+      "investmentBrought": "Not separately disclosed by the cited government source",
+      "investmentType": "Government policy / programme",
+      "technologyUse": "Unmanned systems, earth observation and space-technology collaboration",
+      "sourceSummary": "The official APPGCET/SVU page records the university's Drones and Space Technologies Consortium and participating industry partners.",
+      "sourceUrl": "https://cets.apsche.ap.gov.in/PGCET/PGCET_HomePages/AboutUs.aspx",
+      "amount": {
+        "currency": null,
+        "chartable": false,
+        "croreValue": null,
+        "usdMillionValue": null,
+        "parseNote": "Excluded because no chartable INR crore or USD amount was found."
+      }
+    },
+    {
+      "id": "ai-119",
+      "year": 2026,
+      "state": "Andhra Pradesh",
+      "location": "Andhra Pradesh",
+      "organization": "Andhra Pradesh Non-Resident Telugu Society",
+      "majorPlayers": [
+        "Andhra Pradesh Non-Resident Telugu Society (APNRTS)",
+        "Light Edify"
+      ],
+      "institutionRelationships": [
+        {
+          "source": "Andhra Pradesh Non-Resident Telugu Society (APNRTS)",
+          "target": "Light Edify",
+          "relationship": "Training collaboration",
+          "detail": "APNRTS presents its AWS Cloud Practitioner training programme in collaboration with Light Edify.",
+          "sourceUrl": "https://apnrts.ap.gov.in/it_training"
+        }
+      ],
+      "initiative": "Advanced IT training covering artificial intelligence, data science and cloud",
+      "industry": "Education & Skilling",
+      "capability": "AI Talent & Skilling",
+      "Industry": "Education & Skilling",
+      "Capability": "AI Talent & Skilling",
+      "investmentDomain": "AI and cloud workforce development",
+      "investmentBrought": "US$50 participant fee; not a programme investment commitment",
+      "investmentType": "Government training programme",
+      "technologyUse": "Artificial intelligence, data science, Python, Hadoop, cybersecurity and AWS cloud",
+      "sourceSummary": "The official APNRTS portal lists AI and data-science training and an AWS cloud-practitioner programme.",
+      "sourceUrl": "https://apnrts.ap.gov.in/it_training",
+      "amount": {
+        "currency": null,
+        "chartable": false,
+        "croreValue": null,
+        "usdMillionValue": null,
+        "parseNote": "Excluded because no chartable INR crore or USD amount was found."
+      }
+    },
+    {
+      "id": "ai-120",
+      "year": 2024,
+      "state": "Andhra Pradesh",
+      "location": "Andhra Pradesh",
+      "organization": "ITE&C Department, Government of Andhra Pradesh",
+      "majorPlayers": [
+        "Information Technology, Electronics and Communications Department, Government of Andhra Pradesh",
+        "Government of Andhra Pradesh"
+      ],
+      "institutionRelationships": [],
+      "initiative": "Government-data startup proofs of concept for citizen-centric administration",
+      "industry": "Government & Public Services",
+      "capability": "Digital Public Infrastructure",
+      "Industry": "Government & Public Services",
+      "Capability": "Digital Public Infrastructure",
+      "investmentDomain": "Government data and digital public-service delivery",
+      "investmentBrought": "Not separately disclosed by the cited government source",
+      "investmentType": "Government policy / programme",
+      "technologyUse": "AI, deep tech, drones and IoT applied to government problem statements",
+      "sourceSummary": "The official AP IT & GCC Policy 4.0 describes startup POCs using government data and emerging technologies to improve public services.",
+      "sourceUrl": "https://apit.ap.gov.in/assets/files/AP%20IT%20%26%20GCC%20Policy%20%284%200%29%202024-2029_%20G%20O%20MS%20No.9%2C%20dt%2012%2012%202024.pdf",
+      "amount": {
+        "currency": null,
+        "chartable": false,
+        "croreValue": null,
+        "usdMillionValue": null,
+        "parseNote": "Excluded because no chartable INR crore or USD amount was found."
+      }
+    },
+    {
+      "id": "ai-121",
+      "year": 2026,
+      "state": "Andhra Pradesh",
+      "location": "Tirupati",
+      "organization": "Sri Venkateswara University / SV Medical College",
+      "majorPlayers": [
+        "Sri Venkateswara University",
+        "SV Medical College"
+      ],
+      "institutionRelationships": [],
+      "initiative": "Interdisciplinary research collaboration addressing healthcare and science challenges",
+      "industry": "Healthcare",
+      "capability": "AI Research & Innovation",
+      "Industry": "Healthcare",
+      "Capability": "AI Research & Innovation",
+      "investmentDomain": "Health-science research and data-driven collaboration",
+      "investmentBrought": "Not separately disclosed by the cited government source",
+      "investmentType": "Government policy / programme",
+      "technologyUse": "Data science, machine learning and interdisciplinary healthcare research",
+      "sourceSummary": "The official APSCHE-hosted SVU profile documents AI/data-science programmes and collaboration with SV Medical College on healthcare research.",
+      "sourceUrl": "https://cets.apsche.ap.gov.in/PGCET/PGCET_HomePages/AboutUs.aspx",
+      "amount": {
+        "currency": null,
+        "chartable": false,
+        "croreValue": null,
+        "usdMillionValue": null,
+        "parseNote": "Excluded because no chartable INR crore or USD amount was found."
+      }
+    },
+    {
+      "id": "ai-122",
+      "year": 2024,
+      "state": "Andhra Pradesh",
+      "location": "Andhra Pradesh",
+      "organization": "Government of Andhra Pradesh / Industries & Commerce Department",
+      "majorPlayers": [
+        "Government of Andhra Pradesh",
+        "Department of Industries and Commerce, Government of Andhra Pradesh"
+      ],
+      "institutionRelationships": [],
+      "initiative": "Industry 4.0 adoption framework under Electronics Manufacturing Policy 4.0",
+      "industry": "Manufacturing & Electronics",
+      "capability": "Automation & Enterprise Tech",
+      "Industry": "Manufacturing & Electronics",
+      "Capability": "Automation & Enterprise Tech",
+      "investmentDomain": "AI-enabled smart manufacturing",
+      "investmentBrought": "Not separately disclosed by the cited government source",
+      "investmentType": "Government policy / programme",
+      "technologyUse": "AI, IoT, predictive operations and data-driven production optimization",
+      "sourceSummary": "The official electronics policy identifies AI and IoT as the two pillars of Industry 4.0 and commits to research and workforce support.",
+      "sourceUrl": "https://apmsmeone.ap.gov.in/MSMEONE/Data/ExistingPolicy/Andhra%20Pradesh%20Electronics%20Manufacturing%20policy%20%284.0%29%202024-29.pdf",
+      "amount": {
+        "currency": null,
+        "chartable": false,
+        "croreValue": null,
+        "usdMillionValue": null,
+        "parseNote": "Excluded because no chartable INR crore or USD amount was found."
+      }
+    },
+    {
+      "id": "ai-123",
+      "year": 2024,
+      "state": "Andhra Pradesh",
+      "location": "Andhra Pradesh",
+      "organization": "ITE&C Department, Government of Andhra Pradesh",
+      "majorPlayers": [
+        "Information Technology, Electronics and Communications Department, Government of Andhra Pradesh",
+        "Government of Andhra Pradesh"
+      ],
+      "institutionRelationships": [],
+      "initiative": "Data Center Policy 4.0 targeting AI-capable advanced data centres",
+      "industry": "Technology Infrastructure",
+      "capability": "Cloud & Compute",
+      "Industry": "Technology Infrastructure",
+      "Capability": "Cloud & Compute",
+      "investmentDomain": "AI-ready data-centre capacity and cloud infrastructure",
+      "investmentBrought": "Capacity target up to 1 GW; no row-specific investment amount disclosed",
+      "investmentType": "State policy target",
+      "technologyUse": "Advanced data centres, multi-cloud workloads, AI vision analytics and natural-language processing",
+      "sourceSummary": "The official Data Center Policy 4.0 targets up to 1 GW of capacity and specifically seeks advanced data centres with AI capabilities.",
+      "sourceUrl": "https://apit.ap.gov.in/assets/files/Data%20Center%20Policy%20%284.0%29%202024-29.PDF",
+      "amount": {
+        "currency": null,
+        "chartable": false,
+        "croreValue": null,
+        "usdMillionValue": null,
+        "parseNote": "Excluded because no chartable INR crore or USD amount was found."
+      }
+    },
+    {
+      "id": "ai-125",
+      "year": 2024,
+      "state": "Andhra Pradesh",
+      "location": "Andhra Pradesh",
+      "organization": "Government of Andhra Pradesh / Industries & Commerce Department",
+      "majorPlayers": [
+        "Government of Andhra Pradesh",
+        "Department of Industries and Commerce, Government of Andhra Pradesh"
+      ],
+      "institutionRelationships": [],
+      "initiative": "Electronics Manufacturing Policy support for AI, IoT and advanced electronics",
+      "industry": "Manufacturing & Electronics",
+      "capability": "Semiconductor & Electronics",
+      "Industry": "Manufacturing & Electronics",
+      "Capability": "Semiconductor & Electronics",
+      "investmentDomain": "Electronics, smart hardware and responsible AI manufacturing",
+      "investmentBrought": "Not separately disclosed by the cited government source",
+      "investmentType": "Government policy / programme",
+      "technologyUse": "Electronics systems, AI, IoT and Industry 4.0",
+      "sourceSummary": "The official Electronics Manufacturing Policy 4.0 supports advanced electronics and an AI/IoT-enabled manufacturing ecosystem.",
+      "sourceUrl": "https://apmsmeone.ap.gov.in/MSMEONE/Data/ExistingPolicy/Andhra%20Pradesh%20Electronics%20Manufacturing%20policy%20%284.0%29%202024-29.pdf",
+      "amount": {
+        "currency": null,
+        "chartable": false,
+        "croreValue": null,
+        "usdMillionValue": null,
+        "parseNote": "Excluded because no chartable INR crore or USD amount was found."
+      }
+    },
+    {
+      "id": "ai-126",
+      "year": 2024,
+      "state": "Andhra Pradesh",
+      "location": "Andhra Pradesh",
+      "organization": "ITE&C Department / Andhra Pradesh Innovation Society",
+      "majorPlayers": [
+        "Information Technology, Electronics and Communications Department, Government of Andhra Pradesh",
+        "Andhra Pradesh Innovation Society (APIS)"
+      ],
+      "institutionRelationships": [],
+      "initiative": "Andhra Pradesh Innovation & Startup Policy 4.0 (2024-29)",
+      "industry": "Technology & Innovation",
+      "capability": "Startup & Innovation Ecosystem",
+      "Industry": "Technology & Innovation",
+      "Capability": "Startup & Innovation Ecosystem",
+      "investmentDomain": "Deep-tech, AI and ML startup incubation and incentives",
+      "investmentBrought": "Not separately disclosed by the cited government source",
+      "investmentType": "Government policy / programme",
+      "technologyUse": "AI, machine learning, deep tech and shared innovation infrastructure",
+      "sourceSummary": "The official government order approves the statewide Innovation & Startup Policy 4.0 and its fiscal and non-fiscal support framework.",
+      "sourceUrl": "https://apit.ap.gov.in/assets/files/2025ITC_36058_MS3_E-2.pdf",
+      "amount": {
+        "currency": null,
+        "chartable": false,
+        "croreValue": null,
+        "usdMillionValue": null,
+        "parseNote": "Excluded because no chartable INR crore or USD amount was found."
+      }
+    },
+    {
+      "id": "ai-127",
+      "year": 2026,
+      "state": "Uttar Pradesh",
+      "location": "Uttar Pradesh",
+      "organization": "Government of Uttar Pradesh",
+      "majorPlayers": [
+        "Government of Uttar Pradesh"
+      ],
+      "institutionRelationships": [],
+      "initiative": "Uttar Pradesh AI Mission (UP-AIM)",
+      "industry": "Government & Public Services",
+      "capability": "AI Strategy & Governance",
+      "Industry": "Government & Public Services",
+      "Capability": "AI Strategy & Governance",
+      "investmentDomain": "Statewide AI adoption across governance, economy and society",
+      "investmentBrought": "Not separately disclosed by the cited government source",
+      "investmentType": "Government policy / programme",
+      "technologyUse": "Responsible AI, sector use cases, foundational models and governance framework",
+      "sourceSummary": "The official 2026-27 budget highlights define UP-AIM and its eight implementation pillars.",
+      "sourceUrl": "https://information.up.gov.in/admin/UploadDocument/OtherPress/compressed_20022026041527Budget%20Highlights%20English.pdf",
+      "amount": {
+        "currency": null,
+        "chartable": false,
+        "croreValue": null,
+        "usdMillionValue": null,
+        "parseNote": "Excluded because no chartable INR crore or USD amount was found."
+      }
+    },
+    {
+      "id": "ai-128",
+      "year": 2026,
+      "state": "Uttar Pradesh",
+      "location": "Uttar Pradesh",
+      "organization": "Government of Uttar Pradesh / Invest UP",
+      "majorPlayers": [
+        "Government of Uttar Pradesh",
+        "Invest UP"
+      ],
+      "institutionRelationships": [],
+      "initiative": "UP AI Mission support for medical and pharmaceutical AI",
+      "industry": "Healthcare",
+      "capability": "AI Applications",
+      "Industry": "Healthcare",
+      "Capability": "AI Applications",
+      "investmentDomain": "AI integration in healthcare, medical technology and pharmaceuticals",
+      "investmentBrought": "₹2,000 crore over three years",
+      "investmentType": "State mission allocation",
+      "technologyUse": "AI-enabled medical and pharmaceutical research, diagnostics and applications",
+      "sourceSummary": "Invest UP reports a ₹2,000 crore, three-year UP AI Mission allocation targeting AI integration in medical and pharmaceutical sectors.",
+      "sourceUrl": "https://invest.up.gov.in/uttar-pradesh-indias/",
+      "amount": {
+        "currency": "INR",
+        "chartable": true,
+        "croreValue": 2000,
+        "usdMillionValue": null,
+        "parseNote": "Parsed INR crore amount."
+      }
+    },
+    {
+      "id": "ai-129",
+      "year": 2026,
+      "state": "Uttar Pradesh",
+      "location": "Uttar Pradesh",
+      "organization": "Government of Uttar Pradesh / School Education",
+      "majorPlayers": [
+        "Government of Uttar Pradesh",
+        "Department of School Education, Government of Uttar Pradesh"
+      ],
+      "institutionRelationships": [],
+      "initiative": "AI-ML curriculum and technology labs in government schools",
+      "industry": "Education & Skilling",
+      "capability": "AI Talent & Skilling",
+      "Industry": "Education & Skilling",
+      "Capability": "AI Talent & Skilling",
+      "investmentDomain": "School-level AI literacy and technical skills",
+      "investmentBrought": "Not separately disclosed by the cited government source",
+      "investmentType": "Government policy / programme",
+      "technologyUse": "AI/ML curriculum and school technology laboratories",
+      "sourceSummary": "The official 2026-27 budget highlights report AI-ML curriculum in 150 schools and technology labs across government schools.",
+      "sourceUrl": "https://information.up.gov.in/admin/UploadDocument/OtherPress/compressed_20022026041527Budget%20Highlights%20English.pdf",
+      "amount": {
+        "currency": null,
+        "chartable": false,
+        "croreValue": null,
+        "usdMillionValue": null,
+        "parseNote": "Excluded because no chartable INR crore or USD amount was found."
+      }
+    },
+    {
+      "id": "ai-130",
+      "year": 2024,
+      "state": "Uttar Pradesh",
+      "location": "Uttar Pradesh",
+      "organization": "Invest UP / Government of Uttar Pradesh",
+      "majorPlayers": [
+        "Invest UP",
+        "Government of Uttar Pradesh"
+      ],
+      "institutionRelationships": [],
+      "initiative": "Uttar Pradesh Global Capability Centers Policy 2024",
+      "industry": "Finance",
+      "capability": "Automation & Enterprise Tech",
+      "Industry": "Finance",
+      "Capability": "Automation & Enterprise Tech",
+      "investmentDomain": "Enterprise technology, finance operations and advanced GCC services",
+      "investmentBrought": "Not separately disclosed by the cited government source",
+      "investmentType": "Government policy / programme",
+      "technologyUse": "Digital functions, R&D, finance and back-office automation supported by cloud services",
+      "sourceSummary": "The official UP GCC policy defines advanced centres spanning IT, R&D, finance and digital operations, with cloud-cost support.",
+      "sourceUrl": "https://invest.up.gov.in/up-gcc-policy-2024/",
+      "amount": {
+        "currency": null,
+        "chartable": false,
+        "croreValue": null,
+        "usdMillionValue": null,
+        "parseNote": "Excluded because no chartable INR crore or USD amount was found."
+      }
+    },
+    {
+      "id": "ai-131",
+      "year": 2025,
+      "state": "Uttar Pradesh",
+      "location": "Uttar Pradesh",
+      "organization": "U.P. Electronics Corporation Limited",
+      "majorPlayers": [
+        "U.P. Electronics Corporation Limited (UPLC)",
+        "Department of Information Technology and Electronics, Government of Uttar Pradesh"
+      ],
+      "institutionRelationships": [
+        {
+          "source": "U.P. Electronics Corporation Limited (UPLC)",
+          "target": "Department of Information Technology and Electronics, Government of Uttar Pradesh",
+          "relationship": "Policy administration",
+          "detail": "UPLC operates the official state data-centre policy programme under the Department of Information Technology and Electronics.",
+          "sourceUrl": "https://uplc.up.gov.in/en/page/uttar-pradesh-data-center-policy"
+        }
+      ],
+      "initiative": "Uttar Pradesh Data Center Policy implementation and project pipeline",
+      "industry": "Technology Infrastructure",
+      "capability": "Cloud & Compute",
+      "Industry": "Technology Infrastructure",
+      "Capability": "Cloud & Compute",
+      "investmentDomain": "Hyperscale data-centre parks and compute infrastructure",
+      "investmentBrought": "₹21,342.90 crore proposed investment as of June 2025",
+      "investmentType": "Proposed investment tracked by state agency",
+      "technologyUse": "Hyperscale data centres, edge data centres, cloud and mission-critical digital infrastructure",
+      "sourceSummary": "The official UPLC dashboard reports ₹21,342.90 crore of proposed data-centre investment and 644 MW capacity as of June 2025.",
+      "sourceUrl": "https://uplc.up.gov.in/en/page/uttar-pradesh-data-center-policy",
+      "amount": {
+        "currency": "INR",
+        "chartable": true,
+        "croreValue": 21342.9,
+        "usdMillionValue": null,
+        "parseNote": "Parsed INR crore amount."
+      }
+    },
+    {
+      "id": "ai-132",
+      "year": 2026,
+      "state": "Uttar Pradesh",
+      "location": "Uttar Pradesh",
+      "organization": "Government of Uttar Pradesh",
+      "majorPlayers": [
+        "Government of Uttar Pradesh"
+      ],
+      "institutionRelationships": [],
+      "initiative": "UP-AIM open data and datasets platform pillar",
+      "industry": "Government & Public Services",
+      "capability": "Digital Public Infrastructure",
+      "Industry": "Government & Public Services",
+      "Capability": "Digital Public Infrastructure",
+      "investmentDomain": "Open government data and AI-ready datasets",
+      "investmentBrought": "Not separately disclosed by the cited government source",
+      "investmentType": "Government policy / programme",
+      "technologyUse": "Open data, interoperable datasets and public-sector AI infrastructure",
+      "sourceSummary": "The official UP budget identifies an Open Data & Datasets Platform as a core UP-AIM pillar.",
+      "sourceUrl": "https://information.up.gov.in/admin/UploadDocument/OtherPress/compressed_20022026041527Budget%20Highlights%20English.pdf",
+      "amount": {
+        "currency": null,
+        "chartable": false,
+        "croreValue": null,
+        "usdMillionValue": null,
+        "parseNote": "Excluded because no chartable INR crore or USD amount was found."
+      }
+    },
+    {
+      "id": "ai-133",
+      "year": 2026,
+      "state": "Uttar Pradesh",
+      "location": "Uttar Pradesh",
+      "organization": "Government of Uttar Pradesh",
+      "majorPlayers": [
+        "Government of Uttar Pradesh"
+      ],
+      "institutionRelationships": [],
+      "initiative": "UP-AIM foundational-model adoption pillar",
+      "industry": "Technology & Innovation",
+      "capability": "Emerging AI Capability",
+      "Industry": "Technology & Innovation",
+      "Capability": "Emerging AI Capability",
+      "investmentDomain": "Foundational models and new AI technologies",
+      "investmentBrought": "Not separately disclosed by the cited government source",
+      "investmentType": "Government policy / programme",
+      "technologyUse": "Foundation models and cross-sector AI adoption",
+      "sourceSummary": "The official UP budget lists leveraging foundational models as one of UP-AIM's core pillars.",
+      "sourceUrl": "https://information.up.gov.in/admin/UploadDocument/OtherPress/compressed_20022026041527Budget%20Highlights%20English.pdf",
+      "amount": {
+        "currency": null,
+        "chartable": false,
+        "croreValue": null,
+        "usdMillionValue": null,
+        "parseNote": "Excluded because no chartable INR crore or USD amount was found."
+      }
+    },
+    {
+      "id": "ai-134",
+      "year": 2025,
+      "state": "Uttar Pradesh",
+      "location": "Uttar Pradesh",
+      "organization": "Invest UP / UP Defence Industrial Corridor",
+      "majorPlayers": [
+        "Invest UP",
+        "IIT Kanpur",
+        "Indian Institute of Technology (BHU) Varanasi"
+      ],
+      "institutionRelationships": [],
+      "initiative": "Defence testing facilities and Centres of Excellence at IIT Kanpur and IIT-BHU",
+      "industry": "Defence & Aerospace",
+      "capability": "AI Research & Innovation",
+      "Industry": "Defence & Aerospace",
+      "Capability": "AI Research & Innovation",
+      "investmentDomain": "Defence R&D, UAV testing and advanced diagnostics",
+      "investmentBrought": "Not separately disclosed by the cited government source",
+      "investmentType": "Government policy / programme",
+      "technologyUse": "UAS testing, communications testing, materials research and AI/ML diagnostic solutions",
+      "sourceSummary": "The official Invest UP sector page documents defence testing facilities, funded CoEs and AI/ML diagnostic-solution opportunities.",
+      "sourceUrl": "https://invest.up.gov.in/defence-aerospace-sector/",
+      "amount": {
+        "currency": null,
+        "chartable": false,
+        "croreValue": null,
+        "usdMillionValue": null,
+        "parseNote": "Excluded because no chartable INR crore or USD amount was found."
+      }
+    },
+    {
+      "id": "ai-135",
+      "year": 2024,
+      "state": "Uttar Pradesh",
+      "location": "Uttar Pradesh",
+      "organization": "Invest UP / Government of Uttar Pradesh",
+      "majorPlayers": [
+        "Invest UP",
+        "Government of Uttar Pradesh"
+      ],
+      "institutionRelationships": [],
+      "initiative": "Uttar Pradesh Semiconductor Policy 2024",
+      "industry": "Manufacturing & Electronics",
+      "capability": "Semiconductor & Electronics",
+      "Industry": "Manufacturing & Electronics",
+      "Capability": "Semiconductor & Electronics",
+      "investmentDomain": "Semiconductor fabs, ATMP/OSAT, sensors and chip design",
+      "investmentBrought": "Not separately disclosed by the cited government source",
+      "investmentType": "Government policy / programme",
+      "technologyUse": "Semiconductor manufacturing, silicon photonics, sensor fabs and design-led R&D",
+      "sourceSummary": "The official Invest UP semiconductor page documents the 2024 policy, eligible technologies and state R&D/CoE support.",
+      "sourceUrl": "https://invest.up.gov.in/semiconductor-sector/",
+      "amount": {
+        "currency": null,
+        "chartable": false,
+        "croreValue": null,
+        "usdMillionValue": null,
+        "parseNote": "Excluded because no chartable INR crore or USD amount was found."
+      }
+    },
+    {
+      "id": "ai-136",
+      "year": 2024,
+      "state": "Uttar Pradesh",
+      "location": "Uttar Pradesh",
+      "organization": "StartinUP / Department of IT & Electronics",
+      "majorPlayers": [
+        "StartinUP",
+        "Department of Information Technology and Electronics, Government of Uttar Pradesh"
+      ],
+      "institutionRelationships": [],
+      "initiative": "Emerging-technology Centres of Excellence under the UP Startup Policy",
+      "industry": "Technology & Innovation",
+      "capability": "Startup & Innovation Ecosystem",
+      "Industry": "Technology & Innovation",
+      "Capability": "Startup & Innovation Ecosystem",
+      "investmentDomain": "AI/ML, drone, MedTech and emerging-technology startup support",
+      "investmentBrought": "Not separately disclosed by the cited government source",
+      "investmentType": "Government policy / programme",
+      "technologyUse": "AI/ML, drones, MedTech, blockchain, 5G/6G and additive manufacturing",
+      "sourceSummary": "The official StartinUP portal reports established CoEs in AI/ML, drones and MedTech and further planned emerging-tech CoEs.",
+      "sourceUrl": "https://invest.up.gov.in/startup-sector/",
+      "amount": {
+        "currency": null,
+        "chartable": false,
+        "croreValue": null,
+        "usdMillionValue": null,
+        "parseNote": "Excluded because no chartable INR crore or USD amount was found."
+      }
+    },
+    {
+      "id": "ai-137",
+      "year": 2026,
+      "state": "Kerala",
+      "location": "Kerala",
+      "organization": "Government of Kerala / KSCSTE",
+      "majorPlayers": [
+        "Government of Kerala",
+        "Kerala State Council for Science, Technology and Environment (KSCSTE)"
+      ],
+      "institutionRelationships": [],
+      "initiative": "Centre for Artificial Intelligence in Agriculture under Kerala Biotechnology Policy 2026",
+      "industry": "Agriculture",
+      "capability": "AI Applications",
+      "Industry": "Agriculture",
+      "Capability": "AI Applications",
+      "investmentDomain": "Precision agriculture, crop health and pest surveillance",
+      "investmentBrought": "Not separately disclosed by the cited government source",
+      "investmentType": "Government policy / programme",
+      "technologyUse": "Integrated agricultural datasets, AI pest surveillance, weather prediction and irrigation scheduling",
+      "sourceSummary": "The official Kerala Biotechnology Policy 2026 mandates a Centre for AI in Agriculture and lists its operational use cases.",
+      "sourceUrl": "https://kscste.kerala.gov.in/storage/2026/03/KBC_Biotech-Policy_26m.pdf",
+      "amount": {
+        "currency": null,
+        "chartable": false,
+        "croreValue": null,
+        "usdMillionValue": null,
+        "parseNote": "Excluded because no chartable INR crore or USD amount was found."
+      }
+    },
+    {
+      "id": "ai-138",
+      "year": 2026,
+      "state": "Kerala",
+      "location": "Kerala",
+      "organization": "K-DISC / Kerala Genome Data Centre",
+      "majorPlayers": [
+        "Kerala Development and Innovation Strategic Council (K-DISC)",
+        "Kerala Genome Data Centre"
+      ],
+      "institutionRelationships": [],
+      "initiative": "Kerala Genome Data Centre for medical, agricultural and livestock genomics",
+      "industry": "Healthcare",
+      "capability": "AI Research & Innovation",
+      "Industry": "Healthcare",
+      "Capability": "AI Research & Innovation",
+      "investmentDomain": "Genomic data infrastructure and life-science research",
+      "investmentBrought": "₹150 crore hardware/software + ₹300 crore genomic-data generation; ₹450 crore total",
+      "investmentType": "Government programme investment",
+      "technologyUse": "High-capacity genomic data management, analytics, research datasets and ethical data standards",
+      "sourceSummary": "The official KGDC page states ₹150 crore for hardware/software and ₹300 crore for four years of genomic data generation.",
+      "sourceUrl": "https://kgdc.kerala.gov.in/about/",
+      "amount": {
+        "currency": "INR",
+        "chartable": true,
+        "croreValue": 450,
+        "usdMillionValue": null,
+        "parseNote": "Parsed explicit INR total amount."
+      }
+    },
+    {
+      "id": "ai-139",
+      "year": 2026,
+      "state": "Kerala",
+      "location": "Kerala",
+      "organization": "Government of Kerala / Electronics & IT Department",
+      "majorPlayers": [
+        "Government of Kerala",
+        "Department of Electronics and Information Technology, Government of Kerala"
+      ],
+      "institutionRelationships": [],
+      "initiative": "Ten-year Kerala AI Mission",
+      "industry": "Government & Public Services",
+      "capability": "AI Strategy & Governance",
+      "Industry": "Government & Public Services",
+      "Capability": "AI Strategy & Governance",
+      "investmentDomain": "Ethical AI governance and public-sector modernization",
+      "investmentBrought": "Not separately disclosed by the cited government source",
+      "investmentType": "Government policy / programme",
+      "technologyUse": "State AI governance framework, 50 government AI solutions and responsible adoption",
+      "sourceSummary": "Kerala IT Policy 2026 defines a ten-year AI Mission, 50 governance/PSU solutions and an AI-ready workforce target of 100,000.",
+      "sourceUrl": "https://kfon.kerala.gov.in/wp-content/uploads/2026/02/IT_policy_2026_Kerala.pdf",
+      "amount": {
+        "currency": null,
+        "chartable": false,
+        "croreValue": null,
+        "usdMillionValue": null,
+        "parseNote": "Excluded because no chartable INR crore or USD amount was found."
+      }
+    },
+    {
+      "id": "ai-140",
+      "year": 2026,
+      "state": "Kerala",
+      "location": "Kerala",
+      "organization": "Kerala Infrastructure and Technology for Education",
+      "majorPlayers": [
+        "Kerala Infrastructure and Technology for Education (KITE)",
+        "Digital India BHASHINI Division"
+      ],
+      "institutionRelationships": [
+        {
+          "source": "Kerala Infrastructure and Technology for Education (KITE)",
+          "target": "Digital India BHASHINI Division",
+          "relationship": "Language-platform integration",
+          "detail": "KITE's Samagra Plus translation service is powered by BHASHINI APIs.",
+          "sourceUrl": "https://ai.kite.kerala.gov.in/"
+        }
+      ],
+      "initiative": "Responsible AI curriculum and Samagra AI Engine",
+      "industry": "Education & Skilling",
+      "capability": "AI Talent & Skilling",
+      "Industry": "Education & Skilling",
+      "Capability": "AI Talent & Skilling",
+      "investmentDomain": "School AI curriculum, teacher training and public AI literacy",
+      "investmentBrought": "Not separately disclosed by the cited government source",
+      "investmentType": "Government policy / programme",
+      "technologyUse": "Responsible AI, robotics, prompt engineering, RAG and curriculum-aligned LLM services",
+      "sourceSummary": "The official KITE AI portal documents completed teacher training, AI curriculum from Class 7 and the Samagra AI Engine rollout.",
+      "sourceUrl": "https://ai.kite.kerala.gov.in/",
+      "amount": {
+        "currency": null,
+        "chartable": false,
+        "croreValue": null,
+        "usdMillionValue": null,
+        "parseNote": "Excluded because no chartable INR crore or USD amount was found."
+      }
+    },
+    {
+      "id": "ai-141",
+      "year": 2026,
+      "state": "Kerala",
+      "location": "Kerala",
+      "organization": "Government of Kerala / Digital Science Park",
+      "majorPlayers": [
+        "Government of Kerala",
+        "Digital Science Park"
+      ],
+      "institutionRelationships": [],
+      "initiative": "Digital Science Park Industry 4.0 and smart-hardware facilities",
+      "industry": "Manufacturing & Electronics",
+      "capability": "Automation & Enterprise Tech",
+      "Industry": "Manufacturing & Electronics",
+      "Capability": "Automation & Enterprise Tech",
+      "investmentDomain": "Industry 4.0, robotics and smart manufacturing",
+      "investmentBrought": "Not separately disclosed by the cited government source",
+      "investmentType": "Government policy / programme",
+      "technologyUse": "Industry 4.0, robotics, smart hardware, 5G and advanced materials",
+      "sourceSummary": "The official Kerala government page describes operational Digital Science Park facilities for Industry 4.0, robotics, electronics and smart hardware.",
+      "sourceUrl": "https://kerala.gov.in/articledetail/NjA0NjQ5MzUxLjI0/0?lan=en",
+      "amount": {
+        "currency": null,
+        "chartable": false,
+        "croreValue": null,
+        "usdMillionValue": null,
+        "parseNote": "Excluded because no chartable INR crore or USD amount was found."
+      }
+    },
+    {
+      "id": "ai-142",
+      "year": 2026,
+      "state": "Kerala",
+      "location": "Thiruvananthapuram",
+      "organization": "Government of Kerala / Digital Science Park",
+      "majorPlayers": [
+        "Government of Kerala",
+        "Digital Science Park"
+      ],
+      "institutionRelationships": [],
+      "initiative": "AI and deep-tech infrastructure at Digital Science Park",
+      "industry": "Technology Infrastructure",
+      "capability": "Cloud & Compute",
+      "Industry": "Technology Infrastructure",
+      "Capability": "Cloud & Compute",
+      "investmentDomain": "AI research compute, high-end data centres and digital deep tech",
+      "investmentBrought": "₹1,515 crore total estimated project outlay",
+      "investmentType": "Government project outlay",
+      "technologyUse": "AI research infrastructure, high-end data centres, 5G, blockchain and cybersecurity labs",
+      "sourceSummary": "The official Kerala government page reports the park's AI/deep-tech scope and ₹1,515 crore total estimated outlay.",
+      "sourceUrl": "https://kerala.gov.in/articledetail/NjA0NjQ5MzUxLjI0/0?lan=en",
+      "amount": {
+        "currency": "INR",
+        "chartable": true,
+        "croreValue": 1515,
+        "usdMillionValue": null,
+        "parseNote": "Parsed explicit INR total amount."
+      }
+    },
+    {
+      "id": "ai-143",
+      "year": 2025,
+      "state": "Kerala",
+      "location": "Kerala",
+      "organization": "Kerala State IT Mission",
+      "majorPlayers": [
+        "Kerala State IT Mission"
+      ],
+      "institutionRelationships": [],
+      "initiative": "K-AI innovation gateway for departmental AI use cases",
+      "industry": "Government & Public Services",
+      "capability": "Digital Public Infrastructure",
+      "Industry": "Government & Public Services",
+      "Capability": "Digital Public Infrastructure",
+      "investmentDomain": "Cross-department AI use-case intake and implementation",
+      "investmentBrought": "Not separately disclosed by the cited government source",
+      "investmentType": "Government policy / programme",
+      "technologyUse": "Structured AI idea capture, expert evaluation, implementation monitoring and startup collaboration",
+      "sourceSummary": "The official K-AI portal reports participation by 18 departments, 51 use cases and 237 submitted proposals.",
+      "sourceUrl": "https://kai.kerala.gov.in/",
+      "amount": {
+        "currency": null,
+        "chartable": false,
+        "croreValue": null,
+        "usdMillionValue": null,
+        "parseNote": "Excluded because no chartable INR crore or USD amount was found."
+      }
+    },
+    {
+      "id": "ai-144",
+      "year": 2024,
+      "state": "Kerala",
+      "location": "Kerala",
+      "organization": "Government of Kerala / Kerala State IT Mission",
+      "majorPlayers": [
+        "Government of Kerala",
+        "Kerala State IT Mission"
+      ],
+      "institutionRelationships": [],
+      "initiative": "Kerala AVGC-XR Policy with AI Media focus",
+      "industry": "Marketing & Advertising",
+      "capability": "Emerging AI Capability",
+      "Industry": "Marketing & Advertising",
+      "Capability": "Emerging AI Capability",
+      "investmentDomain": "AI-enabled media, animation, VFX, gaming and immersive content",
+      "investmentBrought": "Not separately disclosed by the cited government source",
+      "investmentType": "Government policy / programme",
+      "technologyUse": "AI media, automation, simulation, XR, digital twins and OTT content platforms",
+      "sourceSummary": "The officially approved AVGC-XR policy identifies AI Media and automation as focus areas and targets 250 establishments and 50,000 jobs by 2029.",
+      "sourceUrl": "https://document.kerala.gov.in/documents/cabinetdecisions/cabinet2203202414%3A46%3A24.pdf",
+      "amount": {
+        "currency": null,
+        "chartable": false,
+        "croreValue": null,
+        "usdMillionValue": null,
+        "parseNote": "Excluded because no chartable INR crore or USD amount was found."
+      }
+    },
+    {
+      "id": "ai-145",
+      "year": 2026,
+      "state": "Kerala",
+      "location": "Kerala",
+      "organization": "Government of Kerala / Invest Kerala",
+      "majorPlayers": [
+        "Government of Kerala",
+        "Maker Village",
+        "Ministry of Electronics and Information Technology, Government of India",
+        "Indian Institute of Information Technology and Management-Kerala (IIITM-K)",
+        "Kerala Startup Mission"
+      ],
+      "institutionRelationships": [],
+      "initiative": "Electronics System Design & Manufacturing ecosystem and Maker Village",
+      "industry": "Manufacturing & Electronics",
+      "capability": "Semiconductor & Electronics",
+      "Industry": "Manufacturing & Electronics",
+      "Capability": "Semiconductor & Electronics",
+      "investmentDomain": "Electronic hardware, chip design and ESDM incubation",
+      "investmentBrought": "Not separately disclosed by the cited government source",
+      "investmentType": "Government policy / programme",
+      "technologyUse": "Electronic system design, semiconductor/electronics skills and hardware prototyping",
+      "sourceSummary": "The official Invest Kerala page documents the state ESDM ecosystem and Maker Village hardware incubator backed by MeitY, IIITM-K and Kerala Startup Mission.",
+      "sourceUrl": "https://www.invest.kerala.gov.in/doing-business-in-kerala/thriving-sectors/electronics-system-design-manufacturing-esdm/",
+      "amount": {
+        "currency": null,
+        "chartable": false,
+        "croreValue": null,
+        "usdMillionValue": null,
+        "parseNote": "Excluded because no chartable INR crore or USD amount was found."
+      }
+    },
+    {
+      "id": "ai-146",
+      "year": 2026,
+      "state": "Kerala",
+      "location": "Kerala",
+      "organization": "Kerala Startup Mission",
+      "majorPlayers": [
+        "Kerala Startup Mission"
+      ],
+      "institutionRelationships": [],
+      "initiative": "Government-backed AI, robotics and semiconductor startup ecosystem",
+      "industry": "Technology & Innovation",
+      "capability": "Startup & Innovation Ecosystem",
+      "Industry": "Technology & Innovation",
+      "Capability": "Startup & Innovation Ecosystem",
+      "investmentDomain": "AI, edge chips, robotics and enterprise-agent startups",
+      "investmentBrought": "Not separately disclosed by the cited government source",
+      "investmentType": "Government policy / programme",
+      "technologyUse": "AI edge chips, autonomous driving, voice AI, marine robotics and health-tech software",
+      "sourceSummary": "The official Kerala Startup Mission portal profiles supported startups spanning AI chips, autonomous systems, voice AI and robotics.",
+      "sourceUrl": "https://startupmission.kerala.gov.in/",
+      "amount": {
+        "currency": null,
+        "chartable": false,
+        "croreValue": null,
+        "usdMillionValue": null,
+        "parseNote": "Excluded because no chartable INR crore or USD amount was found."
+      }
+    },
+    {
+      "id": "ai-147",
+      "year": 2025,
+      "state": "Kerala",
+      "location": "Kerala",
+      "organization": "Kerala Motor Vehicles Department",
+      "majorPlayers": [
+        "Kerala Motor Vehicles Department",
+        "Kerala State Goods and Services Tax Department",
+        "Ministry of Road Transport and Highways, Government of India",
+        "National Highways Authority of India (NHAI)"
+      ],
+      "institutionRelationships": [
+        {
+          "source": "Kerala Motor Vehicles Department",
+          "target": "Kerala State Goods and Services Tax Department",
+          "relationship": "Government-system data integration",
+          "detail": "The Virtual Check Post integrates GST Department ANPR feeds for enforcement checks.",
+          "sourceUrl": "https://enforcement.mvd.kerala.gov.in/"
+        },
+        {
+          "source": "Kerala Motor Vehicles Department",
+          "target": "Ministry of Road Transport and Highways, Government of India",
+          "relationship": "Government-system data integration",
+          "detail": "The Virtual Check Post integrates VAHAN and Parivahan data from the national road-transport ministry.",
+          "sourceUrl": "https://enforcement.mvd.kerala.gov.in/"
+        },
+        {
+          "source": "Kerala Motor Vehicles Department",
+          "target": "National Highways Authority of India (NHAI)",
+          "relationship": "Government-system data integration",
+          "detail": "The Virtual Check Post integrates NHAI weigh-in-motion feeds for vehicle enforcement.",
+          "sourceUrl": "https://enforcement.mvd.kerala.gov.in/"
+        }
+      ],
+      "initiative": "Virtual Check Post digital enforcement platform",
+      "industry": "Transportation",
+      "capability": "AI Applications",
+      "Industry": "Transportation",
+      "Capability": "AI Applications",
+      "investmentDomain": "Vehicle compliance, road safety and digital enforcement",
+      "investmentBrought": "Not separately disclosed by the cited government source",
+      "investmentType": "Government policy / programme",
+      "technologyUse": "AI-driven real-time monitoring, ANPR, automated violation detection and multi-system data integration",
+      "sourceSummary": "The official MVD Virtual Check Post portal describes AI-driven ANPR enforcement and real-time compliance monitoring.",
+      "sourceUrl": "https://enforcement.mvd.kerala.gov.in/",
+      "amount": {
+        "currency": null,
+        "chartable": false,
+        "croreValue": null,
+        "usdMillionValue": null,
+        "parseNote": "Excluded because no chartable INR crore or USD amount was found."
+      }
+    },
+    {
+      "id": "ai-148",
+      "year": 2026,
+      "state": "Karnataka",
+      "location": "Karnataka",
+      "organization": "Government of Karnataka / Karnataka Digital Economy Mission",
+      "majorPlayers": [
+        "Government of Karnataka",
+        "Karnataka Digital Economy Mission (KDEM)"
+      ],
+      "institutionRelationships": [],
+      "initiative": "AI-enabled inclusive development and public-service delivery",
+      "industry": "Government & Public Services",
+      "capability": "AI Applications",
+      "Industry": "Government & Public Services",
+      "Capability": "AI Applications",
+      "investmentDomain": "Applied AI for state services and inclusive development",
+      "investmentBrought": "Not separately disclosed by the cited government source",
+      "investmentType": "Government policy / programme",
+      "technologyUse": "AI decision support and citizen-service applications",
+      "sourceSummary": "KDEM's official state-budget note places artificial intelligence at the core of inclusive development and governance.",
+      "sourceUrl": "https://karnatakadigital.in/news/state-budget-2026-27-artificial-intelligence-at-the-core-of-inclusive-development-and-governance/",
+      "amount": {
+        "currency": null,
+        "chartable": false,
+        "croreValue": null,
+        "usdMillionValue": null,
+        "parseNote": "Excluded because no chartable INR crore or USD amount was found."
+      }
+    },
+    {
+      "id": "ai-149",
+      "year": 2024,
+      "state": "Karnataka",
+      "location": "Bengaluru",
+      "organization": "Government of Karnataka / Karnataka Digital Economy Mission",
+      "majorPlayers": [
+        "Government of Karnataka",
+        "Karnataka Digital Economy Mission (KDEM)"
+      ],
+      "institutionRelationships": [],
+      "initiative": "Karnataka GCC Policy AI Centre of Excellence",
+      "industry": "Technology & Innovation",
+      "capability": "AI Research & Innovation",
+      "Industry": "Technology & Innovation",
+      "Capability": "AI Research & Innovation",
+      "investmentDomain": "AI research, datasets, compute and commercialization",
+      "investmentBrought": "Not separately disclosed by the cited government source",
+      "investmentType": "Government policy / programme",
+      "technologyUse": "AI R&D, shared compute, curated datasets, responsible AI and startup acceleration",
+      "sourceSummary": "The official draft GCC policy proposes a Bengaluru AI Centre of Excellence with hub-and-spoke R&D, compute, datasets and startup support.",
+      "sourceUrl": "https://karnatakadigital.in/wp-content/uploads/2024/11/Draft-KarnatakaGCCPolicy2024-2029-.pdf",
+      "amount": {
+        "currency": null,
+        "chartable": false,
+        "croreValue": null,
+        "usdMillionValue": null,
+        "parseNote": "Excluded because no chartable INR crore or USD amount was found."
+      }
+    },
+    {
+      "id": "ai-150",
+      "year": 2024,
+      "state": "Karnataka",
+      "location": "Karnataka",
+      "organization": "Government of Karnataka / Karnataka Digital Economy Mission",
+      "majorPlayers": [
+        "Government of Karnataka",
+        "Karnataka Digital Economy Mission (KDEM)"
+      ],
+      "institutionRelationships": [],
+      "initiative": "Responsible-AI and GCC ecosystem governance framework",
+      "industry": "Government & Public Services",
+      "capability": "AI Strategy & Governance",
+      "Industry": "Government & Public Services",
+      "Capability": "AI Strategy & Governance",
+      "investmentDomain": "Responsible AI standards and coordinated state ecosystem development",
+      "investmentBrought": "Not separately disclosed by the cited government source",
+      "investmentType": "Government policy / programme",
+      "technologyUse": "Responsible and ethical AI governance, institutional coordination and policy implementation",
+      "sourceSummary": "The official draft GCC policy embeds responsible and ethical AI within the proposed AI Centre of Excellence and state support framework.",
+      "sourceUrl": "https://karnatakadigital.in/wp-content/uploads/2024/11/Draft-KarnatakaGCCPolicy2024-2029-.pdf",
+      "amount": {
+        "currency": null,
+        "chartable": false,
+        "croreValue": null,
+        "usdMillionValue": null,
+        "parseNote": "Excluded because no chartable INR crore or USD amount was found."
+      }
+    },
+    {
+      "id": "ai-151",
+      "year": 2024,
+      "state": "Karnataka",
+      "location": "Bengaluru and regional spokes",
+      "organization": "Government of Karnataka / Karnataka Digital Economy Mission",
+      "majorPlayers": [
+        "Government of Karnataka",
+        "Karnataka Digital Economy Mission (KDEM)"
+      ],
+      "institutionRelationships": [],
+      "initiative": "Shared AI compute and curated-dataset access through the AI Centre of Excellence",
+      "industry": "Technology Infrastructure",
+      "capability": "Digital Public Infrastructure",
+      "Industry": "Technology Infrastructure",
+      "Capability": "Digital Public Infrastructure",
+      "investmentDomain": "Shared AI data and compute infrastructure",
+      "investmentBrought": "Not separately disclosed by the cited government source",
+      "investmentType": "Government policy / programme",
+      "technologyUse": "Curated datasets, common compute resources and hub-and-spoke access",
+      "sourceSummary": "The official draft GCC policy proposes common compute and curated datasets through an AI Centre of Excellence accessible to ecosystem participants.",
+      "sourceUrl": "https://karnatakadigital.in/wp-content/uploads/2024/11/Draft-KarnatakaGCCPolicy2024-2029-.pdf",
+      "amount": {
+        "currency": null,
+        "chartable": false,
+        "croreValue": null,
+        "usdMillionValue": null,
+        "parseNote": "Excluded because no chartable INR crore or USD amount was found."
+      }
+    },
+    {
+      "id": "ai-152",
+      "year": 2024,
+      "state": "Karnataka",
+      "location": "Karnataka",
+      "organization": "Government of Karnataka / Karnataka Digital Economy Mission",
+      "majorPlayers": [
+        "Government of Karnataka",
+        "Karnataka Digital Economy Mission (KDEM)"
+      ],
+      "institutionRelationships": [],
+      "initiative": "AI Centre of Excellence emerging-technology acceleration programme",
+      "industry": "Technology & Innovation",
+      "capability": "Emerging AI Capability",
+      "Industry": "Technology & Innovation",
+      "Capability": "Emerging AI Capability",
+      "investmentDomain": "Next-generation AI experimentation and startup acceleration",
+      "investmentBrought": "Not separately disclosed by the cited government source",
+      "investmentType": "Government policy / programme",
+      "technologyUse": "Advanced AI, responsible AI, shared labs and commercialization support",
+      "sourceSummary": "The official draft GCC policy positions the AI Centre of Excellence as a platform for advanced AI experimentation, innovation and startup acceleration.",
+      "sourceUrl": "https://karnatakadigital.in/wp-content/uploads/2024/11/Draft-KarnatakaGCCPolicy2024-2029-.pdf",
+      "amount": {
+        "currency": null,
+        "chartable": false,
+        "croreValue": null,
+        "usdMillionValue": null,
+        "parseNote": "Excluded because no chartable INR crore or USD amount was found."
+      }
+    },
+    {
+      "id": "ai-153",
+      "year": 2026,
+      "state": "Maharashtra",
+      "location": "Maharashtra",
+      "organization": "Government of Maharashtra / Agriculture Department",
+      "majorPlayers": [
+        "Government of Maharashtra",
+        "Department of Agriculture, Government of Maharashtra",
+        "Agriculture Intelligence and Analytics Innovation Centre"
+      ],
+      "institutionRelationships": [],
+      "initiative": "Agriculture Intelligence and Analytics Innovation Centre",
+      "industry": "Agriculture",
+      "capability": "AI Research & Innovation",
+      "Industry": "Agriculture",
+      "Capability": "AI Research & Innovation",
+      "investmentDomain": "Applied agricultural AI research and field translation",
+      "investmentBrought": "Not separately disclosed by the cited government source",
+      "investmentType": "Government policy / programme",
+      "technologyUse": "AI analytics, research collaboration, responsible adoption and startup solutions",
+      "sourceSummary": "The official AIAIC portal describes a government-backed centre connecting policy, technology, research institutions, startups and field implementation.",
+      "sourceUrl": "https://aiaic.maharashtra.gov.in/ContentPages/AboutUs.aspx/",
+      "amount": {
+        "currency": null,
+        "chartable": false,
+        "croreValue": null,
+        "usdMillionValue": null,
+        "parseNote": "Excluded because no chartable INR crore or USD amount was found."
+      }
+    },
+    {
+      "id": "ai-154",
+      "year": 2026,
+      "state": "Maharashtra",
+      "location": "Maharashtra",
+      "organization": "Electronics, IT and AI Department, Government of Maharashtra",
+      "majorPlayers": [
+        "Department of Electronics, Information Technology and Artificial Intelligence, Government of Maharashtra",
+        "Government of Maharashtra"
+      ],
+      "institutionRelationships": [],
+      "initiative": "Tech-Saturday statewide digital-capacity programme",
+      "industry": "Education & Skilling",
+      "capability": "AI Talent & Skilling",
+      "Industry": "Education & Skilling",
+      "Capability": "AI Talent & Skilling",
+      "investmentDomain": "Government workforce capacity for emerging technologies",
+      "investmentBrought": "Not separately disclosed by the cited government source",
+      "investmentType": "Government policy / programme",
+      "technologyUse": "Hands-on emerging-technology training, digital tools and live demonstrations",
+      "sourceSummary": "The department's official page documents a monthly hands-on technology programme for government officers that has expanded to every district.",
+      "sourceUrl": "https://it.maharashtra.gov.in/tech-saturday/",
+      "amount": {
+        "currency": null,
+        "chartable": false,
+        "croreValue": null,
+        "usdMillionValue": null,
+        "parseNote": "Excluded because no chartable INR crore or USD amount was found."
+      }
+    },
+    {
+      "id": "ai-155",
+      "year": 2025,
+      "state": "Telangana",
+      "location": "Telangana",
+      "organization": "Government of Telangana / Invest Telangana",
+      "majorPlayers": [
+        "Government of Telangana",
+        "Centre for Research in Applied Artificial Intelligence"
+      ],
+      "institutionRelationships": [],
+      "initiative": "Centre for Research in Applied Artificial Intelligence",
+      "industry": "Healthcare",
+      "capability": "AI Research & Innovation",
+      "Industry": "Healthcare",
+      "Capability": "AI Research & Innovation",
+      "investmentDomain": "Applied AI research in healthcare and mobility",
+      "investmentBrought": "Not separately disclosed by the cited government source",
+      "investmentType": "Government policy / programme",
+      "technologyUse": "Applied AI research, health technology, mobility and industry-academia collaboration",
+      "sourceSummary": "The official Invest Telangana portal describes the applied-AI research centre and its healthcare and mobility focus.",
+      "sourceUrl": "https://invest.telangana.gov.in/emerging-technologies/",
+      "amount": {
+        "currency": null,
+        "chartable": false,
+        "croreValue": null,
+        "usdMillionValue": null,
+        "parseNote": "Excluded because no chartable INR crore or USD amount was found."
+      }
+    },
+    {
+      "id": "ai-156",
+      "year": 2025,
+      "state": "Telangana",
+      "location": "Telangana",
+      "organization": "Government of Telangana",
+      "majorPlayers": [
+        "Government of Telangana"
+      ],
+      "institutionRelationships": [],
+      "initiative": "Telangana Rising 2047 AI-enabled GCC and facility-operations programme",
+      "industry": "Government & Public Services",
+      "capability": "Automation & Enterprise Tech",
+      "Industry": "Government & Public Services",
+      "Capability": "Automation & Enterprise Tech",
+      "investmentDomain": "Enterprise automation and AI-enabled operational management",
+      "investmentBrought": "Not separately disclosed by the cited government source",
+      "investmentType": "Government policy / programme",
+      "technologyUse": "AI-enabled facility management, enterprise analytics and high-value GCC operations",
+      "sourceSummary": "The official Telangana Rising 2047 strategy calls for AI-enabled facility management and high-value GCC operations across the state economy.",
+      "sourceUrl": "https://tgswc.telangana.gov.in/wp-content/uploads/2025/12/TelanganaRising-2047.pdf",
+      "amount": {
+        "currency": null,
+        "chartable": false,
+        "croreValue": null,
+        "usdMillionValue": null,
+        "parseNote": "Excluded because no chartable INR crore or USD amount was found."
+      }
+    },
+    {
+      "id": "ai-157",
+      "year": 2025,
+      "state": "Telangana",
+      "location": "Telangana",
+      "organization": "ITE&C Department, Government of Telangana",
+      "majorPlayers": [
+        "Information Technology, Electronics and Communications Department, Government of Telangana",
+        "Government of Telangana"
+      ],
+      "institutionRelationships": [],
+      "initiative": "Telangana Data Exchange (TGDeX)",
+      "industry": "Government & Public Services",
+      "capability": "Digital Public Infrastructure",
+      "Industry": "Government & Public Services",
+      "Capability": "Digital Public Infrastructure",
+      "investmentDomain": "Secure government data exchange and reusable AI assets",
+      "investmentBrought": "Not separately disclosed by the cited government source",
+      "investmentType": "Government policy / programme",
+      "technologyUse": "Secure data exchange, sector data banks, reusable AI models and governed access",
+      "sourceSummary": "The official TGDeX portal reports more than 300 data banks and 50 AI models across over 25 sectors for governed public use cases.",
+      "sourceUrl": "https://tgdex.telangana.gov.in/about-us",
+      "amount": {
+        "currency": null,
+        "chartable": false,
+        "croreValue": null,
+        "usdMillionValue": null,
+        "parseNote": "Excluded because no chartable INR crore or USD amount was found."
+      }
+    },
+    {
+      "id": "ai-158",
+      "year": 2025,
+      "state": "Tamil Nadu",
+      "location": "Tamil Nadu",
+      "organization": "Tamil Nadu e-Governance Agency / iTNT Hub",
+      "majorPlayers": [
+        "Tamil Nadu e-Governance Agency (TNeGA)",
+        "iTNT Hub"
+      ],
+      "institutionRelationships": [],
+      "initiative": "Public Sector Innovation Challenge",
+      "industry": "Government & Public Services",
+      "capability": "AI Applications",
+      "Industry": "Government & Public Services",
+      "Capability": "AI Applications",
+      "investmentDomain": "AI solutions for state problem statements",
+      "investmentBrought": "Not separately disclosed by the cited government source",
+      "investmentType": "Government policy / programme",
+      "technologyUse": "Artificial intelligence, machine learning, cloud services and data sandboxes",
+      "sourceSummary": "The official iTNT Hub challenge invites AI-driven solutions for government problem statements and provides cloud and data-sandbox support.",
+      "sourceUrl": "https://itnthub.tn.gov.in/public_sector%20_nnovation_challenge.html",
+      "amount": {
+        "currency": null,
+        "chartable": false,
+        "croreValue": null,
+        "usdMillionValue": null,
+        "parseNote": "Excluded because no chartable INR crore or USD amount was found."
+      }
+    },
+    {
+      "id": "ai-159",
+      "year": 2025,
+      "state": "Tamil Nadu",
+      "location": "Tamil Nadu",
+      "organization": "Tamil Nadu e-Governance Agency",
+      "majorPlayers": [
+        "Tamil Nadu e-Governance Agency (TNeGA)"
+      ],
+      "institutionRelationships": [],
+      "initiative": "Tamil Nadu Artificial Intelligence Mission government-adoption programme",
+      "industry": "Government & Public Services",
+      "capability": "Automation & Enterprise Tech",
+      "Industry": "Government & Public Services",
+      "Capability": "Automation & Enterprise Tech",
+      "investmentDomain": "Predictive administration and process modernization",
+      "investmentBrought": "Not separately disclosed by the cited government source",
+      "investmentType": "Government policy / programme",
+      "technologyUse": "Predictive analytics, AI-supported decisions and government process automation",
+      "sourceSummary": "The official IT department policy note assigns TNAIM responsibility for predictive policy support and AI adoption across government.",
+      "sourceUrl": "https://tnega.tn.gov.in/assets/pdf/it_e_pn_2025_26.pdf",
+      "amount": {
+        "currency": null,
+        "chartable": false,
+        "croreValue": null,
+        "usdMillionValue": null,
+        "parseNote": "Excluded because no chartable INR crore or USD amount was found."
+      }
+    },
+    {
+      "id": "ai-160",
+      "year": 2025,
+      "state": "Tamil Nadu",
+      "location": "Tamil Nadu",
+      "organization": "Tamil Nadu e-Governance Agency",
+      "majorPlayers": [
+        "Tamil Nadu e-Governance Agency (TNeGA)"
+      ],
+      "institutionRelationships": [],
+      "initiative": "TNAIM shared compute, storage and data-enablement framework",
+      "industry": "Technology Infrastructure",
+      "capability": "Digital Public Infrastructure",
+      "Industry": "Technology Infrastructure",
+      "Capability": "Digital Public Infrastructure",
+      "investmentDomain": "Shared AI compute, storage and public-sector data enablement",
+      "investmentBrought": "Not separately disclosed by the cited government source",
+      "investmentType": "Government policy / programme",
+      "technologyUse": "AI compute, storage, data access and common mission infrastructure",
+      "sourceSummary": "The official IT department policy note includes compute and storage enablement within the Tamil Nadu Artificial Intelligence Mission.",
+      "sourceUrl": "https://tnega.tn.gov.in/assets/pdf/it_e_pn_2025_26.pdf",
+      "amount": {
+        "currency": null,
+        "chartable": false,
+        "croreValue": null,
+        "usdMillionValue": null,
+        "parseNote": "Excluded because no chartable INR crore or USD amount was found."
+      }
+    },
+    {
+      "id": "ai-161",
+      "year": 2025,
+      "state": "Tamil Nadu",
+      "location": "Tamil Nadu",
+      "organization": "Tamil Nadu e-Governance Agency / iTNT Hub",
+      "majorPlayers": [
+        "Tamil Nadu e-Governance Agency (TNeGA)",
+        "iTNT Hub"
+      ],
+      "institutionRelationships": [],
+      "initiative": "TNAIM emerging-AI innovation and startup programme",
+      "industry": "Technology & Innovation",
+      "capability": "Emerging AI Capability",
+      "Industry": "Technology & Innovation",
+      "Capability": "Emerging AI Capability",
+      "investmentDomain": "Emerging AI pilots, innovation challenges and startup support",
+      "investmentBrought": "Not separately disclosed by the cited government source",
+      "investmentType": "Government policy / programme",
+      "technologyUse": "Advanced AI pilots, innovation sandboxes and startup-led public-sector solutions",
+      "sourceSummary": "The official policy note and iTNT delivery platform position TNAIM to support AI innovation, startups and mission-led pilots.",
+      "sourceUrl": "https://tnega.tn.gov.in/assets/pdf/it_e_pn_2025_26.pdf",
+      "amount": {
+        "currency": null,
+        "chartable": false,
+        "croreValue": null,
+        "usdMillionValue": null,
+        "parseNote": "Excluded because no chartable INR crore or USD amount was found."
+      }
+    },
+    {
+      "id": "ai-162",
+      "year": 2025,
+      "state": "Gujarat",
+      "location": "Gujarat",
+      "organization": "Department of Science and Technology, Government of Gujarat",
+      "majorPlayers": [
+        "Department of Science and Technology, Government of Gujarat",
+        "Government of Gujarat"
+      ],
+      "institutionRelationships": [],
+      "initiative": "Gujarat AI Innovation Challenge",
+      "industry": "Government & Public Services",
+      "capability": "AI Applications",
+      "Industry": "Government & Public Services",
+      "Capability": "AI Applications",
+      "investmentDomain": "Government AI use-case pilots and production rollouts",
+      "investmentBrought": "Not separately disclosed by the cited government source",
+      "investmentType": "Government policy / programme",
+      "technologyUse": "AI proofs of concept, evaluation sandboxes and production-scale public-service solutions",
+      "sourceSummary": "The official government resolution establishes a structured AI Innovation Challenge for selecting, funding and scaling departmental use cases.",
+      "sourceUrl": "https://dst.gujarat.gov.in/ViewFile?fileName=0ryyfossIfrnK3nTSB6DigDNC8sV7UEe%E2%9C%A4Bs244MkMaQXivO2UR0ZGWpek1G3wLvJ%E2%9C%BFtcvcaPnnJPErYpE6nxryem1F%E2%9C%A4wwdcshGvAXdLdMfxp%E2%9C%A49jF0K4K2fGW%E2%9C%A4k4Fa%E2%9C%A4kswYrHNG%E2%9C%A4%E2%9C%BFruhnIdXzXDdGDfg%E2%99%AC%E2%99%AC",
+      "amount": {
+        "currency": null,
+        "chartable": false,
+        "croreValue": null,
+        "usdMillionValue": null,
+        "parseNote": "Excluded because no chartable INR crore or USD amount was found."
+      }
+    },
+    {
+      "id": "ai-163",
+      "year": 2025,
+      "state": "Gujarat",
+      "location": "Gujarat",
+      "organization": "Department of Science and Technology, Government of Gujarat",
+      "majorPlayers": [
+        "Department of Science and Technology, Government of Gujarat",
+        "Government of Gujarat"
+      ],
+      "institutionRelationships": [],
+      "initiative": "Viksit Gujarat API-based performance-monitoring framework",
+      "industry": "Government & Public Services",
+      "capability": "Automation & Enterprise Tech",
+      "Industry": "Government & Public Services",
+      "Capability": "Automation & Enterprise Tech",
+      "investmentDomain": "Automated programme monitoring and administrative analytics",
+      "investmentBrought": "Not separately disclosed by the cited government source",
+      "investmentType": "Government policy / programme",
+      "technologyUse": "API-based integration, automated KPI monitoring and executive dashboards",
+      "sourceSummary": "The official Viksit Gujarat strategy document specifies API-driven data integration and automated KPI monitoring for programme execution.",
+      "sourceUrl": "https://dst.gujarat.gov.in/ViewFile?fileName=59n4CHE8hT5O9e1bY15gKteAbAHYP4%E2%9C%A4ONIjAc2MHpteSUzlxriaCckr6LIuX5NCLZ%E2%9C%BFaW1NMtPzNhzUQ47Bh0%E2%9C%BF8%E2%9C%A4eS4Y%E2%9C%BFp%E2%9C%BFSJbfPD2VNPc4%E2%9C%A4WDZoy5c71xOC3KCYZKu7Gah9u5MgeF3S2RYV5nykyoA%E2%99%AC%E2%99%AC",
+      "amount": {
+        "currency": null,
+        "chartable": false,
+        "croreValue": null,
+        "usdMillionValue": null,
+        "parseNote": "Excluded because no chartable INR crore or USD amount was found."
+      }
+    },
+    {
+      "id": "ai-164",
+      "year": 2025,
+      "state": "Gujarat",
+      "location": "Gujarat",
+      "organization": "Department of Science and Technology, Government of Gujarat",
+      "majorPlayers": [
+        "Department of Science and Technology, Government of Gujarat",
+        "Government of Gujarat"
+      ],
+      "institutionRelationships": [],
+      "initiative": "Gujarat State Data Governance Framework",
+      "industry": "Government & Public Services",
+      "capability": "Digital Public Infrastructure",
+      "Industry": "Government & Public Services",
+      "Capability": "Digital Public Infrastructure",
+      "investmentDomain": "Secure cross-government data exchange and governance",
+      "investmentBrought": "Not separately disclosed by the cited government source",
+      "investmentType": "Government policy / programme",
+      "technologyUse": "Governed data exchange supporting AI, blockchain, IoT and edge-computing use cases",
+      "sourceSummary": "The official framework defines secure data sharing across government entities to support AI and other emerging-technology services.",
+      "sourceUrl": "https://dst.gujarat.gov.in/dst/ViewFile?fileName=EqJ2TlVJgYTCNGhOgjP77hHfmUYD00%E2%9C%BFG%E2%9C%BFnl9KC449JTUEEZNfc6K8dw1mvrIkTES%E2%9C%BFvPdFIwqSygKRrDu5P9EXZiSUXOpuE2TfMB5Y93aKiwrlg2ySmzGmRLUpD%E2%9C%BFGzGMAf5XiUSI7jqTi%E2%9C%BFhIHi13QDQ%E2%99%AC%E2%99%AC",
+      "amount": {
+        "currency": null,
+        "chartable": false,
+        "croreValue": null,
+        "usdMillionValue": null,
+        "parseNote": "Excluded because no chartable INR crore or USD amount was found."
+      }
+    },
+    {
+      "id": "ai-165",
+      "year": 2026,
+      "state": "Gujarat",
+      "location": "Gujarat",
+      "organization": "Department of Science and Technology, Government of Gujarat",
+      "majorPlayers": [
+        "Department of Science and Technology, Government of Gujarat",
+        "Government of Gujarat"
+      ],
+      "institutionRelationships": [],
+      "initiative": "Gujarat Science, Technology and Innovation Policy 2026-31",
+      "industry": "Technology & Innovation",
+      "capability": "Emerging AI Capability",
+      "Industry": "Technology & Innovation",
+      "Capability": "Emerging AI Capability",
+      "investmentDomain": "Frontier technology research and innovation ecosystem",
+      "investmentBrought": "Not separately disclosed by the cited government source",
+      "investmentType": "Government policy / programme",
+      "technologyUse": "Artificial intelligence, semiconductors, quantum technologies and advanced research infrastructure",
+      "sourceSummary": "The official STI policy portal identifies AI and other frontier technologies as priority areas for research talent and innovation-system development.",
+      "sourceUrl": "https://dst.gujarat.gov.in/Home/stip",
+      "amount": {
+        "currency": null,
+        "chartable": false,
+        "croreValue": null,
+        "usdMillionValue": null,
+        "parseNote": "Excluded because no chartable INR crore or USD amount was found."
+      }
+    },
+    {
+      "id": "ai-166",
+      "year": 2025,
+      "state": "Haryana",
+      "location": "Gurugram and Panchkula",
+      "organization": "Government of Haryana",
+      "majorPlayers": [
+        "Government of Haryana"
+      ],
+      "institutionRelationships": [],
+      "initiative": "Global AI Centre and Haryana Advanced Computing Facility",
+      "industry": "Technology & Innovation",
+      "capability": "AI Research & Innovation",
+      "Industry": "Technology & Innovation",
+      "Capability": "AI Research & Innovation",
+      "investmentDomain": "AI research, innovation and advanced-computing capacity",
+      "investmentBrought": "Not separately disclosed by the cited government source",
+      "investmentType": "Government policy / programme",
+      "technologyUse": "Applied AI R&D, advanced computing, industry-academia collaboration and shared facilities",
+      "sourceSummary": "The official Make in Haryana Industrial Policy identifies the two facilities for AI research, innovation and capacity building.",
+      "sourceUrl": "https://investharyana.in/content/pdfs/Make%20in%20Haryana%20Industrial%20Policy%202025%20-%2015.09.2025.pdf",
+      "amount": {
+        "currency": null,
+        "chartable": false,
+        "croreValue": null,
+        "usdMillionValue": null,
+        "parseNote": "Excluded because no chartable INR crore or USD amount was found."
+      }
+    },
+    {
+      "id": "ai-167",
+      "year": 2025,
+      "state": "Haryana",
+      "location": "Haryana",
+      "organization": "Government of Haryana",
+      "majorPlayers": [
+        "Government of Haryana"
+      ],
+      "institutionRelationships": [],
+      "initiative": "Haryana AI Development Programme",
+      "industry": "Government & Public Services",
+      "capability": "AI Strategy & Governance",
+      "Industry": "Government & Public Services",
+      "Capability": "AI Strategy & Governance",
+      "investmentDomain": "Coordinated statewide AI ecosystem and adoption programme",
+      "investmentBrought": "Not separately disclosed by the cited government source",
+      "investmentType": "Government policy / programme",
+      "technologyUse": "AI programme governance, institutional coordination and capacity development",
+      "sourceSummary": "The official industrial policy sets out the Haryana AI Development Programme alongside dedicated AI and advanced-computing institutions.",
+      "sourceUrl": "https://investharyana.in/content/pdfs/Make%20in%20Haryana%20Industrial%20Policy%202025%20-%2015.09.2025.pdf",
+      "amount": {
+        "currency": null,
+        "chartable": false,
+        "croreValue": null,
+        "usdMillionValue": null,
+        "parseNote": "Excluded because no chartable INR crore or USD amount was found."
+      }
+    },
+    {
+      "id": "ai-168",
+      "year": 2025,
+      "state": "Haryana",
+      "location": "Haryana",
+      "organization": "Government of Haryana",
+      "majorPlayers": [
+        "Government of Haryana"
+      ],
+      "institutionRelationships": [],
+      "initiative": "Sectoral Centres of Excellence in AI and AVGC-XR",
+      "industry": "Technology & Innovation",
+      "capability": "Emerging AI Capability",
+      "Industry": "Technology & Innovation",
+      "Capability": "Emerging AI Capability",
+      "investmentDomain": "Emerging-technology labs and industry-linked centres",
+      "investmentBrought": "Not separately disclosed by the cited government source",
+      "investmentType": "Government policy / programme",
+      "technologyUse": "Artificial intelligence, AVGC-XR and advanced digital-production technologies",
+      "sourceSummary": "The official industrial policy provides for sectoral Centres of Excellence covering AI, AVGC-XR and other emerging industries.",
+      "sourceUrl": "https://investharyana.in/content/pdfs/Make%20in%20Haryana%20Industrial%20Policy%202025%20-%2015.09.2025.pdf",
+      "amount": {
+        "currency": null,
+        "chartable": false,
+        "croreValue": null,
+        "usdMillionValue": null,
+        "parseNote": "Excluded because no chartable INR crore or USD amount was found."
+      }
+    },
+    {
+      "id": "ai-169",
+      "year": 2025,
+      "state": "Haryana",
+      "location": "Haryana",
+      "organization": "Government of Haryana",
+      "majorPlayers": [
+        "Government of Haryana"
+      ],
+      "institutionRelationships": [],
+      "initiative": "Electronics Centre of Excellence support under Make in Haryana",
+      "industry": "Manufacturing & Electronics",
+      "capability": "Semiconductor & Electronics",
+      "Industry": "Manufacturing & Electronics",
+      "Capability": "Semiconductor & Electronics",
+      "investmentDomain": "Electronics R&D, prototyping and industry skills",
+      "investmentBrought": "Not separately disclosed by the cited government source",
+      "investmentType": "Government policy / programme",
+      "technologyUse": "Electronics engineering, shared testing infrastructure and industry-oriented research",
+      "sourceSummary": "The official industrial policy includes Electronics among the priority sectoral Centres of Excellence eligible for state support.",
+      "sourceUrl": "https://investharyana.in/content/pdfs/Make%20in%20Haryana%20Industrial%20Policy%202025%20-%2015.09.2025.pdf",
+      "amount": {
+        "currency": null,
+        "chartable": false,
+        "croreValue": null,
+        "usdMillionValue": null,
+        "parseNote": "Excluded because no chartable INR crore or USD amount was found."
+      }
+    },
+    {
+      "id": "ai-170",
+      "year": 2026,
+      "state": "Delhi",
+      "location": "New Delhi",
+      "organization": "National Informatics Centre / Government of India",
+      "majorPlayers": [
+        "National Informatics Centre (NIC)",
+        "Government of India"
+      ],
+      "institutionRelationships": [],
+      "initiative": "National Data Centre cloud services in Delhi",
+      "industry": "Technology Infrastructure",
+      "capability": "Cloud & Compute",
+      "Industry": "Technology Infrastructure",
+      "Capability": "Cloud & Compute",
+      "investmentDomain": "Government cloud and national data-centre capacity",
+      "investmentBrought": "Not separately disclosed by the cited government source",
+      "investmentType": "Government policy / programme",
+      "technologyUse": "Government cloud, shared compute, hosting and resilient digital infrastructure",
+      "sourceSummary": "An official PIB government document identifies the National Data Centre in Delhi as part of NIC's cloud and hosting infrastructure for government.",
+      "sourceUrl": "https://static.pib.gov.in/WriteReadData/specificdocs/documents/2026/feb/doc2026212786901.pdf",
+      "amount": {
+        "currency": null,
+        "chartable": false,
+        "croreValue": null,
+        "usdMillionValue": null,
+        "parseNote": "Excluded because no chartable INR crore or USD amount was found."
+      }
+    },
+    {
+      "id": "ai-171",
+      "year": 2024,
+      "state": "Delhi",
+      "location": "Delhi",
+      "organization": "Finance Department, Government of NCT of Delhi",
+      "majorPlayers": [
+        "Finance Department, Government of NCT of Delhi",
+        "Government of NCT of Delhi"
+      ],
+      "institutionRelationships": [],
+      "initiative": "Faceless GST administration using AI, analytics and automation",
+      "industry": "Finance",
+      "capability": "Digital Public Infrastructure",
+      "Industry": "Finance",
+      "Capability": "Digital Public Infrastructure",
+      "investmentDomain": "Digital tax administration and interoperable compliance analytics",
+      "investmentBrought": "Not separately disclosed by the cited government source",
+      "investmentType": "Government policy / programme",
+      "technologyUse": "Artificial intelligence, data analytics, automated risk assessment and faceless workflows",
+      "sourceSummary": "The official Delhi budget speech describes collaboration on data analytics, automation and AI for faceless tax administration.",
+      "sourceUrl": "https://finance.delhi.gov.in/sites/default/files/Finance/marquee-files/budget_speech_2024-25_english.pdf",
+      "amount": {
+        "currency": null,
+        "chartable": false,
+        "croreValue": null,
+        "usdMillionValue": null,
+        "parseNote": "Excluded because no chartable INR crore or USD amount was found."
+      }
+    },
+    {
+      "id": "ai-172",
+      "year": 2026,
+      "state": "Delhi",
+      "location": "Delhi",
+      "organization": "Planning Department, Government of NCT of Delhi",
+      "majorPlayers": [
+        "Planning Department, Government of NCT of Delhi",
+        "Government of NCT of Delhi"
+      ],
+      "institutionRelationships": [],
+      "initiative": "Frontier-technology industrial development focus",
+      "industry": "Technology & Innovation",
+      "capability": "Emerging AI Capability",
+      "Industry": "Technology & Innovation",
+      "Capability": "Emerging AI Capability",
+      "investmentDomain": "AI, robotics and other frontier-technology industries",
+      "investmentBrought": "Not separately disclosed by the cited government source",
+      "investmentType": "Government policy / programme",
+      "technologyUse": "Artificial intelligence, robotics, biotechnology and green technologies",
+      "sourceSummary": "The official Delhi Economic Survey identifies frontier technologies including AI and robotics as a focus for industrial development.",
+      "sourceUrl": "https://delhiplanning.delhi.gov.in/sites/default/files/2026-03/economic_survey_english_0.pdf",
+      "amount": {
+        "currency": null,
+        "chartable": false,
+        "croreValue": null,
+        "usdMillionValue": null,
+        "parseNote": "Excluded because no chartable INR crore or USD amount was found."
+      }
+    },
+    {
+      "id": "ai-174",
+      "year": 2026,
+      "state": "Andhra Pradesh",
+      "location": "Visakhapatnam",
+      "organization": "Google + Government of Andhra Pradesh + AdaniConneX + Nxtra by Airtel",
+      "majorPlayers": [
+        "Google",
+        "Government of Andhra Pradesh",
+        "AdaniConneX",
+        "Nxtra by Airtel"
+      ],
+      "institutionRelationships": [
+        {
+          "source": "Google",
+          "target": "AdaniConneX",
+          "relationship": "Infrastructure partner",
+          "detail": "Builds AI-hub data-centre infrastructure",
+          "sourceUrl": "https://blog.google/intl/en-in/google-ai-hub-scaling-indias-ai-infrastructure-and-community-impact/"
+        },
+        {
+          "source": "Google",
+          "target": "Nxtra by Airtel",
+          "relationship": "Infrastructure partner",
+          "detail": "Builds AI-hub campus and connectivity infrastructure",
+          "sourceUrl": "https://blog.google/intl/en-in/google-ai-hub-scaling-indias-ai-infrastructure-and-community-impact/"
+        },
+        {
+          "source": "Google",
+          "target": "Government of Andhra Pradesh",
+          "relationship": "Ecosystem partnership",
+          "detail": "Joint Bharat AI Shakti regional ecosystem programme",
+          "sourceUrl": "https://blog.google/intl/en-in/google-ai-hub-scaling-indias-ai-infrastructure-and-community-impact/"
+        }
+      ],
+      "initiative": "Construction phase of Google's first India AI Hub in Visakhapatnam",
+      "industry": "Technology Infrastructure",
+      "capability": "Cloud & Compute",
+      "Industry": "Technology Infrastructure",
+      "Capability": "Cloud & Compute",
+      "investmentDomain": "Gigawatt-scale AI compute, subsea connectivity and clean-energy infrastructure.",
+      "investmentBrought": "US$15 billion over 2026-2030",
+      "investmentType": "Under construction / committed investment",
+      "technologyUse": "Full-stack AI infrastructure, gigawatt-scale data-centre compute and international subsea connectivity.",
+      "sourceSummary": "Google confirms construction started on its US$15 billion Visakhapatnam AI hub and names its infrastructure partners.",
+      "sourceUrl": "https://blog.google/intl/en-in/google-ai-hub-scaling-indias-ai-infrastructure-and-community-impact/",
+      "amount": {
+        "currency": "USD",
+        "chartable": true,
+        "croreValue": null,
+        "usdMillionValue": 15000,
+        "parseNote": "Parsed USD billion amount as USD million."
+      }
+    },
+    {
+      "id": "ai-175",
+      "year": 2026,
+      "state": "Andhra Pradesh",
+      "location": "Vizianagaram district",
+      "organization": "Reliance Industries + Government of Andhra Pradesh + APIIC",
+      "majorPlayers": [
+        "Reliance Industries",
+        "Government of Andhra Pradesh",
+        "Andhra Pradesh Industrial Infrastructure Corporation"
+      ],
+      "institutionRelationships": [
+        {
+          "source": "Reliance Industries",
+          "target": "Government of Andhra Pradesh",
+          "relationship": "Project approval",
+          "detail": "Land, incentives and utility support approved",
+          "sourceUrl": "https://www.theweek.in/wire-updates/business/2026/05/20/andhra-govt-clears-over-800-acres-for-ril%E2%80%99s-rs-1-lakh-cr-ai-data-centre-in-vizianagaram-district.amp.html"
+        },
+        {
+          "source": "Reliance Industries",
+          "target": "Andhra Pradesh Industrial Infrastructure Corporation",
+          "relationship": "Land allotment",
+          "detail": "APIIC identifies and administers project land",
+          "sourceUrl": "https://www.theweek.in/wire-updates/business/2026/05/20/andhra-govt-clears-over-800-acres-for-ril%E2%80%99s-rs-1-lakh-cr-ai-data-centre-in-vizianagaram-district.amp.html"
+        }
+      ],
+      "initiative": "Giga-scale AI data centre and cable landing station in Vizianagaram district",
+      "industry": "Technology Infrastructure",
+      "capability": "Cloud & Compute",
+      "Industry": "Technology Infrastructure",
+      "Capability": "Cloud & Compute",
+      "investmentDomain": "AI data-centre capacity, cable landing infrastructure and state-supported utilities.",
+      "investmentBrought": "₹1.08 lakh crore proposed cumulative investment",
+      "investmentType": "Approved land allotment / proposed investment",
+      "technologyUse": "Giga-scale AI data centre with cable landing station, captive energy and high-capacity connectivity.",
+      "sourceSummary": "PTI reports the Andhra Pradesh order approving land and incentives for Reliance's ₹1.08 lakh crore AI data-centre project.",
+      "sourceUrl": "https://www.theweek.in/wire-updates/business/2026/05/20/andhra-govt-clears-over-800-acres-for-ril%E2%80%99s-rs-1-lakh-cr-ai-data-centre-in-vizianagaram-district.amp.html",
+      "amount": {
+        "currency": "INR",
+        "chartable": true,
+        "croreValue": 108000,
+        "usdMillionValue": null,
+        "parseNote": "Parsed INR lakh crore amount."
+      }
+    },
+    {
+      "id": "ai-176",
+      "year": 2026,
+      "state": "Delhi",
+      "location": "New Delhi",
+      "organization": "Innefu Labs",
+      "majorPlayers": [
+        "Innefu Labs",
+        "Panthera Growth Partners"
+      ],
+      "institutionRelationships": [
+        {
+          "source": "Innefu Labs",
+          "target": "Panthera Growth Partners",
+          "relationship": "Series B investment",
+          "detail": "Panthera funded sovereign-AI growth and R&D",
+          "sourceUrl": "https://entrepreneur.economictimes.indiatimes.com/amp/news/funding/innefu-labs-secures-30-million-series-b-funding-from-panthera-growth-partners/131531872"
+        }
+      ],
+      "initiative": "Series B funding to scale sovereign AI platforms for national security",
+      "industry": "Defence & Aerospace",
+      "capability": "AI Applications",
+      "Industry": "Defence & Aerospace",
+      "Capability": "AI Applications",
+      "investmentDomain": "Sovereign AI for defence, intelligence, law enforcement and national security.",
+      "investmentBrought": "US$30 million Series B",
+      "investmentType": "Completed Series B funding",
+      "technologyUse": "Sovereign AI platforms, predictive intelligence, link analysis and security decision support.",
+      "sourceSummary": "Economic Times reports the US$30 million Panthera-led round for New Delhi-based Innefu's sovereign-AI expansion.",
+      "sourceUrl": "https://entrepreneur.economictimes.indiatimes.com/amp/news/funding/innefu-labs-secures-30-million-series-b-funding-from-panthera-growth-partners/131531872",
+      "amount": {
+        "currency": "USD",
+        "chartable": true,
+        "croreValue": null,
+        "usdMillionValue": 30,
+        "parseNote": "Parsed USD million amount as USD million."
+      }
+    },
+    {
+      "id": "ai-177",
+      "year": 2024,
+      "state": "Gujarat",
+      "location": "GIFT City, Gandhinagar",
+      "organization": "Infibeam Avenues + Government of Gujarat + Gujarat Informatics Limited",
+      "majorPlayers": [
+        "Infibeam Avenues",
+        "Government of Gujarat",
+        "Gujarat Informatics Limited"
+      ],
+      "institutionRelationships": [
+        {
+          "source": "Infibeam Avenues",
+          "target": "Government of Gujarat",
+          "relationship": "Investment MoU",
+          "detail": "AI-hub investment and state facilitation agreement",
+          "sourceUrl": "https://www.ia.ooo/wp-content/uploads/2024/01/IAL-Press-Release-MoU-Vibrant-Gujarat-Summit-09-01-2024pdf.pdf"
+        },
+        {
+          "source": "Infibeam Avenues",
+          "target": "Gujarat Informatics Limited",
+          "relationship": "MoU counterpart",
+          "detail": "Gujarat Informatics represented the state at signing",
+          "sourceUrl": "https://www.ia.ooo/wp-content/uploads/2024/01/IAL-Press-Release-MoU-Vibrant-Gujarat-Summit-09-01-2024pdf.pdf"
+        }
+      ],
+      "initiative": "Phronetic.ai AI Hub for vision-AI payments and retail intelligence",
+      "industry": "Retail & Commerce",
+      "capability": "AI Applications",
+      "Industry": "Retail & Commerce",
+      "Capability": "AI Applications",
+      "investmentDomain": "Vision AI for retail payments, inventory, security and customer analytics.",
+      "investmentBrought": "₹2,000 crore proposed investment by FY2030",
+      "investmentType": "Signed MoU / proposed investment",
+      "technologyUse": "Video intelligence for inventory, customer activity, payment security and loss prevention.",
+      "sourceSummary": "Infibeam's official release records the ₹2,000 crore Gujarat MoU for its Phronetic.ai hub at GIFT City.",
+      "sourceUrl": "https://www.ia.ooo/wp-content/uploads/2024/01/IAL-Press-Release-MoU-Vibrant-Gujarat-Summit-09-01-2024pdf.pdf",
+      "amount": {
+        "currency": "INR",
+        "chartable": true,
+        "croreValue": 2000,
+        "usdMillionValue": null,
+        "parseNote": "Parsed INR crore amount."
+      }
+    },
+    {
+      "id": "ai-179",
+      "year": 2025,
+      "state": "Haryana",
+      "location": "Gurugram",
+      "organization": "Tagbin",
+      "majorPlayers": [
+        "Tagbin",
+        "SageOne Flagship Growth OE Fund",
+        "Ramesh Damani",
+        "Jyotivardhan Sonthalia",
+        "Sanjay Kaul",
+        "Kurl-on Group"
+      ],
+      "institutionRelationships": [
+        {
+          "source": "Tagbin",
+          "target": "SageOne Flagship Growth OE Fund",
+          "relationship": "Funding investor",
+          "detail": "Participated in the US$10 million round",
+          "sourceUrl": "https://economictimes.indiatimes.com/tech/funding/experiential-tech-startup-tagbin-raises-10-million-focusses-on-ai-led-govt-platforms/articleshow/125983524.cms"
+        },
+        {
+          "source": "Tagbin",
+          "target": "Ramesh Damani",
+          "relationship": "Funding investor",
+          "detail": "Participated in the US$10 million round",
+          "sourceUrl": "https://economictimes.indiatimes.com/tech/funding/experiential-tech-startup-tagbin-raises-10-million-focusses-on-ai-led-govt-platforms/articleshow/125983524.cms"
+        },
+        {
+          "source": "Tagbin",
+          "target": "Jyotivardhan Sonthalia",
+          "relationship": "Funding investor",
+          "detail": "Participated in the US$10 million round",
+          "sourceUrl": "https://economictimes.indiatimes.com/tech/funding/experiential-tech-startup-tagbin-raises-10-million-focusses-on-ai-led-govt-platforms/articleshow/125983524.cms"
+        },
+        {
+          "source": "Tagbin",
+          "target": "Sanjay Kaul",
+          "relationship": "Funding investor",
+          "detail": "Participated in the US$10 million round",
+          "sourceUrl": "https://economictimes.indiatimes.com/tech/funding/experiential-tech-startup-tagbin-raises-10-million-focusses-on-ai-led-govt-platforms/articleshow/125983524.cms"
+        },
+        {
+          "source": "Tagbin",
+          "target": "Kurl-on Group",
+          "relationship": "Funding investor",
+          "detail": "Participated in the US$10 million round",
+          "sourceUrl": "https://economictimes.indiatimes.com/tech/funding/experiential-tech-startup-tagbin-raises-10-million-focusses-on-ai-led-govt-platforms/articleshow/125983524.cms"
+        }
+      ],
+      "initiative": "Growth funding for AI-led government decision platforms and Workly AI agents",
+      "industry": "Government & Public Services",
+      "capability": "AI Applications",
+      "Industry": "Government & Public Services",
+      "Capability": "AI Applications",
+      "investmentDomain": "AI decision platforms for public administration and enterprise AI-agent software.",
+      "investmentBrought": "US$10 million growth funding",
+      "investmentType": "Private growth funding round",
+      "technologyUse": "Predictive government dashboards, decision intelligence, policing pilots and enterprise AI agents.",
+      "sourceSummary": "Economic Times reports the Gurugram company's US$10 million raise and its AI-led public-sector platform focus.",
+      "sourceUrl": "https://economictimes.indiatimes.com/tech/funding/experiential-tech-startup-tagbin-raises-10-million-focusses-on-ai-led-govt-platforms/articleshow/125983524.cms",
+      "amount": {
+        "currency": "USD",
+        "chartable": true,
+        "croreValue": null,
+        "usdMillionValue": 10,
+        "parseNote": "Parsed USD million amount as USD million."
+      }
+    },
+    {
+      "id": "ai-180",
+      "year": 2026,
+      "state": "Karnataka",
+      "location": "Bengaluru",
+      "organization": "Sarvam AI",
+      "majorPlayers": [
+        "Sarvam AI",
+        "HCLTech",
+        "Bessemer Venture Partners",
+        "Khosla Ventures",
+        "Peak XV Partners"
+      ],
+      "institutionRelationships": [
+        {
+          "source": "Sarvam AI",
+          "target": "HCLTech",
+          "relationship": "Lead strategic investment",
+          "detail": "HCLTech committed US$150 million",
+          "sourceUrl": "https://www.sarvam.ai/announcing-series-b"
+        },
+        {
+          "source": "Sarvam AI",
+          "target": "Bessemer Venture Partners",
+          "relationship": "Series B investment",
+          "detail": "Invested in the first close",
+          "sourceUrl": "https://www.sarvam.ai/announcing-series-b"
+        },
+        {
+          "source": "Sarvam AI",
+          "target": "Khosla Ventures",
+          "relationship": "Follow-on investment",
+          "detail": "Continued support in the Series B",
+          "sourceUrl": "https://www.sarvam.ai/announcing-series-b"
+        },
+        {
+          "source": "Sarvam AI",
+          "target": "Peak XV Partners",
+          "relationship": "Follow-on investment",
+          "detail": "Continued support in the Series B",
+          "sourceUrl": "https://www.sarvam.ai/announcing-series-b"
+        }
+      ],
+      "initiative": "First close of Series B for sovereign full-stack AI and frontier-model R&D",
+      "industry": "Technology & Innovation",
+      "capability": "AI Research & Innovation",
+      "Industry": "Technology & Innovation",
+      "Capability": "AI Research & Innovation",
+      "investmentDomain": "Frontier models, sovereign AI, large-scale compute and agentic deployment.",
+      "investmentBrought": "US$234 million raised in first close of planned US$300 million Series B",
+      "investmentType": "Raised / first close",
+      "technologyUse": "Frontier-model training, inference infrastructure, agentic coding, cybersecurity and sovereign AI.",
+      "sourceSummary": "Sarvam's official announcement confirms the US$234 million first close and identifies all named investors.",
+      "sourceUrl": "https://www.sarvam.ai/announcing-series-b",
+      "amount": {
+        "currency": "USD",
+        "chartable": true,
+        "croreValue": null,
+        "usdMillionValue": 234,
+        "parseNote": "Parsed USD million amount as USD million."
+      }
+    },
+    {
+      "id": "ai-181",
+      "year": 2025,
+      "state": "Karnataka",
+      "location": "Bengaluru",
+      "organization": "QpiAI",
+      "majorPlayers": [
+        "QpiAI",
+        "Avataar Ventures",
+        "National Quantum Mission",
+        "Department of Science and Technology, Government of India"
+      ],
+      "institutionRelationships": [
+        {
+          "source": "QpiAI",
+          "target": "Avataar Ventures",
+          "relationship": "Series A co-lead",
+          "detail": "Co-led the US$32 million round",
+          "sourceUrl": "https://www.qpiai.tech/newsroom"
+        },
+        {
+          "source": "QpiAI",
+          "target": "National Quantum Mission",
+          "relationship": "Government-backed co-lead",
+          "detail": "Co-led funding through the national mission",
+          "sourceUrl": "https://www.qpiai.tech/newsroom"
+        }
+      ],
+      "initiative": "Series A to scale full-stack quantum computing and integrated quantum-AI systems",
+      "industry": "Technology & Innovation",
+      "capability": "Emerging AI Capability",
+      "Industry": "Technology & Innovation",
+      "Capability": "Emerging AI Capability",
+      "investmentDomain": "Quantum computing, integrated quantum-AI systems and enterprise applications.",
+      "investmentBrought": "US$32 million Series A; INR 279 crore reported equivalent",
+      "investmentType": "Raised / Series A",
+      "technologyUse": "Full-stack quantum hardware and software integrated with AI, optimization and industry applications.",
+      "sourceSummary": "QpiAI's newsroom records the US$32 million round co-led by Avataar Ventures and the National Quantum Mission.",
+      "sourceUrl": "https://www.qpiai.tech/newsroom",
+      "amount": {
+        "currency": "USD",
+        "chartable": true,
+        "croreValue": null,
+        "usdMillionValue": 32,
+        "parseNote": "Parsed USD million amount as USD million."
+      }
+    },
+    {
+      "id": "ai-182",
+      "year": 2024,
+      "state": "Kerala",
+      "location": "District borders and landing points, Kerala",
+      "organization": "Kerala Police + Home Department, Government of Kerala",
+      "majorPlayers": [
+        "Kerala Police",
+        "Home Department, Government of Kerala"
+      ],
+      "institutionRelationships": [
+        {
+          "source": "Kerala Police",
+          "target": "Home Department, Government of Kerala",
+          "relationship": "Budget sanction",
+          "detail": "Funds ANPR and facial-recognition deployment",
+          "sourceUrl": "https://document.kerala.gov.in/documents/governmentorders/govtorder0401202512%3A06%3A39.pdf"
+        }
+      ],
+      "initiative": "ANPR cameras with facial recognition at district borders and landing points",
+      "industry": "Government & Public Services",
+      "capability": "AI Applications",
+      "Industry": "Government & Public Services",
+      "Capability": "AI Applications",
+      "investmentDomain": "Public-safety vehicle identification and facial-recognition surveillance.",
+      "investmentBrought": "₹395.54 lakh revised administrative sanction (₹3.9554 crore)",
+      "investmentType": "Revised administrative sanction",
+      "technologyUse": "Automatic number-plate recognition linked with facial-recognition capability.",
+      "sourceSummary": "The Kerala government order sanctions ₹395.54 lakh for ANPR cameras with facial recognition.",
+      "sourceUrl": "https://document.kerala.gov.in/documents/governmentorders/govtorder0401202512%3A06%3A39.pdf",
+      "amount": {
+        "currency": "INR",
+        "chartable": true,
+        "croreValue": 3.9554,
+        "usdMillionValue": null,
+        "parseNote": "Parsed INR crore amount."
+      }
+    },
+    {
+      "id": "ai-183",
+      "year": 2025,
+      "state": "Kerala",
+      "location": "Ernakulam",
+      "organization": "High Court of Kerala + Digital University Kerala + Home Department, Government of Kerala",
+      "majorPlayers": [
+        "High Court of Kerala",
+        "Digital University Kerala",
+        "Home Department, Government of Kerala"
+      ],
+      "institutionRelationships": [
+        {
+          "source": "Digital University Kerala",
+          "target": "High Court of Kerala",
+          "relationship": "Implementation partnership",
+          "detail": "Builds AI practices and judicial-intelligence CoE",
+          "sourceUrl": "https://document.kerala.gov.in/documents/governmentorders/govtorder1108202516%3A25%3A33.pdf"
+        },
+        {
+          "source": "Digital University Kerala",
+          "target": "Home Department, Government of Kerala",
+          "relationship": "Sanctioned funding",
+          "detail": "Additional implementation funds approved",
+          "sourceUrl": "https://document.kerala.gov.in/documents/governmentorders/govtorder1108202516%3A25%3A33.pdf"
+        }
+      ],
+      "initiative": "Centre of Excellence on Judicial Intelligence and AI practices for the High Court",
+      "industry": "Government & Public Services",
+      "capability": "AI Research & Innovation",
+      "Industry": "Government & Public Services",
+      "Capability": "AI Research & Innovation",
+      "investmentDomain": "Judicial intelligence, court AI practices and implementation capacity.",
+      "investmentBrought": "₹68.16 lakh additional allocation (₹0.6816 crore); not the total project cost",
+      "investmentType": "Additional allocation sanctioned",
+      "technologyUse": "AI practices, judicial-intelligence research, staffing and supporting infrastructure.",
+      "sourceSummary": "The Kerala government order allocates an additional ₹68.16 lakh for Digital University Kerala's judicial-intelligence CoE.",
+      "sourceUrl": "https://document.kerala.gov.in/documents/governmentorders/govtorder1108202516%3A25%3A33.pdf",
+      "amount": {
+        "currency": "INR",
+        "chartable": true,
+        "croreValue": 0.6816,
+        "usdMillionValue": null,
+        "parseNote": "Parsed INR crore amount."
+      }
+    },
+    {
+      "id": "ai-185",
+      "year": 2025,
+      "state": "Maharashtra",
+      "location": "Mumbai Metropolitan Region",
+      "organization": "Amazon Web Services + Government of Maharashtra",
+      "majorPlayers": [
+        "Amazon Web Services",
+        "Government of Maharashtra"
+      ],
+      "institutionRelationships": [
+        {
+          "source": "Amazon Web Services",
+          "target": "Government of Maharashtra",
+          "relationship": "Investment MoU",
+          "detail": "Formalises Mumbai Region expansion through 2030",
+          "sourceUrl": "https://www.aboutamazon.in/news/aws/aws-invests-8-billion-in-maharashtra"
+        }
+      ],
+      "initiative": "Expansion of the AWS Asia Pacific (Mumbai) Region through 2030",
+      "industry": "Technology Infrastructure",
+      "capability": "Cloud & Compute",
+      "Industry": "Technology Infrastructure",
+      "Capability": "Cloud & Compute",
+      "investmentDomain": "Cloud infrastructure capacity serving growing cloud and AI demand.",
+      "investmentBrought": "US$8.3 billion planned investment by 2030",
+      "investmentType": "Signed MoU / planned investment",
+      "technologyUse": "Cloud and data-centre infrastructure for AI, enterprise and public-sector workloads.",
+      "sourceSummary": "AWS confirms its US$8.3 billion Maharashtra plan and the signed state MoU exchanged at Davos 2025.",
+      "sourceUrl": "https://www.aboutamazon.in/news/aws/aws-invests-8-billion-in-maharashtra",
+      "amount": {
+        "currency": "USD",
+        "chartable": true,
+        "croreValue": null,
+        "usdMillionValue": 8300,
+        "parseNote": "Parsed USD billion amount as USD million."
+      }
+    },
+    {
+      "id": "ai-186",
+      "year": 2026,
+      "state": "Maharashtra",
+      "location": "Mumbai Metropolitan Region",
+      "organization": "AM Intelligence Labs + Government of Maharashtra",
+      "majorPlayers": [
+        "AM Intelligence Labs",
+        "Government of Maharashtra"
+      ],
+      "institutionRelationships": [
+        {
+          "source": "AM Intelligence Labs",
+          "target": "Government of Maharashtra",
+          "relationship": "Investment MoU",
+          "detail": "Green data-centre and AI-compute project agreed",
+          "sourceUrl": "https://economictimes.indiatimes.com/news/india/maharashtra-signs-mou-worth-rs-1-14-lakh-crore-with-am-intelligence-labs-can-create-8000-jobs/articleshow/131094714.cms"
+        }
+      ],
+      "initiative": "Integrated Green Data Centre Park and AI Compute Hub near Mumbai",
+      "industry": "Technology Infrastructure",
+      "capability": "Cloud & Compute",
+      "Industry": "Technology Infrastructure",
+      "Capability": "Cloud & Compute",
+      "investmentDomain": "Renewable-powered AI compute, high-performance chip capacity and data-centre infrastructure.",
+      "investmentBrought": "₹1.14 lakh crore proposed investment",
+      "investmentType": "Signed MoU / proposed investment",
+      "technologyUse": "500 MW green data-centre capacity with 250,000 high-performance AI chipsets.",
+      "sourceSummary": "Economic Times/PTI reports the signed ₹1.14 lakh crore Maharashtra MoU for a 500 MW AI compute hub.",
+      "sourceUrl": "https://economictimes.indiatimes.com/news/india/maharashtra-signs-mou-worth-rs-1-14-lakh-crore-with-am-intelligence-labs-can-create-8000-jobs/articleshow/131094714.cms",
+      "amount": {
+        "currency": "INR",
+        "chartable": true,
+        "croreValue": 113999.99999999999,
+        "usdMillionValue": null,
+        "parseNote": "Parsed INR lakh crore amount."
+      }
+    },
+    {
+      "id": "ai-187",
+      "year": 2026,
+      "state": "Tamil Nadu",
+      "location": "Chennai",
+      "organization": "Government of Tamil Nadu + Sarvam AI + IIT Madras",
+      "majorPlayers": [
+        "Government of Tamil Nadu",
+        "Sarvam AI",
+        "IIT Madras"
+      ],
+      "institutionRelationships": [
+        {
+          "source": "Government of Tamil Nadu",
+          "target": "Sarvam AI",
+          "relationship": "Investment MoU",
+          "detail": "Full-stack sovereign AI park partnership",
+          "sourceUrl": "https://www.business-standard.com/amp/india-news/tn-seals-10-000-crore-deal-to-build-india-s-first-sovereign-ai-park-126011300548_1.html"
+        },
+        {
+          "source": "Sarvam AI",
+          "target": "IIT Madras",
+          "relationship": "Research partnership",
+          "detail": "Digital Sangam research and talent collaboration",
+          "sourceUrl": "https://www.business-standard.com/amp/india-news/tn-seals-10-000-crore-deal-to-build-india-s-first-sovereign-ai-park-126011300548_1.html"
+        }
+      ],
+      "initiative": "Digital Sangam full-stack Sovereign AI Research Park",
+      "industry": "Technology Infrastructure",
+      "capability": "Cloud & Compute",
+      "Industry": "Technology Infrastructure",
+      "Capability": "Cloud & Compute",
+      "investmentDomain": "Sovereign AI compute, secure data, model labs, research and startup incubation.",
+      "investmentBrought": "₹10,000 crore initial investment",
+      "investmentType": "Signed MoU / committed investment",
+      "technologyUse": "20 MW AI-optimized data centre, Tamil-first models, research labs and AI-in-governance institute.",
+      "sourceSummary": "Business Standard reports Tamil Nadu's signed ₹10,000 crore sovereign-AI park deal with Sarvam AI.",
+      "sourceUrl": "https://www.business-standard.com/amp/india-news/tn-seals-10-000-crore-deal-to-build-india-s-first-sovereign-ai-park-126011300548_1.html",
+      "amount": {
+        "currency": "INR",
+        "chartable": true,
+        "croreValue": 10000,
+        "usdMillionValue": null,
+        "parseNote": "Parsed INR crore amount."
+      }
+    },
+    {
+      "id": "ai-188",
+      "year": 2025,
+      "state": "Tamil Nadu",
+      "location": "Ambattur, Chennai",
+      "organization": "CtrlS Datacenters + Government of Tamil Nadu",
+      "majorPlayers": [
+        "CtrlS Datacenters",
+        "Government of Tamil Nadu"
+      ],
+      "institutionRelationships": [
+        {
+          "source": "CtrlS Datacenters",
+          "target": "Government of Tamil Nadu",
+          "relationship": "State-facilitated launch",
+          "detail": "State supported and inaugurated the Chennai park",
+          "sourceUrl": "https://www.ctrls.com/ctrls-powers-indias-digital-revolution-new-chennai-datacenter-park-backed-by-rs-4000-crore-direct-and-rs-50000-crore-indirect-investment/"
+        }
+      ],
+      "initiative": "Launched 72 MW AI-ready Chennai Datacenter Park",
+      "industry": "Technology Infrastructure",
+      "capability": "Cloud & Compute",
+      "Industry": "Technology Infrastructure",
+      "Capability": "Cloud & Compute",
+      "investmentDomain": "AI-ready data-centre capacity with resilient power and cooling infrastructure.",
+      "investmentBrought": "Approximately ₹4,000 crore direct investment",
+      "investmentType": "Operational / launched",
+      "technologyUse": "AI-ready cooling, 72 MW IT load, resilient data-centre design and direct cloud links.",
+      "sourceSummary": "CtrlS confirms the approximately ₹4,000 crore direct investment and the Tamil Nadu-backed launch.",
+      "sourceUrl": "https://www.ctrls.com/ctrls-powers-indias-digital-revolution-new-chennai-datacenter-park-backed-by-rs-4000-crore-direct-and-rs-50000-crore-indirect-investment/",
+      "amount": {
+        "currency": "INR",
+        "chartable": true,
+        "croreValue": 4000,
+        "usdMillionValue": null,
+        "parseNote": "Parsed INR crore amount."
+      }
+    },
+    {
+      "id": "ai-190",
+      "year": 2025,
+      "state": "Telangana",
+      "location": "Telangana",
+      "organization": "CtrlS Datacenters + Government of Telangana",
+      "majorPlayers": [
+        "CtrlS Datacenters",
+        "Government of Telangana"
+      ],
+      "institutionRelationships": [
+        {
+          "source": "CtrlS Datacenters",
+          "target": "Government of Telangana",
+          "relationship": "Investment MoU",
+          "detail": "AI data-centre cluster investment agreed",
+          "sourceUrl": "https://www.telangana.gov.in/news/news-and-press-releases/2025/01/the-telangana-govt-signs-an-mou-with-ctrls-datacenters/"
+        }
+      ],
+      "initiative": "400 MW AI Datacenter Cluster announced at Davos 2025",
+      "industry": "Technology Infrastructure",
+      "capability": "Cloud & Compute",
+      "Industry": "Technology Infrastructure",
+      "Capability": "Cloud & Compute",
+      "investmentDomain": "Large-scale AI data-centre capacity and sustainable digital infrastructure.",
+      "investmentBrought": "₹10,000 crore committed investment",
+      "investmentType": "Signed MoU / committed investment",
+      "technologyUse": "400 MW AI data-centre cluster supporting large-scale compute and cloud workloads.",
+      "sourceSummary": "The Telangana government confirms the signed ₹10,000 crore MoU for a 400 MW AI data-centre cluster.",
+      "sourceUrl": "https://www.telangana.gov.in/news/news-and-press-releases/2025/01/the-telangana-govt-signs-an-mou-with-ctrls-datacenters/",
+      "amount": {
+        "currency": "INR",
+        "chartable": true,
+        "croreValue": 10000,
+        "usdMillionValue": null,
+        "parseNote": "Parsed INR crore amount."
+      }
+    },
+    {
+      "id": "ai-191",
+      "year": 2025,
+      "state": "Telangana",
+      "location": "Hyderabad outskirts",
+      "organization": "ST Telemedia Global Data Centres India + Government of Telangana",
+      "majorPlayers": [
+        "ST Telemedia Global Data Centres India",
+        "Government of Telangana"
+      ],
+      "institutionRelationships": [
+        {
+          "source": "ST Telemedia Global Data Centres India",
+          "target": "Government of Telangana",
+          "relationship": "Investment MoU",
+          "detail": "AI-ready Hyderabad campus investment agreed",
+          "sourceUrl": "https://www.sttelemediagdc.com/newsroom/stt-gdc-india-signs-mou-telangana-government-investments-up-to-inr-3500-crore"
+        }
+      ],
+      "initiative": "Up-to-100 MW AI-ready data-centre campus near Hyderabad",
+      "industry": "Technology Infrastructure",
+      "capability": "Cloud & Compute",
+      "Industry": "Technology Infrastructure",
+      "Capability": "Cloud & Compute",
+      "investmentDomain": "AI-ready data-centre capacity and scalable cloud infrastructure.",
+      "investmentBrought": "Up to ₹3,500 crore committed investment",
+      "investmentType": "Signed MoU / investment ceiling",
+      "technologyUse": "AI-ready, scalable data-centre campus with targeted capacity up to 100 MW.",
+      "sourceSummary": "STT GDC confirms the signed Telangana MoU for an AI-ready campus with investment up to ₹3,500 crore.",
+      "sourceUrl": "https://www.sttelemediagdc.com/newsroom/stt-gdc-india-signs-mou-telangana-government-investments-up-to-inr-3500-crore",
+      "amount": {
+        "currency": "INR",
+        "chartable": true,
+        "croreValue": 3500,
+        "usdMillionValue": null,
+        "parseNote": "Parsed INR crore amount."
+      }
+    },
+    {
+      "id": "ai-192",
+      "year": 2025,
+      "state": "Telangana",
+      "location": "Hyderabad",
+      "organization": "Darwinbox",
+      "majorPlayers": [
+        "Darwinbox",
+        "Partners Group",
+        "KKR",
+        "Gravity Holdings"
+      ],
+      "institutionRelationships": [
+        {
+          "source": "Darwinbox",
+          "target": "Partners Group",
+          "relationship": "Investment co-lead",
+          "detail": "Co-led the US$140 million investment",
+          "sourceUrl": "https://newsroom.darwinbox.com/press-release/partners-group-and-kkr-invest-140-million-in-darwinbox"
+        },
+        {
+          "source": "Darwinbox",
+          "target": "KKR",
+          "relationship": "Investment co-lead",
+          "detail": "Co-led the US$140 million investment",
+          "sourceUrl": "https://newsroom.darwinbox.com/press-release/partners-group-and-kkr-invest-140-million-in-darwinbox"
+        },
+        {
+          "source": "Darwinbox",
+          "target": "Gravity Holdings",
+          "relationship": "Participating investor",
+          "detail": "Participated in the growth investment",
+          "sourceUrl": "https://newsroom.darwinbox.com/press-release/partners-group-and-kkr-invest-140-million-in-darwinbox"
+        }
+      ],
+      "initiative": "Growth investment for AI-enabled human-capital management and GenAI products",
+      "industry": "Technology & Innovation",
+      "capability": "Automation & Enterprise Tech",
+      "Industry": "Technology & Innovation",
+      "Capability": "Automation & Enterprise Tech",
+      "investmentDomain": "AI-enabled workforce management, enterprise software and global expansion.",
+      "investmentBrought": "US$140 million investment under definitive agreements",
+      "investmentType": "Definitive agreements signed",
+      "technologyUse": "AI-enabled HCM, people analytics, autonomous HR agents and generative-AI workflows.",
+      "sourceSummary": "Darwinbox's official release confirms the US$140 million investment and all three participating investors.",
+      "sourceUrl": "https://newsroom.darwinbox.com/press-release/partners-group-and-kkr-invest-140-million-in-darwinbox",
+      "amount": {
+        "currency": "USD",
+        "chartable": true,
+        "croreValue": null,
+        "usdMillionValue": 140,
+        "parseNote": "Parsed USD million amount as USD million."
+      }
+    },
+    {
+      "id": "ai-193",
+      "year": 2026,
+      "state": "Telangana",
+      "location": "Bharat Future City, Ranga Reddy district",
+      "organization": "Amazon Web Services + Government of Telangana",
+      "majorPlayers": [
+        "Amazon Web Services",
+        "Government of Telangana"
+      ],
+      "institutionRelationships": [
+        {
+          "source": "Amazon Web Services",
+          "target": "Government of Telangana",
+          "relationship": "Investment facilitation",
+          "detail": "State-supported data-centre construction at Future City",
+          "sourceUrl": "https://www.telangana.gov.in/news/press-releases/2026/07/honble-cm-sri-a-revanth-reddy-participated-in-groundbreaking-ceremony-of-amazon-data-centre-at-bharat-future-city-ranga-reddy-district-aws/"
+        }
+      ],
+      "initiative": "AWS data-centre construction at Bharat Future City",
+      "industry": "Technology Infrastructure",
+      "capability": "Cloud & Compute",
+      "Industry": "Technology Infrastructure",
+      "Capability": "Cloud & Compute",
+      "investmentDomain": "Cloud and AI data-centre expansion at Bharat Future City.",
+      "investmentBrought": "US$7 billion investment plan; construction milestone reached in July 2026",
+      "investmentType": "Under construction / committed investment",
+      "technologyUse": "Large-scale cloud data-centre infrastructure supporting AI and digital workloads.",
+      "sourceSummary": "The Telangana government confirms the AWS groundbreaking and describes the investment as US$7 billion.",
+      "sourceUrl": "https://www.telangana.gov.in/news/press-releases/2026/07/honble-cm-sri-a-revanth-reddy-participated-in-groundbreaking-ceremony-of-amazon-data-centre-at-bharat-future-city-ranga-reddy-district-aws/",
+      "amount": {
+        "currency": "USD",
+        "chartable": true,
+        "croreValue": null,
+        "usdMillionValue": 7000,
+        "parseNote": "Parsed USD billion amount as USD million."
+      }
+    },
+    {
+      "id": "ai-194",
+      "year": 2026,
+      "state": "Uttar Pradesh",
+      "location": "Greater Noida",
+      "organization": "AM Green Group + Invest UP + Government of Uttar Pradesh",
+      "majorPlayers": [
+        "AM Green Group",
+        "Invest UP",
+        "Government of Uttar Pradesh"
+      ],
+      "institutionRelationships": [
+        {
+          "source": "AM Green Group",
+          "target": "Invest UP",
+          "relationship": "Investment MoU",
+          "detail": "One-gigawatt AI compute project agreed",
+          "sourceUrl": "https://invest.up.gov.in/world-economic-forum/"
+        }
+      ],
+      "initiative": "One-gigawatt AI compute hub powered by carbon-free energy",
+      "industry": "Technology Infrastructure",
+      "capability": "Cloud & Compute",
+      "Industry": "Technology Infrastructure",
+      "Capability": "Cloud & Compute",
+      "investmentDomain": "Gigawatt-scale AI compute and carbon-free digital infrastructure.",
+      "investmentBrought": "US$25 billion investment commitment",
+      "investmentType": "Signed MoU / phased investment",
+      "technologyUse": "One-gigawatt AI compute hub for hyperscale, enterprise and sovereign workloads.",
+      "sourceSummary": "Invest UP identifies the US$25 billion AM Green AI compute-hub commitment and its phased delivery timeline.",
+      "sourceUrl": "https://invest.up.gov.in/world-economic-forum/",
+      "amount": {
+        "currency": "USD",
+        "chartable": true,
+        "croreValue": null,
+        "usdMillionValue": 25000,
+        "parseNote": "Parsed USD billion amount as USD million."
+      }
+    },
+    {
+      "id": "ai-195",
+      "year": 2026,
+      "state": "Uttar Pradesh",
+      "location": "Noida",
+      "organization": "Sify Technologies + Invest UP + Government of Uttar Pradesh",
+      "majorPlayers": [
+        "Sify Technologies",
+        "Invest UP",
+        "Government of Uttar Pradesh"
+      ],
+      "institutionRelationships": [
+        {
+          "source": "Sify Technologies",
+          "target": "Invest UP",
+          "relationship": "Investment MoU",
+          "detail": "AI-ready Noida data-centre proposal agreed",
+          "sourceUrl": "https://invest.up.gov.in/world-economic-forum/"
+        }
+      ],
+      "initiative": "AI-ready data centre and AI City proposal in Noida",
+      "industry": "Technology Infrastructure",
+      "capability": "Cloud & Compute",
+      "Industry": "Technology Infrastructure",
+      "Capability": "Cloud & Compute",
+      "investmentDomain": "AI-ready data-centre capacity and associated AI City infrastructure.",
+      "investmentBrought": "₹1,600 crore investment proposal",
+      "investmentType": "Signed MoU / proposed investment",
+      "technologyUse": "Renewable-powered, air-cooled AI-ready data centre and surrounding AI City.",
+      "sourceSummary": "Invest UP lists Sify's ₹1,600 crore AI-ready Noida data-centre and AI City proposal.",
+      "sourceUrl": "https://invest.up.gov.in/world-economic-forum/",
+      "amount": {
+        "currency": "INR",
+        "chartable": true,
+        "croreValue": 1600,
+        "usdMillionValue": null,
+        "parseNote": "Parsed INR crore amount."
       }
     }
   ]

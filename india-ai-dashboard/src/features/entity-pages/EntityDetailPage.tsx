@@ -2,12 +2,13 @@ import Image from "next/image";
 import Link from "next/link";
 
 import { JsonLd } from "@/components/JsonLd";
+import { slugify } from "@/lib/slugs";
 import { absoluteUrl, siteConfig } from "@/lib/seo";
 import type { EntitySummary } from "@/services/dashboardData";
 
 const ENTITY_LABELS: Record<EntitySummary["kind"], string> = {
   state: "State",
-  company: "Company",
+  company: "Institution / major player",
   "sector-type": "Sector type",
   sector: "Sector",
   policy: "Policy",
@@ -95,7 +96,8 @@ export function EntityDetailPage({ entity }: { entity: EntitySummary }) {
               <tr>
                 <th>Year</th>
                 <th>State</th>
-                <th>Organization</th>
+                <th>Listed organization</th>
+                <th>Major players</th>
                 <th>Industry</th>
                 <th>Capability</th>
                 <th>Investment</th>
@@ -109,6 +111,15 @@ export function EntityDetailPage({ entity }: { entity: EntitySummary }) {
                   <td>
                     <strong>{record.organization}</strong>
                     <span>{record.initiative}</span>
+                  </td>
+                  <td>
+                    <div className="entity-major-player-list">
+                      {majorPlayersForRecord(record).map((player) => (
+                        <Link key={slugify(player)} href={`/companies/${slugify(player)}`}>
+                          {player}
+                        </Link>
+                      ))}
+                    </div>
                   </td>
                   <td>{industryLabel(record.industry)}</td>
                   <td>{record.capability}</td>
@@ -126,6 +137,30 @@ export function EntityDetailPage({ entity }: { entity: EntitySummary }) {
       </section>
     </main>
   );
+}
+
+function majorPlayersForRecord(record: EntitySummary["records"][number]): string[] {
+  const rawPlayers = (record as unknown as { majorPlayers?: unknown }).majorPlayers;
+  const candidates: unknown[] = Array.isArray(rawPlayers)
+    ? rawPlayers
+    : typeof rawPlayers === "string"
+      ? rawPlayers.split(";")
+      : [];
+  const bySlug = new Map<string, string>();
+
+  candidates.forEach((candidate) => {
+    const label = typeof candidate === "string" ? candidate.normalize("NFKC").replace(/\s+/g, " ").trim() : "";
+    const slug = slugify(label);
+    if (label && slug && !bySlug.has(slug)) bySlug.set(slug, label);
+  });
+
+  if (!bySlug.size) {
+    const organization = record.organization.normalize("NFKC").replace(/\s+/g, " ").trim();
+    const slug = slugify(organization);
+    if (organization && slug) bySlug.set(slug, organization);
+  }
+
+  return [...bySlug.values()];
 }
 
 function pathForEntity(entity: EntitySummary): string {

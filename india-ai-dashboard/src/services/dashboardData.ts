@@ -1,10 +1,13 @@
 import datasetJson from "../../data/dashboard.v1.json";
-import type { DashboardDataset, InvestmentRecord } from "@/types/dashboard";
+import type { DashboardDataset, InstitutionRelationship, InvestmentRecord } from "@/types/dashboard";
 import { slugify } from "@/lib/slugs";
 
 export type EntityKind = "state" | "company" | "sector-type" | "sector" | "policy" | "investment-period";
 
-type LegacyInvestmentRecord = InvestmentRecord & {
+type LegacyInvestmentRecord = Omit<InvestmentRecord, "majorPlayers" | "institutionRelationships"> & {
+  majorPlayers?: unknown;
+  "Major Players"?: unknown;
+  institutionRelationships?: unknown;
   domain?: string;
   subdomain?: string;
 };
@@ -40,9 +43,7 @@ export function getStates(): EntitySummary[] {
 }
 
 export function getCompanies(): EntitySummary[] {
-  return groupRecords("company", dataset.records, (record) => record.organization, (title, records) => ({
-    description: `${title} appears in ${records.length} verified India AI development announcements.`,
-  }));
+  return groupInstitutionRecords(dataset.records);
 }
 
 export function getSectors(): EntitySummary[] {
@@ -109,12 +110,72 @@ function normalizeInvestmentRecord(record: LegacyInvestmentRecord): InvestmentRe
     record.subdomain,
     inferCapability(record),
   );
+  const institutionRelationships = normalizeInstitutionRelationships(record.institutionRelationships);
+  const majorPlayers = dedupeLabels([
+    ...normalizeMajorPlayers(record.majorPlayers ?? record["Major Players"], record.organization),
+    ...institutionRelationships.flatMap((relationship) => [relationship.source, relationship.target]),
+  ]);
 
   return {
     ...record,
     industry,
     capability,
-  };
+    majorPlayers,
+    institutionRelationships,
+  } as InvestmentRecord;
+}
+
+function normalizeInstitutionRelationships(value: unknown): InstitutionRelationship[] {
+  if (!Array.isArray(value)) return [];
+  const seen = new Set<string>();
+
+  return value.flatMap<InstitutionRelationship>((candidate) => {
+    if (!candidate || typeof candidate !== "object") return [];
+    const relationship = candidate as Partial<InstitutionRelationship>;
+    const source = normalizeInstitutionLabel(String(relationship.source || ""));
+    const target = normalizeInstitutionLabel(String(relationship.target || ""));
+    if (!source || !target || source.toLocaleLowerCase("en-IN") === target.toLocaleLowerCase("en-IN")) return [];
+    const key = [source, target].map((label) => label.toLocaleLowerCase("en-IN")).sort().join("\u0000");
+    if (seen.has(key)) return [];
+    seen.add(key);
+    return [{
+      source,
+      target,
+      relationship: String(relationship.relationship || "Direct relationship").trim(),
+      detail: String(relationship.detail || "Named together as direct counterparties in the cited source.").trim(),
+      ...(relationship.sourceUrl ? { sourceUrl: String(relationship.sourceUrl).trim() } : {}),
+    }];
+  });
+}
+
+function normalizeMajorPlayers(value: unknown, organization: string): string[] {
+  const rawValues = Array.isArray(value) ? value : typeof value === "string" ? [value] : [];
+  const players = rawValues.flatMap((rawValue) =>
+    typeof rawValue === "string" ? rawValue.split(/\s*;\s*|[\r\n]+/g) : [],
+  );
+  const normalized = dedupeLabels(players.map(normalizeInstitutionLabel).filter(Boolean));
+  if (normalized.length) return normalized;
+
+  const fallback = normalizeInstitutionLabel(organization);
+  return fallback ? [fallback] : [];
+}
+
+function normalizeInstitutionLabel(value: string): string {
+  return String(value || "")
+    .normalize("NFKC")
+    .replace(/\s+/g, " ")
+    .replace(/^;+|;+$/g, "")
+    .trim();
+}
+
+function dedupeLabels(labels: string[]): string[] {
+  const seen = new Set<string>();
+  return labels.filter((label) => {
+    const key = label.toLocaleLowerCase("en-IN");
+    if (!key || seen.has(key)) return false;
+    seen.add(key);
+    return true;
+  });
 }
 
 function pickValue(fallback: string, ...values: Array<string | undefined>): string {
@@ -160,6 +221,63 @@ function inferCapability(record: LegacyInvestmentRecord): string {
 
 function formatSectorType(value: string): string {
   return value.replace(/\s*Domain$/i, "").toLowerCase();
+}
+
+function groupInstitutionRecords(records: InvestmentRecord[]): EntitySummary[] {
+  const groups = new Map<
+    string,
+    { title: string; titlePriority: number; records: Map<string, InvestmentRecord> }
+  >();
+
+  records.forEach((record) => {
+    const majorPlayers = normalizeMajorPlayers(
+      (record as InvestmentRecord & { majorPlayers?: unknown }).majorPlayers,
+      record.organization,
+    );
+    const candidates = [
+      ...majorPlayers.map((title) => ({ title, priority: 0 })),
+      { title: normalizeInstitutionLabel(record.organization), priority: 1 },
+    ];
+    const seenRecordSlugs = new Set<string>();
+
+    candidates.forEach(({ title, priority }) => {
+      const slug = slugify(title);
+      if (!title || !slug || seenRecordSlugs.has(slug)) return;
+      seenRecordSlugs.add(slug);
+
+      const existing = groups.get(slug);
+      if (!existing) {
+        groups.set(slug, {
+          title,
+          titlePriority: priority,
+          records: new Map([[record.id, record]]),
+        });
+        return;
+      }
+
+      existing.records.set(record.id, record);
+      if (
+        priority < existing.titlePriority ||
+        (priority === existing.titlePriority && title.localeCompare(existing.title, "en-IN") < 0)
+      ) {
+        existing.title = title;
+        existing.titlePriority = priority;
+      }
+    });
+  });
+
+  return [...groups.entries()]
+    .map(([slug, group]) => {
+      const groupedRecords = [...group.records.values()];
+      return {
+        kind: "company" as const,
+        slug,
+        title: group.title,
+        records: groupedRecords,
+        description: `${group.title} is listed as an institution or major player in ${groupedRecords.length} verified India AI development announcements.`,
+      };
+    })
+    .sort((a, b) => a.title.localeCompare(b.title, "en-IN") || a.slug.localeCompare(b.slug));
 }
 
 function groupRecords(
